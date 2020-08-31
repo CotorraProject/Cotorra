@@ -1,0 +1,24 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+ARG BUILD_CONFIGURATION=Debug
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_URLS=http://+:80
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+EXPOSE 80
+
+WORKDIR /src
+COPY ["Cotorra.Client/Cotorra.Client.csproj", "Cotorra.Client/"]
+COPY ["Cotorra.ClientLocal/Cotorra.ClientLocal.csproj", "Cotorra.ClientLocal/"]
+COPY ["Cotorra.ClientProxy/Cotorra.ClientProxy.csproj", "Cotorra.ClientProxy/"]
+COPY ["Cotorra.Core/Cotorra.Core.csproj", "Cotorra.Core/"]
+COPY ["Cotorra.ExpressionParser.Core/Cotorra.ExpressionParser.Core.csproj", "Cotorra.ExpressionParser.Core/"]
+COPY ["Cotorra.Schema/Cotorra.Schema.csproj", "Cotorra.Schema/"]
+COPY ["Cotorra.Web/Cotorra.Web.csproj", "Cotorra.Web/"]
+
+RUN dotnet restore "Cotorra.Web/Cotorra.Web.csproj"
+COPY . .
+WORKDIR "/src/Cotorra.Web"
+RUN dotnet build --no-restore "Cotorra.Web.csproj" -c $BUILD_CONFIGURATION
+
+RUN echo "exec dotnet run --no-build --no-launch-profile -c $BUILD_CONFIGURATION --" > /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

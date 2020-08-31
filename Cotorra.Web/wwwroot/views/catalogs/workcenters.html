@@ -1,0 +1,53 @@
+﻿<!--top actions-->
+<div class="top-actions">
+    <button class="btn btn-primary" id="np_btnAddRecord">
+        <i class="far fa-plus-circle"></i>
+    </button>
+</div>
+
+<!--main container-->
+<div class="np-workcenters-grid full-kendo-grid">
+</div>
+
+<!--add periodtype modal-->
+<script id="workcenters_save_template" type="text/ractive">
+
+    <form id="np_cat_saverecord">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group textfield required" style="margin-bottom:0px !important;">
+                    <label for="np_pt_txtName">Nombre del centro de trabajo</label>
+                    <input type="text" class="form-control" id="np_pt_txtName" name="np_pt_txtName" value="{{Name}}"
+                           autocomplete="off" maxlength="100" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="m-t-15 p-10 p-t-15 address-container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h5 class="m-b-15">
+                                <b>Dirección del centro de trabajo</b>
+                            </h5>
+                        </div>
+                    </div>
+                    {{>np-address-template}}
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row p-t-20">
+        <div class="col-xs-3 col-xs-offset-3">
+            <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-3">
+            <button id="np_btnSaveRecord" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+
+</script>

@@ -1,0 +1,10 @@
+C:\devgit\LeCotorre\Cotorra.Database\bin\Debug\Cotorra.Database.dacpac
+C:\devgit\LeCotorre\Cotorra.Database\bin\Debug\Cotorra.Database.dll
+C:\devgit\LeCotorre\Cotorra.Database\bin\Debug\Cotorra.Database.pdb
+C:\devgit\LeCotorre\Cotorra.Database\obj\Debug\Cotorra.Database.sqlprojAssemblyReference.cache
+C:\devgit\LeCotorre\Cotorra.Database\obj\Debug\Model.xml
+C:\devgit\LeCotorre\Cotorra.Database\obj\Debug\refactor.xml
+C:\devgit\LeCotorre\Cotorra.Database\obj\Debug\postdeploy.sql
+C:\devgit\LeCotorre\Cotorra.Database\obj\Debug\predeploy.sql
+C:\devgit\LeCotorre\Cotorra.Database\obj\Debug\Cotorra.Database.dll
+C:\devgit\LeCotorre\Cotorra.Database\obj\Debug\Cotorra.Database.pdb

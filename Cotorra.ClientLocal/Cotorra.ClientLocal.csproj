@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>%24/Cotorra/Dev/Cotorra.ClientLocal</SccProjectName>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccAuxPath>https://dev.azure.com/cotorra</SccAuxPath>
+    <SccLocalPath>.</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <TieredCompilation>true</TieredCompilation>
+    <ProjectGuid>{EAC704B2-B8A2-43AE-8E3C-E2AEC46E3B0E}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cotorra.Client\Cotorra.Client.csproj" />
+    <ProjectReference Include="..\Cotorra.Core\Cotorra.Core.csproj" />
+    <ProjectReference Include="..\Cotorra.Schema\Cotorra.Schema.csproj" />
+  </ItemGroup>
+
+</Project>

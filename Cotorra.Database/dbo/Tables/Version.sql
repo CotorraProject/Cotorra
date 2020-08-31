@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Version]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+	[Version] NVARCHAR(200) NOT NULL,
+	[DateTime] DATETIME
+)

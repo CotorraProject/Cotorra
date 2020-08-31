@@ -1,0 +1,98 @@
+﻿<!-- update sbc grid templates -->
+
+
+<script id="employees_update_sbc_template" type="text/ractive">
+    <form id="np_emp_sbcupdate_saverecord">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="np-emp-sbcupdate-grid full-kendo-grid full-width" style="height:300px;  border: solid 1px rgba(0,0,0,.1);">
+
+                </div>
+            </div>
+
+            <div class="col-xs-6 p-0 m-0">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group textfield disabled">
+                            <label for="np_emp_sal_txtName">Nombre del colaboradors</label>
+                            <input type="text" class="form-control disable" id="np_emp_sal_txtName" name="np_emp_sal_txtName" value="{{Name}}"
+                                   autocomplete="off" maxlength="100" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xs-6">
+                        <div class="form-group textfield required currency">
+                            <label for="np_emp_sal_txtDailySalary">Salario diario</label>
+                            <input type="text" class="form-control currency-input" id="np_emp_sal_txtDailySalary" name="np_emp_sal_txtDailySalary" value="{{DailySalary}}"
+                                   autocomplete="off" maxlength="100" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group select disabled">
+                            <label for="np_emp_sal_drpContributionBase">Base de cotización</label>
+                            <select class="form-control" id="np_emp_sal_drpContributionBase" name="np_emp_sal_drpContributionBase" value="{{ContributionBase}}" disabled>
+                                {{#ContributionBasesOptions}}
+                                <option value='{{ID}}'>{{Name}}</option>
+                                {{/ContributionBasesOptions}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group textfield">
+                            <label for="np_emp_sal_txtDate">Fecha de aplicación</label>
+                            <input type="text" class="form-control" id="np_emp_sal_txtDate" name="np_emp_sal_txtDate" value="{{ChangeDate}}"
+                                   autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="form-group textfield currency required">
+                            <label for="np_emp_sal_txtSBCFixedPart">SBC parte fija</label>
+                            <input type="text" class="form-control currency-input" id="np_emp_sal_txtSBCFixedPart" name="np_emp_sal_txtSBCFixedPart" value="{{SBCFixedPart}}"
+                                   autocomplete="off" maxlength="25" />
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="form-group">
+                            <button class="btn btn-icon-small" data-toggle="tooltip" title="Calculo SBC (F10)" data-placement="bottom"
+                                    onclick="event.preventDefault(); UX.Cotorra.SBCUpdate.UI.SetCalculateSBC( );" style="margin-top : 17px">
+                                <i class="fas fa-money-check-edit-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="form-group textfield currency required">
+                            <label for="np_emp_sal_txtSBCVariablePart">SBC parte variable</label>
+                            <input type="text" class="form-control currency-input" id="np_emp_sal_txtSBCVariablePart" name="np_emp_sal_txtSBCVariablePart" value="{{SBCVariablePart}}"
+                                   autocomplete="off" maxlength="25" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group textfield currency required">
+                            <label for="np_emp_sal_txtSBCMax25UMA">SBC (tope 25 UMA)</label>
+                            <input type="text" class="form-control currency-input" id="np_emp_sal_txtSBCMax25UMA" name="np_emp_sal_txtSBCMax25UMA" value="{{SBCMax25UMA}}"
+                                   autocomplete="off" maxlength="25" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row p-t-20">
+        <div class="col-xs-6">
+            <button id="np_btnCancelSaveSBC" class="btn btn-white full-width">Cancelar</button>
+        </div>
+        <div class="col-xs-6">
+            <button id="np_btnSaveSBC" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+
+</script>

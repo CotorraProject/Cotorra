@@ -1,0 +1,2409 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="dpoActionTemplate">
+</script>
+
+<script type="text/x-kendo-template" id="dpoEmployeeTemplate">
+    <div class="preparyroll-more">
+        <div class="dropdown employee-more-actions">
+            <a class="btn btn-icon-small btn-more-actions" href="\\#" data-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <ul class="dropdown-menu dm-icon">
+                <!--<li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditOverdraft(this);">
+                        <i class="fad fa-money-check overdraft"></i>
+                        Recibo
+                    </a>
+                </li>
+                <li class="divider" style="margin:3px;"></li>-->
+                <!--<li>
+                    <a href="\\#">
+                        <i class="fad fa-clock incidents"></i>
+                        Incidencias
+                    </a>
+                </li>-->
+                <!--<li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditInhability(this);">
+                        <i class="fad fa-procedures inhability"></i>
+                        Incapacidades
+                    </a>
+                </li>-->
+                <!--<li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditPermanentMovements(this);">
+                        <i class="fad fa-redo-alt permanent-movements"></i>
+                        Movtos. permanentes
+                    </a>
+                </li>-->
+                <!--<li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditVacation(this);">
+                        <i class="fad fa-umbrella-beach vacations"></i>
+                        Vacaciones
+                    </a>
+                </li>-->
+                <li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditInfonavit(this);">
+                        <i class="fad fa-home-lg-alt infonavit"></i>
+                        Infonavit
+                    </a>
+                </li>
+                <li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditFonacot(this);">
+                        <i class="fad fa-dryer-alt fonacot"></i>
+                        FONACOT
+                    </a>
+                </li>
+                <li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditAccumulated(this);">
+                        <i class="fad fa-usd-square accumulated"></i>
+                        Acumulados
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="employee-grid-name">
+        <div class="code">
+            ID #=EmployeeCode#
+        </div>
+        <div class="fullname">
+            #=EmployeeName#
+        </div>
+        <div class="jobposition">
+            #=EmployeeJobPosition#
+        </div>
+    </div>
+    <div class="overdraft-type">
+        # if(OverdraftType == 1) {#
+        <div class="pp-ods-ordinary" data-toggle="tooltip" title="Recibo ordinario" data-placement="top">
+            O
+        </div>
+        #} else if(OverdraftType == 2){#
+        <div class="pp-ods-extraordinary" data-toggle="tooltip" title="Recibo extraordinario" data-placement="top">
+            E
+        </div>
+        #} else if(OverdraftType == 3){#
+        <div class="pp-ods-ordinarysettlement" data-toggle="tooltip" title="Finiquito" data-placement="top">
+            F
+        </div>
+        #} else if(OverdraftType == 4){#
+        <div class="pp-ods-compensatiosettlement" data-toggle="tooltip" title="Indemnización" data-placement="top">
+            I
+        </div>
+        #} else {#
+        -
+        #}#
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="dhEmployeeTemplate">
+    <div class="preparyroll-more">
+        <div class="dropdown employee-more-actions">
+            <a class="btn btn-icon-small btn-more-actions" href="\\#" data-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <ul class="dropdown-menu dm-icon">
+                <li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditInhability(this);">
+                        <i class="fad fa-procedures inhability"></i>
+                        Incapacidades
+                    </a>
+                </li>
+                <li>
+                    <a href="\\#" onclick="UX.Cotorra.PrePayroll.UI.EditVacation(this);">
+                        <i class="fad fa-umbrella-beach vacations"></i>
+                        Vacaciones
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="employee-grid-name">
+        <div class="code">
+            ID #=Code#
+        </div>
+        <div class="fullname">
+            #=FullName#
+        </div>
+        <div class="jobposition">
+            #=Position#
+        </div>
+    </div>
+    <div class="overdraft-type">
+        # if(OverdraftType == 1) {#
+        <div class="pp-ods-ordinary" data-toggle="tooltip" title="Recibo ordinario" data-placement="top">
+            O
+        </div>
+        #} else if(OverdraftType == 2){#
+        <div class="pp-ods-extraordinary" data-toggle="tooltip" title="Recibo extraordinario" data-placement="top">
+            E
+        </div>
+        #} else if(OverdraftType == 3){#
+        <div class="pp-ods-ordinarysettlement" data-toggle="tooltip" title="Finiquito" data-placement="top">
+            F
+        </div>
+        #} else if(OverdraftType == 4){#
+        <div class="pp-ods-compensatiosettlement" data-toggle="tooltip" title="Indemnización" data-placement="top">
+            I
+        </div>
+        #} else {#
+        -
+        #}#
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="prepayrollActionTemplate">
+    <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+            onclick="UX.Cotorra.PrePayroll.UI.EditOverdraft(this);">
+        <i class="fad fa-pencil"></i>
+    </button>
+</script>
+
+<script type="text/x-kendo-template" id="prepayrollPTActionTemplate">
+    # if(PeriodStatus == 0) {#
+    <div class="pp-ptsel-closed">
+        Cerrado
+    </div>
+    #} else if(PeriodStatus == 1){#
+    <div class="pp-ptsel-actual">
+        Actual
+    </div>
+    #} else if(PeriodStatus == 2){#
+    <div class="pp-ptsel-authorized">
+        Autorizado
+    </div>
+    #} else if(PeriodStatus == 3){#
+    <div class="pp-ptsel-stamped">
+        Timbrado
+    </div>
+    #} else {#
+    -
+    #}#
+</script>
+
+<script type="text/x-kendo-template" id="overdraftStatusActionTemplate">
+    # if(OverdraftStatus == 0) {#
+    <div class="pp-ods-actual">
+        Abierto
+    </div>
+    #} else if(OverdraftStatus == 1){#
+    <div class="pp-ods-authorized">
+        Por timbrar
+    </div>
+    #} else if(OverdraftStatus == 2){#
+    <div class="pp-ods-stamped">
+        Timbrado
+    </div>
+    #} else if(OverdraftStatus == 99){#
+    <div class="pp-ods-cancelled">
+        Cancelado
+    </div>
+    #} else {#
+    -
+    #}#
+</script>
+
+<script type="text/x-kendo-template" id="overdraftTypeActionTemplate">
+    # if(OverdraftType == 1) {#
+    <div class="pp-ods-ordinary">
+        Ordinario
+    </div>
+    #} else if(OverdraftType == 2){#
+    <div class="pp-ods-extraordinary">
+        Extraordinario
+    </div>
+    #} else if(OverdraftType == 3){#
+    <div class="pp-ods-ordinarysettlement">
+        Finiquito
+    </div>
+    #} else if(OverdraftType == 4){#
+    <div class="pp-ods-compensatiosettlement">
+        Indemnización
+    </div>
+    #} else {#
+    -
+    #}#
+</script>
+
+<div id="np-prepayroll" class="catalog-model-a">
+</div>
+
+<!--select period type-->
+<script id="np-selectperiodtype-template" type="text/ractive">
+
+    {{#if type == 'periodType'}}
+    <div class="np-pp-selectperiod-grid full-kendo-grid" style="height:200px;">
+    </div>
+    {{elseif type == 'period'}}
+    <div class="row">
+        <div class="col-xs-3 filters-selectperiod">
+
+            <div class="form-group select">
+                <label for="np_pp_drpPeriodType">Tipo de periodo</label>
+                <select class="form-control" id="np_pp_drpPeriodType" name="np_pp_drpPeriodType" value="{{PeriodTypeID}}">
+                    {{#PeriodTypesOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/PeriodTypesOptions}}
+                </select>
+            </div>
+            <div class="form-group select">
+                <label for="np_pp_drpPeriodType">Ejercicio</label>
+                <select class="form-control" id="np_pp_drpPeriodType" name="np_pp_drpPeriodType" value="{{PeriodID}}">
+                    {{#FiscalYearsOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/FiscalYearsOptions}}
+                </select>
+            </div>
+            <button id="btnFilterPeriods" class="btn btn-primary full-width">Filtrar</button>
+        </div>
+        <div class="col-xs-9">
+            <div class="np-pp-selectperiod-grid full-kendo-grid" style="height:350px;">
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</script>
+
+<!--prepayroll template-->
+<script id="np-prepayroll-template" type="text/ractive">
+    <div class="generic-catalog">
+        <div class="generic-catalog-menu scrollbar-macosx">
+            <div id="workPeriod">
+                <div class="period-type-name">
+                    {{WorkPeriod.PeriodType}} <span>{{WorkPeriod.PeriodFiscalYear}}</span>
+                    <i class="fad fa-chevron-circle-down icon"></i>
+                </div>
+                <div class="period-number">
+                    Periodo {{WorkPeriod.PeriodNumber}}
+                </div>
+                <div class="date-from">
+                    Del {{WorkPeriod.FromDate}}, al {{WorkPeriod.ToDate}}
+                </div>
+                <div class="date-to">
+
+                </div>
+                <div class="dates hidden">{{WorkPeriod.Dates}}</div>
+                <div class="period">
+                    {{#if WorkPeriod.PeriodStatus == 1}}
+                    <span class="pp-ptsel-actual">
+                        periodo actual
+                    </span>
+                    {{/if}}
+                    {{#if WorkPeriod.PeriodStatus == 2}}
+                    <span class="pp-ptsel-authorized">
+                        periodo autorizado
+                    </span>
+                    {{/if}}
+                    {{#if WorkPeriod.PeriodStatus == 3}}
+                    <span class="pp-ptsel-stamped">
+                        periodo timbrado
+                    </span>
+                    {{/if}}
+                </div>
+
+            </div>
+
+            <div class="kpis">
+                <div class="kpi">
+                    <div class="data">
+                        $0.00
+                    </div>
+                    <div class="title">
+                        Nómina neta
+                    </div>
+                </div>
+
+                <div class="kpi">
+                    <div class="data">
+                        $0.00
+                    </div>
+                    <div class="title">
+                        ISR
+                    </div>
+                </div>
+
+                <div class="kpi">
+                    <div class="data">
+                        $0.00
+                    </div>
+                    <div class="title">
+                        Subsidio al empleo
+                    </div>
+                </div>
+
+                <div class="kpi">
+                    <div class="data">
+                        $0.00
+                    </div>
+                    <div class="title">
+                        Obligaciones
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bottom-actions">
+                <button class="btn btn-primary btn-editing" id="np_btnSummaryPayroll" title="Resumen">
+                    <i class="fas fa-info"></i>
+                    Resumen DPO
+                </button>
+
+                <button class="btn btn-primary btn-lime" id="np_btnDispersePayroll" title="Dispersar">
+                    <i class="fas fa-inbox-out"></i>
+                    Dispersión
+                </button>
+
+                <!--<button class="btn btn-primary btn-cyan" id="np_btnPrintPayroll" title="Imprimir">
+                    <i class="far fa-print"></i>
+                    Imprimir
+                </button>-->
+            </div>
+        </div>
+        <div class="generic-catalog-content">
+            <div class="generic-catalog-actions">
+
+                <div id="searchContent" class="top-action-filter flex">
+                    <div class="form-group textfield-icon">
+                        <input id="dpo-quicksearch" type="text" class="form-control quicksearch" autocomplete="off" placeholder="Buscar colaboradores por nombre o código" />
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="top-actions">
+
+                    <button class="btn btn-primary {{#if !ShowAuthorize}} hidden {{/if}}" id="np_btnRecalculatePayroll" title="Autorizar">
+                        <i class="fad fa-shield-check m-r-5"></i>
+                        Autorizar
+                    </button>
+                    <button class="btn btn-primary btn-amber {{#if !ShowStamp}} hidden {{/if}}" id="np_btnStampPayroll" title="Timbrar">
+                        <i class="far fa-file-certificate m-r-5"></i>
+                        Timbrar
+                    </button>
+
+                </div>
+            </div>
+            <div class="generic-catalog-data">
+                <div class="catalog-content">
+                    <div class="tabs-flat">
+                        <ul class="tab-nav" role="tablist">
+                            <li class="active">
+                                <a href="#np_pp_dpo" aria-controls="np_pp_dpo" role="tab" data-toggle="tab" aria-expanded="true">Percepciones, deducciones y obligaciones</a>
+                            </li>
+                            <li class="">
+                                <a href="#np_pp_dh" aria-controls="np_pp_dh" role="tab" data-toggle="tab" aria-expanded="true">Incidencias</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content tab-content-pp">
+                            <div id="np_pp_dpo" class="tab-pane np-dpo-grid full-kendo-grid active">
+                            </div>
+
+                            <div id="np_pp_dh" class="tab-pane np-dh-grid full-kendo-grid">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--prepayroll summary template-->
+<script id="np-prepayrollsummary-template" type="text/ractive">
+    <div class="generic-catalog top">
+        <div class="generic-catalog-content">
+            <div class="generic-catalog-actions">
+                <div class="top-action-filter flex">
+                    <i class="fad fa-calendar-alt"></i>
+                    <div class="title">Detalle del periodo</div>
+                    <div class="description">
+                        {{FullDateInfo}}
+                    </div>
+                </div>
+
+                <div class="top-action-filter flex net-to-pay">
+                    <i class="fad fa-dollar-sign"></i>
+                    <div class="title">Neto a pagar</div>
+                    <div class="description">
+                        {{NetToPay}}
+                    </div>
+                </div>
+                <div class="top-actions">
+                    <button class="btn btn-primary" id="np_btnExportSummaryPayroll">
+                        <i class="far fa-file-excel"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="generic-catalog">
+        <div class="generic-catalog-content">
+            <div class="generic-catalog-data">
+                <div class="catalog-content tabs-flat">
+                    <ul class="tab-nav" role="tablist">
+                        <li class="active">
+                            <a href="#np_ppsum_perdec" aria-controls="np_ppsum_perdec" role="tab" data-toggle="tab" aria-expanded="true">Percepciones y deducciones</a>
+                        </li>
+                        <li class="">
+                            <a href="#np_ppsum_liab" aria-controls="np_ppsum_liab" role="tab" data-toggle="tab" aria-expanded="true">Obligaciones</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content tab-content-pp">
+                        <div id="np_ppsum_perdec" class="tab-pane full-kendo-grid active">
+                        </div>
+
+                        <div id="np_ppsum_liab" class="tab-pane full-kendo-grid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="np-prepayrolldisperse-template" type="text/ractive">
+    <form id="np_prepayrolldisperse_form">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group select">
+                    <label for="np_pd_drpBank">Selecciona el banco</label>
+                    <select class="form-control" id="np_pd_drpBank" name="np_pd_drpBank" value="{{BankCode}}">
+                        <option value=''>- - -</option>
+                        {{#BanksOptions}}
+                        <option value='{{Code}}'>{{Name}}</option>
+                        {{/BanksOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 {{#if (BankCode == 21) || (BankCode == 12)}} hidden {{/if}}">
+                <h5>Parámetros para {{BankName}}</h5>
+            </div>
+        </div>
+
+        <!--BANAMEX-->
+        <div id="banamex-params" class="{{#if BankCode !== 2}} hidden {{/if}}">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtCustomerNumberBanamex">Número de cliente</label>
+                        <input type="text" class="form-control" id="np_pd_txtCustomerNumberBanamex" name="np_pd_txtCustomerNumberBanamex" value="{{BankExtraParams.Banamex.CustomerNumber}}"
+                               autocomplete="off" maxlength="12" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtChargeAccountBanamex">Cuenta de cargo</label>
+                        <input type="text" class="form-control" id="np_pd_txtChargeAccountBanamex" name="np_pd_txtChargeAccountBanamex" value="{{BankExtraParams.Banamex.ChargeAccount}}"
+                               autocomplete="off" maxlength="20" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtBranchOfficeNumberBanamex">Número de sucursal</label>
+                        <input type="text" class="form-control" id="np_pd_txtBranchOfficeNumberBanamex" name="np_pd_txtBranchOfficeNumberBanamex" value="{{BankExtraParams.Banamex.BranchOfficeNumber}}"
+                               autocomplete="off" maxlength="4" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtPaymentDateBanamex">Fecha de pago</label>
+                        <input type="text" class="form-control" id="np_pd_txtPaymentDateBanamex" name="np_pd_txtPaymentDateBanamex" value="{{BankExtraParams.Banamex.PaymentDate}}"
+                               autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtFileNumberOfDayBanamex">Secuencial del archivo</label>
+                        <input type="text" class="form-control" id="np_pd_txtFileNumberOfDayBanamex" name="np_pd_txtFileNumberOfDayBanamex" value="{{BankExtraParams.Banamex.FileNumberOfDay}}"
+                               autocomplete="off" maxlength="4" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtStateIdBanamex">Clave del estado</label>
+                        <input type="text" class="form-control" id="np_pd_txtStateIdBanamex" name="np_pd_txtStateIdBanamex" value="{{BankExtraParams.Banamex.StateID}}"
+                               autocomplete="off" maxlength="2" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtCityIdBanamex">Clave de ciudad</label>
+                        <input type="text" class="form-control" id="np_pd_txtCityIdBanamex" name="np_pd_txtCityIdBanamex" value="{{BankExtraParams.Banamex.CityID}}"
+                               autocomplete="off" maxlength="4" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--SCOTIBANK-->
+        <div id="scotiabank-params" class="{{#if BankCode !== 44}} hidden {{/if}}">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtCustomerNumberScotiabank">Número de cliente</label>
+                        <input type="text" class="form-control" id="np_pd_txtCustomerNumberScotiabank" name="np_pd_txtCustomerNumberScotiabank" value="{{BankExtraParams.Scotiabank.CustomerNumber}}"
+                               autocomplete="off" maxlength="5" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtChargeAccountScotiabank">Cuenta de cargo</label>
+                        <input type="text" class="form-control" id="np_pd_txtChargeAccountScotiabank" name="np_pd_txtChargeAccountScotiabank" value="{{BankExtraParams.Scotiabank.ChargeAccount}}"
+                               autocomplete="off" maxlength="11" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtFileNumberOfDayScotiabank">No. archivo en el día</label>
+                        <input type="text" class="form-control form-control-maskMaxLength2" id="np_pd_txtFileNumberOfDayScotiabank" name="np_pd_txtFileNumberOfDayScotiabank" value="{{BankExtraParams.Scotiabank.FileNumberOfDay}}"
+                               autocomplete="off" maxlength="2" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtCompanyReferenceScotiabank">Referencia empresa</label>
+                        <input type="text" class="form-control" id="np_pd_txtCompanyReferenceScotiabank" name="np_pd_txtCompanyReferenceScotiabank" value="{{BankExtraParams.Scotiabank.CompanyReference}}"
+                               autocomplete="off" maxlength="10" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtPaymentDateScotiabank">Fecha de aplicación</label>
+                        <input type="text" class="form-control" id="np_pd_txtPaymentDateScotiabank" name="np_pd_txtPaymentDateScotiabank" value="{{BankExtraParams.Scotiabank.PaymentDate}}"
+                               autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--SANTANDER-->
+        <div id="scotiabank-params" class="{{#if BankCode !== 14}} hidden {{/if}}">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtChargeAccountSantander">Cuenta de cargo</label>
+                        <input type="text" class="form-control" id="np_pd_txtChargeAccountSantander" name="np_pd_txtChargeAccountSantander" value="{{BankExtraParams.Santander.CompanyBankAccount}}"
+                               autocomplete="off" maxlength="16" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtPaymentDateSantander">Fecha de pago</label>
+                        <input type="text" class="form-control" id="np_pd_txtPaymentDateSantander" name="np_pd_txtPaymentDateSantander" value="{{BankExtraParams.Santander.PaymentDate}}"
+                               autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--BANORTE-->
+        <div id="scotiabank-params" class="{{#if BankCode !== 72}} hidden {{/if}}">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtChargeAccountBanorte">Cuenta de cargo</label>
+                        <input type="text" class="form-control" id="np_pd_txtChargeAccountBanorte" name="np_pd_txtChargeAccountBanorte" value="{{BankExtraParams.Banorte.ChargeAccount}}"
+                               autocomplete="off" maxlength="9" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtSystemIDBanorte">Clave del sistema</label>
+                        <input type="text" class="form-control" id="np_pd_txtSystemIDBanorte" name="np_pd_txtSystemIDBanorte" value="{{BankExtraParams.Banorte.SystemID}}"
+                               autocomplete="off" maxlength="3" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="np_pd_txtPaymentDateBanorte">Fecha de pago</label>
+                        <input type="text" class="form-control" id="np_pd_txtPaymentDateBanorte" name="np_pd_txtPaymentDateBanorte" value="{{BankExtraParams.Banorte.PaymentDate}}"
+                               autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <button class="btn btn-primary full-width" id="np_btnDisperse">
+                    Dispersar
+                </button>
+            </div>
+            <div class="col-xs-6">
+                <button class="btn btn-white full-width" id="np_btnCancelDisperse">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+
+    </form>
+</script>
+
+<script id="np-prepayrolldisperse-template222" type="text/ractive">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group select">
+                <label for="np_pd_drpBank">Selecciona el banco</label>
+                <select class="form-control" id="np_pd_drpBank" name="np_pd_drpBank" value="{{BankID}}">
+                    <option value=''>- - -</option>
+                    {{#BanksOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/BanksOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <button class="btn btn-primary full-width" id="np_btnDisperse">
+                Dispersar
+            </button>
+        </div>
+        <div class="col-xs-6">
+            <button class="btn btn-white full-width" id="np_btnCancelDisperse">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</script>
+
+<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="accumulatedActionTemplate">
+
+</script>
+
+<!-- add fonacot modal -->
+<script id="np-editaccumulated-template" type="text/ractive">
+    <form id="np_accumulated_form">
+        <div id="np-accumulated">
+            <div class="generic-catalog">
+                <div class="generic-catalog-content">
+                    <div class="generic-catalog-actions">
+                        <div class="top-action-filter flex">
+                            <i class="fad fa-user-circle"></i>
+                            <div class="title">ID {{Employee.Code}}</div>
+                            <div class="description">{{Employee.Name}}</div>
+                        </div>
+                        <!--<div class="top-actions">
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            <div class="generic-catalog">
+                <div class="generic-catalog-content">
+                    <div class="generic-catalog-data" style="top: 0px !important; height:100%;">
+                        <div class="catalog-content">
+                            <div class="np-accumulated-grid full-kendo-grid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-t-10">
+                <div class="col-xs-3 col-xs-offset-3">
+                    <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+                </div>
+
+                <div class="col-xs-3">
+                    <button id="np_btnSaveRecord" class="btn btn-primary full-width">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</script>
+
+
+
+<!-------------------------OVERDRAFT------------------------>
+<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="overdraftConceptNameTemplate">
+    <div class="text-left overdraft-conceptname">
+        <div>
+            #= ConceptPaymentName #
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="overdraftAmountTemplate">
+    <div class="text-right overdraft-amount">
+        <a class="od-edit-amount #if(IsTotalAmountCapturedByUser){# captured-by-user #}# #if(IsGeneratedByPermanentMovement){# generated-by-permov #}#"
+           title="#if(IsTotalAmountCapturedByUser){# Importe capturado por el usuario #}else if(IsGeneratedByPermanentMovement){# Importe generado por un movimiento permanente #}else{# Importe calculado automáticamente #}#"
+           href="\\#"
+           onfocus="UX.Cotorra.Overdraft.UI.EditAmount(this);"
+           onclick="UX.Cotorra.Overdraft.UI.EditAmount(this);">
+            #= UX.Cotorra.Common.FormatCurrency(Amount) #
+        </a>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="overdraftAmountSimpleTemplate">
+    <div class="text-right overdraft-amount">
+        <a class="od-edit-amount no-editable #if(IsTotalAmountCapturedByUser){# captured-by-user #}# #if(IsGeneratedByPermanentMovement){# generated-by-permov #}#"
+           title="#if(IsTotalAmountCapturedByUser){# Importe capturado por el usuario #}else if(IsGeneratedByPermanentMovement){# Importe generado por un movimiento permanente #}else{# Importe calculado automáticamente #}#">
+            #= UX.Cotorra.Common.FormatCurrency(Amount) #
+        </a>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="overdraftValueTemplate">
+    #if(Value == 0){#
+    <div>
+        &nbsp;
+    </div>
+    #} else {#
+    <div>
+        <div class="text-right overdraft-amount">
+            <a class="od-edit-amount od-edit-value #if(IsValueCapturedByUser){# captured-by-user #}#"
+               title="#if(IsValueCapturedByUser){# Valor capturado por el usuario #}else{# Valor obtenido automáticamente #}#"
+               href="\\#"
+               onfocus="UX.Cotorra.Overdraft.UI.EditAmount(this);"
+               onclick="UX.Cotorra.Overdraft.UI.EditAmount(this);">
+                #= Value #
+            </a>
+        </div>
+    </div>
+    #}#
+</script>
+
+<script type="text/x-kendo-template" id="overdraftValueSimpleTemplate">
+    #if(Value == 0){#
+    <div>
+        &nbsp;
+    </div>
+    #} else {#
+    <div>
+        <div class="text-right overdraft-amount">
+            <a class="od-edit-amount no-editable #if(IsValueCapturedByUser){# captured-by-user #}#"
+               title="#if(IsValueCapturedByUser){# Valor capturado por el usuario #}else{# Valor obtenido automáticamente #}#">
+                #= Value #
+            </a>
+        </div>
+    </div>
+    #}#
+</script>
+
+<!--edit overdraft modal-->
+<script id="np-editoverdraft-template" type="text/ractive">
+    <div id="np-overdraft" class="{{#if Overdraft.Status == 99}}cancelled{{/if}}">
+        {{#if Overdraft.Status == 99}}
+        <label class="lb-cancelled">Cancelado</label>
+        {{/if}}
+        <div class="generic-catalog">
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-actions">
+                    <div class="top-action-filter flex">
+                        <i class="fad fa-user-circle"></i>
+                        <div class="title">ID {{Employee.Code}}</div>
+                        <div class="description">{{Employee.FullName}}</div>
+                    </div>
+                    <div class="top-action-filter flex hidden">
+                        <div class="title">Contrato</div>
+                        <div class="description">{{Employee.Contract}}</div>
+                    </div>
+                    <!--<div class="top-action-filter flex">
+                        <i class="fad fa-scrubber"></i>
+                        <div class="title">Puesto</div>
+                        <div class="description">{{Employee.JobPositionName}}</div>
+                    </div>-->
+                    <div class="top-action-filter" style="width:150px;">
+                        <i class="fad fa-dollar-sign"></i>
+                        <div class="title">Sueldo</div>
+                        {{#if Overdraft.OverdraftType == 1}}
+                        <div class="description">{{Employee.DailySalary}}</div>
+                        {{/if}}
+                        {{#if Overdraft.OverdraftType == 2}}
+                        <div class="description">{{Employee.DailySalary}}</div>
+                        {{/if}}
+                        {{#if Overdraft.OverdraftType == 3}}
+                        <div class="description">{{Employee.SettlementSalaryBase}}</div>
+                        {{/if}}
+                        {{#if Overdraft.OverdraftType == 4}}
+                        <div class="description">{{Employee.SettlementSalaryBase}}</div>
+                        {{/if}}
+                    </div>
+                    <div class="top-action-filter" style="width:140px;">
+                        <div class="title">Tipo</div>
+                        {{#if Overdraft.OverdraftType == 1}}
+                        <i class="fad fa-file ordinary"></i>
+                        <div class="description">Ordinario</div>
+                        {{/if}}
+                        {{#if Overdraft.OverdraftType == 2}}
+                        <i class="fad fa-file extraordinary"></i>
+                        <div class="description">Extraordinario</div>
+                        {{/if}}
+                        {{#if Overdraft.OverdraftType == 3}}
+                        <i class="fad fa-file ordinarysettlement"></i>
+                        <div class="description">Finiquito</div>
+                        {{/if}}
+                        {{#if Overdraft.OverdraftType == 4}}
+                        <i class="fad fa-file indemnizatiosettlement"></i>
+                        <div class="description">Indemnización</div>
+                        {{/if}}
+                    </div>
+                    {{#if Overdraft.UUID != null}}
+                    <div class="top-action-filter flex">
+                        <i class="fad fa-file-code"></i>
+                        <div class="title">UUID</div>
+                        <div class="description uuid">{{Overdraft.UUID}}</div>
+                    </div>
+                    <div class="top-actions">
+                        <button class="btn btn-primary" id="np_btnDownloadCFDI" data-oid="{{Overdraft.ID}}" title="Obtener CFDI"
+                                onclick="UX.Cotorra.Overdraft.UI.DownloadCFDI({ overdraftID: $(this).data('oid') });">
+                            <i class="far fa-cloud-download-alt"></i>
+                        </button>
+                        {{#if Overdraft.Status == 2}}
+                        <button class="btn btn-red" id="np_btnCancelCFDI" data-oid="{{Overdraft.ID}}" title="Cancelar CFDI"
+                                onclick="UX.Cotorra.Overdraft.UI.CancelCFDI({ overdraftID: $(this).data('oid') });">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                        {{/if}}
+                        {{#if Overdraft.Status == 99}}
+                        <button class="btn btn-red" id="np_btnDownloadCancelReceipt" data-oid="{{Overdraft.ID}}" title="Obtener acuse de cancelación"
+                                onclick="UX.Cotorra.Overdraft.UI.DownloadCancelledAcknowledgement({ overdraftID: $(this).data('oid') });">
+                            <i class="far fa-cloud-download-alt"></i>
+                        </button>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                    {{#if Overdraft.Status == 0}}
+                    <div class="top-actions">
+                        <button class="btn btn-primary" id="np_btnRestoreOverdraft">
+                            Restaurar
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </div>
+                    {{/if}}
+                    {{#if Overdraft.Status == 1}}
+                    <div class="top-actions">
+                        <button class="btn btn-primary" id="np_btnEditHistoricEmployee" title="Editar histórico del colaborador">
+                            <i class="fad fa-user-edit"></i>
+                        </button>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <div class="generic-catalog" style="height:430px !important;">
+            <div class="generic-catalog-menu scrollbar-macosx">
+            </div>
+            <div class="generic-catalog-content">
+
+                <div class="generic-catalog-data" style="top: 0px !important; height:100%;">
+                    <div class="catalog-content tabs-flat">
+                        <ul class="tab-nav" role="tablist">
+                            <li class="active"><a href="#np_od_dp" aria-controls="np_od_dp" role="tab" data-toggle="tab" aria-expanded="true">Deducciones y Percepciones</a></li>
+                            <li><a href="#np_od_obl" aria-controls="np_od_obl" role="tab" data-toggle="tab" aria-expanded="true">Obligaciones</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="np_od_dp" class="tab-pane active">
+                                <div class="row">
+                                    <div class="col-xs-6 perceptions">
+
+                                        <div class="title">Percepciones</div>
+                                        <div class="np-od-perceptions-grid full-kendo-grid concepts-grid g-grid">
+                                            <div class="g-grid-header">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Concepto</th>
+                                                            <th>Valor</th>
+                                                            <th>Importe</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+
+                                            <div class="g-grid-content">
+                                                <table>
+                                                    <tbody>
+                                                        {{#each Perceptions}}
+                                                        <tr class="iw-mTrigger">
+                                                            <td>
+                                                                {{ConceptPaymentCode}}
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-left overdraft-conceptname">
+                                                                    <div>
+                                                                        {{ConceptPaymentName}}
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div>
+                                                                    <div class="text-right overdraft-amount">
+                                                                        <a class="od-edit-amount od-edit-value" title=" Valor obtenido automáticamente " href="#"
+                                                                           onfocus="UX.Cotorra.Overdraft.UI.EditAmount(this);"
+                                                                           onclick="UX.Cotorra.Overdraft.UI.EditAmount(this);">
+                                                                            {{Value}}
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-right overdraft-amount">
+                                                                    <a class="od-edit-amount" title="" href="#"
+                                                                       onfocus="UX.Cotorra.Overdraft.UI.EditAmount(this);"
+                                                                       onclick="UX.Cotorra.Overdraft.UI.EditAmount(this);">
+                                                                        {{Amount}}
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="concept-total"></div>
+                                        </div>
+
+                                        {{#if Overdraft.Status == 0}}
+                                        <a href="#" class="add-concept" title="Añadir percepción" data-concepttype="P">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                        {{/if}}
+                                    </div>
+
+                                    <div class="col-xs-6 deductions">
+
+                                        <div class="title">Deducciones</div>
+                                        <div class="np-od-deductions-grid full-kendo-grid concepts-grid g-grid">
+                                            <div class="g-grid-header">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Concepto</th>
+                                                            <th>Valor</th>
+                                                            <th>Importe</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+
+                                            <div class="g-grid-content">
+                                                <table>
+                                                    <tbody>
+                                                        {{#each Deductions}}
+                                                        <tr class="iw-mTrigger">
+                                                            <td>
+                                                                {{ConceptPaymentCode}}
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-left overdraft-conceptname">
+                                                                    <div>
+                                                                        {{ConceptPaymentName}}
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div>
+                                                                    <div class="text-right overdraft-amount">
+                                                                        <a class="od-edit-amount od-edit-value" title=" Valor obtenido automáticamente " href="#"
+                                                                           onfocus="UX.Cotorra.Overdraft.UI.EditAmount(this);"
+                                                                           onclick="UX.Cotorra.Overdraft.UI.EditAmount(this);">
+                                                                            {{Value}}
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-right overdraft-amount">
+                                                                    <a class="od-edit-amount" title="" href="#"
+                                                                       onfocus="UX.Cotorra.Overdraft.UI.EditAmount(this);"
+                                                                       onclick="UX.Cotorra.Overdraft.UI.EditAmount(this);">
+                                                                        {{Amount}}
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        {{#if Overdraft.Status == 0}}
+                                        <a href="#" class="add-concept" title="Añadir deducción" data-concepttype="D">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                        {{/if}}
+                                    </div>
+
+                                    <div class="col-xs-12 concepts-grid-payment-footer text-right net-to-pay">
+                                        <span>Neto a pagar:&nbsp;</span>
+                                        <label>$0.00</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="np_od_obl" class="tab-pane">
+                                <div class="row">
+                                    <div class="col-xs-6 liabilities">
+
+                                        <div class="title">Obligaciones</div>
+                                        <div class="np-od-liabilities-grid full-kendo-grid concepts-grid g-grid">
+                                            <div class="g-grid-header">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Concepto</th>
+                                                            <th>Valor</th>
+                                                            <th>Importe</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+
+                                            <div class="g-grid-content">
+                                                <table>
+                                                    <tbody>
+                                                        {{#each Liabilities}}
+                                                        <tr class="iw-mTrigger">
+                                                            <td>
+                                                                {{ConceptPaymentCode}}
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-left overdraft-conceptname">
+                                                                    <div>
+                                                                        {{ConceptPaymentName}}
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div>
+                                                                    <div class="text-right overdraft-amount">
+                                                                        <a class="od-edit-amount od-edit-value" title=" Valor obtenido automáticamente " href="#"
+                                                                           onfocus="UX.Cotorra.Overdraft.UI.EditAmount(this);"
+                                                                           onclick="UX.Cotorra.Overdraft.UI.EditAmount(this);">
+                                                                            {{Value}}
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-right overdraft-amount">
+                                                                    <a class="od-edit-amount" title="" href="#"
+                                                                       onfocus="UX.Cotorra.Overdraft.UI.EditAmount(this);"
+                                                                       onclick="UX.Cotorra.Overdraft.UI.EditAmount(this);">
+                                                                        {{Amount}}
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        {{/each}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        {{#if Overdraft.Status == 0}}
+                                        <a href="#" class="add-concept" title="Añadir percepción" data-concepttype="L">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                        {{/if}}
+                                    </div>
+
+                                    <div class="col-xs-6 empty">
+                                        <div class="title">&nbsp;</div>
+                                        <div class="np-od-empty-grid full-kendo-grid concepts-grid g-grid">
+                                            <div class="g-grid-header">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>&nbsp;</th>
+                                                            <th>&nbsp;</th>
+                                                            <th>&nbsp;</th>
+                                                            <th>&nbsp;</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+
+                                            <div class="g-grid-content">
+                                                <table>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 concepts-grid-payment-footer text-right">
+                                        <span>&nbsp;</span>
+                                        <label>&nbsp;</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<!--add concept modal-->
+<script id="np-addoverdraftconcept-template" type="text/ractive">
+    <form id="np_cat_saverecord">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group select2 required">
+                    <label for="np_aodc_drpConcept">Concepto</label>
+                    <select decorator="select2" id="np_aodc_drpConcept" name="np_aodc_drpConcept" class="form-control"
+                            value="{{ConceptPaymentID}}"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield">
+                    <label for="np_aodc_txtValue">Valor</label>
+                    <input type="text" class="form-control" id="np_aodc_txtValue" name="np_aodc_txtValue" value="{{Value}}"
+                           autocomplete="off" maxlength="10" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield currency">
+                    <label for="np_aodc_txtTotalAmount">Importe total</label>
+                    <input type="text" class="form-control currency-input" id="np_aodc_txtTotalAmount" name="np_aodc_txtTotalAmount" value="{{Amount}}"
+                           autocomplete="off" maxlength="20" />
+                </div>
+            </div>
+        </div>
+        <div class="row p-t-10">
+            <div class="col-xs-6 {{#if ConceptTypeID == ''}} disabled {{/if}}">
+                <button id="np_btnAddConcept" class="btn btn-primary full-width" {{#if ConceptTypeID == ''}} disabled {{/if}}>
+                    Agregar
+                </button>
+            </div>
+            <div class="col-xs-6">
+                <button id="np_btnCancelAddConcept" class="btn btn-white full-width">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </form>
+</script>
+
+<!--edit imports modal-->
+<script id="np-editimports-template" type="text/ractive">
+    <form id="np_cat_saverecord">
+        <div id="np-imports">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group textfield required  {{#if Overdraft.Status != 0}} disabled {{/if}}">
+                        <label for="np_imp_txtValue">Valor</label>
+                        <input type="text" class="form-control" id="np_imp_txtValue" name="np_imp_txtValue" value="{{Value}}"
+                               autocomplete="off" maxlength="20" {{#if Overdraft.Status != 0}} disabled="disabled" {{/if}} />
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="form-group textfield currency required {{#if Overdraft.Status != 0}} disabled {{/if}}">
+                        <label for="np_imp_txtTotalAmount">Importe total</label>
+                        <input type="text" class="form-control" id="np_imp_txtTotalAmount" name="np_imp_txtTotalAmount" value="{{Amount}}"
+                               autocomplete="off" maxlength="20" {{#if Overdraft.Status != 0}} disabled="disabled" {{/if}} />
+                    </div>
+                </div>
+            </div>
+            {{#if (ConceptPaymentType == 1)}}
+            <div class="row imports-isr-imss">
+                <div class="col-xs-6">
+                    <div class="form-group textfield currency required disabled">
+                        <label for="np_imp_txtTotalAmount1">ISR Gravado</label>
+                        <input type="text" class="form-control" id="np_imp_txtTotalAmount1" name="np_imp_txtTotalAmount1" value="{{Amount1}}"
+                               autocomplete="off" maxlength="20" disabled />
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group textfield currency required disabled">
+                        <label for="np_imp_txtTotalAmount2">ISR Exento</label>
+                        <input type="text" class="form-control" id="np_imp_txtTotalAmount2" name="np_imp_txtTotalAmount2" value="{{Amount2}}"
+                               autocomplete="off" maxlength="20" disabled />
+                    </div>
+                </div>
+            </div>
+            <div class="row imports-isr-imss">
+                <div class="col-xs-6">
+                    <div class="form-group textfield currency required disabled">
+                        <label for="np_imp_txtTotalAmount3">IMSS Gravado</label>
+                        <input type="text" class="form-control" id="np_imp_txtTotalAmount3" name="np_imp_txtTotalAmount3" value="{{Amount3}}"
+                               autocomplete="off" maxlength="20" disabled />
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group textfield currency required disabled">
+                        <label for="np_imp_txtTotalAmount4">IMSS Exento</label>
+                        <input type="text" class="form-control" id="np_imp_txtTotalAmount4" name="np_imp_txtTotalAmount4" value="{{Amount4}}"
+                               autocomplete="off" maxlength="20" disabled />
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+        {{#if Overdraft.Status == 0}}
+        <div class="row p-t-10">
+            <div class="col-xs-6">
+                <button id="np_btnSaveImports" class="btn btn-primary full-width">
+                    Actualizar
+                </button>
+            </div>
+            <div class="col-xs-6">
+                <button id="np_btnCancelSaveImports" class="btn btn-white full-width">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+        {{/if}}
+    </form>
+</script>
+
+<!--edit imports fonacot-->
+<script id="np-editimports-credit-template" type="text/ractive">
+    <form id="np_cat_saverecord">
+        <div id="np-imports">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="np-imp-grid full-kendo-grid full-width" style="height:180px;  border: solid 1px rgba(0,0,0,.1);">
+
+                    </div>
+                </div>
+                <div class="col-xs-2 col-xs-offset-6">
+                    <div class="form-group textfield">
+                        <label for="np_imp_txtTotalAmount">Total</label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="form-group textfield">
+                        <label for="np_imp_txtTotalAmount">{{Total}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{#if Overdraft.Status == 0}}
+        <div class="row p-t-10">
+
+            <div class="col-xs-2 col-xs-offset-3">
+                <button id="np_btnSaveImports" class="btn btn-primary">
+                    Actualizar
+                </button>
+            </div>
+            <div class="col-xs-2">
+                <button id="np_btnCancelSaveImports" class="btn btn-white">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col-xs-3">
+                <button id="np_btnRestorImports" class="btn btn-primary">
+                    Restaurar
+                    <i class="fas fa-undo"></i>
+                </button>
+            </div>
+        </div>
+        {{/if}}
+    </form>
+</script>
+
+<script type="text/x-kendo-template" id="fonacotAmountAppliedTemplate">
+    <div class="text-right">
+        <a class="od-edit-amount #if(IsAmountAppliedCapturedByUser){# captured-by-user #}#"
+           title="#if(IsAmountAppliedCapturedByUser){# Importe capturado por el usuario #}else{# Importe calculado automáticamente #}#"
+           href="\\#"
+           onfocus="UX.Cotorra.Overdraft.UI.EditFonacotImportsRow(this);"
+           onclick="UX.Cotorra.Overdraft.UI.EditFonacotImportsRow(this);">
+            #= UX.Cotorra.Common.FormatCurrency(AmountApplied) #
+        </a>
+    </div>
+</script>
+
+
+
+<script type="text/javascript">
+
+    UX.Cotorra.Overdraft = {
+
+        FONACOTConceptCode: 61,
+
+        UI: {
+
+            Params: {},
+
+            ContextMenu: [
+                {
+                    name: '<i class="far fa-pencil" style="color: rgba(100,181,246 ,1);"></i>Editar',
+                    fun: function (ev) {
+                        let tr = ev.trigger.context;
+                        UX.Cotorra.Overdraft.UI.EditImports(tr);
+                    }
+                },
+                {
+                    name: '<i class="far fa-minus-circle" style="color:red;"></i></i>Eliminar concepto',
+                    fun: function (ev) {
+                        let tr = ev.trigger.context;
+                        UX.Cotorra.Overdraft.UI.DeleteConcept(tr);
+                    }
+                }
+            ],
+
+            Init: (params = {}) => {
+
+                UX.Cotorra.Overdraft.UI.Params = params;
+
+                let header = params.PrePayrollHeader;
+
+                //Create modal
+                let modalID = UX.Modals.OpenModal(
+                    'Recibo ' + params.WorkPeriod.Period + ' - ' + moment(header.InitialDate).format('DD/MM/YYYY') + ' a ' + moment(header.FinalDate).format('DD/MM/YYYY'),
+                    'l', '<div id="np-editoverdraft"></div>',
+                    function () {
+
+                        //Create ractive model
+                        let editModel = UX.Cotorra.Overdraft.UI.EditModel = new Ractive({
+                            el: '#np-editoverdraft',
+                            template: '#np-editoverdraft-template',
+                            data: {
+                                //Employee: params.Employee,
+                                Overdraft: params.Overdraft,
+                                Perceptions: [],
+                                Deductions: [],
+                                Liabilities: []
+                            }
+                        });
+
+                        //Set empty grids
+                        UX.Cotorra.Overdraft.UI.LoadConceptsGrid([], 'Perceptions');
+                        UX.Cotorra.Overdraft.UI.LoadConceptsGrid([], 'Deductions');
+                        UX.Cotorra.Overdraft.UI.LoadConceptsGrid([], 'Liabilities');
+
+                        //Get overdraft data
+                        let overdraft = UX.Cotorra.Overdraft.UI.LoadConcepts(params.Overdraft.ID);
+
+                        //Get necessary catalogs
+                        (async function () {
+
+                            //Load data
+                            await UX.Cotorra.Catalogs.Require({
+                                loader: {
+                                    container: '#' + modalID,
+                                    removeWhenFinish: true
+                                },
+                                catalogs: ['Concepts', 'Positions'],
+                                requests: [overdraft],
+                                forceLoad: false
+                            });
+
+                            $('#np_btnRestoreOverdraft').off('click').on('click', function (ev) {
+                                UX.Modals.Confirm('RESTAURAR RECIBO', 'La siguiente acción restaura el recibo a sus conceptos e importes iniciales ¿Deseas continuar?', 'Sí, restaurar', 'No, espera',
+                                    () => {
+
+                                        UX.Loaders.SetLoader('#np-overdraft');
+                                        UX.Cotorra.Catalogs.Do('POST', 'Overdraft', 'Restore',
+                                            {
+                                                overdraftID: params.Overdraft.ID
+                                            },
+                                            (data) => {
+                                                UX.Cotorra.Overdraft.UI.LoadConcepts();
+                                            },
+                                            (error) => {
+                                                UX.Common.ErrorModal(error);
+                                                UX.Loaders.RemoveLoader('#np-overdraft');
+                                            },
+                                            (complete) => {
+                                            }
+                                        );
+                                    },
+                                    () => { });
+                            });
+
+                            $('#np_btnEditHistoricEmployee').off('click').on('click', function (ev) {
+                                UX.Modals.Confirm('MODIFICAR COLABORADOR',
+                                    'Editarás la información del colaborador para el periodo autorizado ¿Deseas continuar?', 'Sí, vamos', 'No, espera',
+                                    () => {
+
+                                        let params = {
+                                            row: { dataItem: UX.Cotorra.Overdraft.UI.EditModel.get('Employee'), },
+                                            catName: 'HistoricEmployees',
+                                            templateName: 'Employees',
+                                            titStr: ' historia colaborador',
+                                            callback: function (params) {
+
+                                                UX.Cotorra.Overdraft.UI.EditModel.set('Employee.FullName', params.Saved.FullName);
+                                                UX.Cotorra.Overdraft.UI.EditModel.set('Employee.DailySalary', params.Data.DailySalary);
+                                                UX.Cotorra.Overdraft.UI.EditModel.set('Employee.JobPositionName', params.JobPositionName);
+                                            }
+                                        }
+
+                                        UX.Cotorra.Employees.UI.OpenSave(null, params);
+                                    },
+                                    () => { });
+                            });
+
+                        })();
+
+                        //Set tab click behavior (fix for resize)
+                        $('#np-editoverdraft .tab-nav a').on('click', function () { $(window).resize(); });
+                    });
+            },
+
+            LoadConceptsGrid: function (data = [], type) {
+
+                //Create amount formatted value
+                for (let i = 0; i < data.length; i++) {
+                    data[i].AmountOriginal = data[i].Amount;
+                    data[i].Amount = UX.Cotorra.Common.FormatCurrency(data[i].Amount);
+                }
+
+                //Set values to model
+                UX.Cotorra.Overdraft.UI.EditModel.set(type, []);
+                UX.Cotorra.Overdraft.UI.EditModel.set(type, data);
+
+                //Sum values
+                type = type.toLowerCase();
+
+                return;
+
+                type = type.toLowerCase();
+
+                //Set fields
+                let fields = {
+                    ID: { type: 'string' },
+                    ConceptPaymentCode: { type: 'number' },
+                    ConceptPaymentName: { type: 'string' },
+                    Value: { type: 'number' },
+                    Amount: { type: 'number' },
+                    CapturedByUser: { type: 'bool' },
+                    OverdraftID: { type: 'bool' },
+                };
+
+                let footerTemplate = "<div class='text-right concepts-grid-total hidden'>";
+                if (type === 'perceptions') { footerTemplate += "<span>Total de percepciones: </span><label class='total-amount'>0</label>"; }
+                if (type === 'deductions') { footerTemplate += "<span>Total de deducciones: </span><label class='total-amount'>0</label>"; }
+                if (type === 'liabilities') { footerTemplate += "<span>Total de obligaciones: </span><label class='total-amount'>0</label>"; }
+                footerTemplate += "</div>";
+
+                //Check for amount template (edit inline in grid)
+                let amountTemplate = null;
+                let valueTemplate = null;
+
+                let ods = UX.Cotorra.Overdraft.UI.Params.Overdraft;
+                if (ods && ods.Status != undefined && ods.Status === 0) {
+                    valueTemplate = kendo.template($('#overdraftValueTemplate').html());
+                    amountTemplate = kendo.template($('#overdraftAmountTemplate').html());
+                } else {
+                    valueTemplate = kendo.template($('#overdraftValueSimpleTemplate').html());
+                    amountTemplate = kendo.template($('#overdraftAmountSimpleTemplate').html())
+                }
+
+                //Set columns
+                let columns = [
+                    {
+                        field: 'ConceptPaymentCode', title: ' ', width: 45,
+                    },
+                    {
+                        field: 'ConceptPaymentName', title: type === 'empty' ? ' ' : 'Concepto',
+                        template: kendo.template($('#overdraftConceptNameTemplate').html()),
+                    },
+                    {
+                        field: 'Value', title: type === 'empty' ? ' ' : 'Valor', width: 80,
+                        template: valueTemplate
+                    },
+                    {
+                        field: 'Amount', title: type === 'empty' ? ' ' : 'Importe', width: 150,
+                        template: amountTemplate,
+                        footerTemplate: type === 'empty' ? ' ' : footerTemplate,
+                    },
+                ];
+
+                //Init grid
+                let gridSelector = '.np-od-' + type + '-grid';
+                let kg = $(gridSelector).data('kendoGrid');
+                if (kg) { kg.destroy(); $(gridSelector).html(''); }
+
+                $(gridSelector).kendoGrid({
+                    dataSource: {
+                        data: data, schema: { model: { fields: fields } }, pageSize: 500,
+                        aggregate: [
+                            { field: 'Amount', aggregate: 'sum' },
+                        ],
+                    },
+                    pageable: { refresh: false, alwaysVisible: false, pageSizes: 500, },
+                    filterable: false,
+                    scrollable: true,
+                    resizable: true,
+                    sortable: false,
+                    columnMenu: false,
+                    refresh: false,
+                    theme: UX.Common.UserSettings.KendoTheme,
+                    columns: columns,
+                    dataBound: function () {
+                        let data = $(this)[0].dataSource.data();
+                        let totalAmount = 0;
+
+                        for (var i = 0; i < data.length; i++) {
+                            let row = data[i];
+                            let kind = row.ConceptPaymentKind;
+                            let $tr = $('tr[data-uid="' + row.uid + '"]');
+
+                            if (kind) { $tr.addClass('is-kind'); }
+                            else { totalAmount += row.Amount; }
+
+                            $tr.off('dblclick').on('dblclick', function () {
+                                UX.Cotorra.Overdraft.UI.EditImports(this);
+                            });
+
+                            $tr.contextMenu(UX.Cotorra.Overdraft.UI.ContextMenu, { triggerOn: 'contextmenu' });
+                        }
+
+                        //Fix for footer colspan
+                        let footerTemplate = $(this)[0].element.find('.k-footer-template');
+                        $(footerTemplate.children()[0]).remove();
+                        $(footerTemplate.children()[0]).remove();
+                        $(footerTemplate.children()[1]).attr('colspan', 3);
+                        $(footerTemplate.children()[1]).find('.concepts-grid-total').removeClass('hidden');
+
+                        //Set custom aggregate
+                        $(footerTemplate).find('.total-amount').html(UX.Cotorra.Common.FormatCurrency(totalAmount));
+
+                        let pta = $('.np-od-perceptions-grid .total-amount').html();
+                        let dta = $('.np-od-deductions-grid .total-amount').html();
+
+                        let perceptionsTotal = pta ? pta.replace(/\$/g, '').replace(/,/g, '') : '0';
+                        let deductionsTotal = dta ? dta.replace(/\$/g, '').replace(/,/g, '') : '0';
+                        let netToPay = parseFloat(perceptionsTotal) - parseFloat(deductionsTotal);
+                        $('.net-to-pay label').html(UX.Cotorra.Common.FormatCurrency(netToPay));
+                    }
+                });
+
+                $(gridSelector).resizeKendoGrid();
+            },
+
+            LoadConcepts: function (overdraftID = null) {
+
+                if (overdraftID) {
+                    this.actualOverdraftID = overdraftID;
+                } else {
+                    overdraftID = this.actualOverdraftID;
+                }
+
+                UX.Loaders.SetLoader('#np-overdraft');
+                let overdraft =
+                    UX.Cotorra.Catalogs.Get('Overdraft',
+                        {
+                            overdraftID: overdraftID
+                        },
+                        (data) => {
+
+                            setTimeout(function () {
+                                if (data.HistoricEmployee != null) {
+                                    data.Employeee = data.HistoricEmployee;
+                                }
+
+                                //Get concept data
+                                for (var i = 0; i < data.Details.length; i++) {
+                                    let odd = data.Details[i];
+                                    let cp = UX.Cotorra.Catalogs.Concepts.find(x => { return x.ID == odd.ConceptPaymentID });
+                                    if (cp) {
+                                        odd.ConceptPaymentName = cp.Name;
+                                        odd.ConceptPaymentCode = cp.Code;
+                                        odd.ConceptPaymentType = cp.ConceptType;
+                                        odd.ConceptPaymentKind = cp.Kind;
+                                        odd.ConceptPaymentPrint = cp.Print;
+                                    }
+                                }
+
+                                data.Details.sort((a, b) => { return a.ConceptPaymentCode > b.ConceptPaymentCode ? 1 : -1; });
+
+                                //Get job position data
+
+                                //Set employee data
+                                if (data.Employee) {
+                                    data.Employee.JobPositionName = UX.Cotorra.Catalogs.Positions.find(x => { return x.ID == data.Employee.JobPositionID }).Name;
+
+                                    let model = UX.Cotorra.Overdraft.UI.EditModel;
+                                    model.set('Employee.ID', data.Employee.ID);
+                                    model.set('Employee.FullName', data.Employee.FullName);
+                                    model.set('Employee.Code', data.Employee.Code);
+                                    model.set('Employee.JobPositionName', data.Employee.JobPositionName);
+                                    model.set('Employee.SettlementSalaryBase', data.Employee.SettlementSalaryBase);
+                                    model.set('Employee.DailySalary', UX.Cotorra.Common.FormatCurrency(data.Employee.DailySalary));
+                                }
+                                else if (data.HistoricEmployee) {
+                                    data.HistoricEmployee.JobPositionName = UX.Cotorra.Catalogs.Positions.find(x => { return x.ID == data.HistoricEmployee.JobPositionID }).Name;
+
+                                    let model = UX.Cotorra.Overdraft.UI.EditModel;
+                                    model.set('Employee', data.HistoricEmployee);
+                                    //model.set('Employee.FullName', data.HistoricEmployee.FullName);
+                                    //model.set('Employee.Code', data.HistoricEmployee.Code);
+                                    //model.set('Employee.JobPositionName', data.HistoricEmployee.JobPositionName);
+                                    model.set('Employee.DailySalary', UX.Cotorra.Common.FormatCurrency(data.HistoricEmployee.DailySalary));
+                                }
+
+                                let perceptions = data.Details.filter(x => { return x.ConceptPaymentType === 1 });
+                                let deductions = data.Details.filter(x => { return x.ConceptPaymentType === 3 });
+                                let liabilities = data.Details.filter(x => { return x.ConceptPaymentType === 2 });
+
+                                //Fix to remove context menu
+                                $('.iw-contextMenu').remove();
+
+                                UX.Cotorra.Overdraft.UI.LoadConceptsGrid(perceptions, 'Perceptions');
+                                UX.Cotorra.Overdraft.UI.LoadConceptsGrid(deductions, 'Deductions');
+                                UX.Cotorra.Overdraft.UI.LoadConceptsGrid(liabilities, 'Liabilities');
+
+                                $('.add-concept').off('click').on('click', function () {
+                                    let type = $(this).data('concepttype');
+                                    UX.Cotorra.Overdraft.UI.AddConcept(type, overdraftID);
+                                });
+                            }, 50);
+
+                            UX.Cotorra.Overdraft.UI.ReloadEmployeeOverdraft();
+                        },
+                        (error) => { UX.Common.ErrorModal(error); },
+                        () => { UX.Loaders.RemoveLoader('#np-overdraft'); },
+                    );
+
+                return overdraft;
+            },
+
+            AddConcept: function (type, overdraftID) {
+
+                //Get modal title
+                let modalTitle = '';
+                switch (type) {
+                    case 'P': modalTitle = 'Percepción'; break;
+                    case 'D': modalTitle = 'Deducción'; break;
+                    case 'L': modalTitle = 'Obligación'; break;
+                    default: modalTitle = ''; break;
+                }
+
+                //Show modal to add concept
+                let modalID = UX.Modals.OpenModal(
+                    'Agregar ' + modalTitle, 's', '<div id="np-addoverdraftconcept"></div>',
+                    function () {
+
+                        //Create ractive model
+                        let editModel = UX.Cotorra.Overdraft.UI.EditModel = new Ractive({
+                            el: '#np-addoverdraftconcept',
+                            template: '#np-addoverdraftconcept-template',
+                            data: {
+                                ConceptPaymentID: '',
+                                Value: '',
+                                Amount: ''
+                            }
+                        });
+
+                        //Buttons
+                        $('#np_btnCancelAddConcept').off('click').on('click', function (ev) { ev.preventDefault(); UX.Modals.CloseModal(modalID); });
+                        $('#np_btnAddConcept').off('click').on('click', function (ev) { ev.preventDefault(); $('#np_cat_saverecord').data('formValidation').validate(); });
+
+                        //Masks
+                        $('#np_aodc_txtTotalAmount').decimalMask(2);
+                        $('#np_aodc_txtValue').decimalMask(2);
+
+                        //Generic catalog combos
+                        let conceptsData = UX.Cotorra.Catalogs.Concepts
+                            .map(c => {
+                                return {
+                                    ID: c.ID, Code: c.Code, Name: c.Name,
+                                    ConceptType: (c.ConceptType === 1 ? 'P' : (c.ConceptType === 3 ? 'D' : (c.ConceptType === 2 ? 'L' : 0)))
+                                }
+                            });
+
+                        //Get actual concepts used on the overdraft
+                        let actualPerceptions = UX.Cotorra.Overdraft.UI.EditModel.get('Value');
+                        let actualDeductions = $('.np-od-deductions-grid ').data('kendoGrid').dataSource._data;
+                        let actualLiabilities = $('.np-od-liabilities-grid ').data('kendoGrid').dataSource._data;
+
+                        //Filter concepts
+                        let conceptsCatalog = $("#np_aodc_drpConcept").genericCatalog(
+                            {
+                                data: conceptsData.filter(c => {
+
+                                    //let isOnPerceptions = actualPerceptions.find(x => { return x.ConceptPaymentID === c.ID; });
+                                    //let isOnDeductions = actualDeductions.find(x => { return x.ConceptPaymentID === c.ID; });
+                                    //let isOnLiabilities = actualLiabilities.find(x => { return x.ConceptPaymentID === c.ID; });
+
+                                    return (c.ConceptType === type /*&& !isOnPerceptions && !isOnDeductions && !isOnLiabilities*/);
+                                }),
+                                columns: [
+                                    { Width: "20%", Field: "Code", SearchType: "Contains" },
+                                    { Width: "80%", Field: "Name", SearchType: "Contains" }
+                                ],
+                                fieldID: "ID", fieldText: "Name", fieldSort: "Code", selectorName: "np_aodc_drpConcept"
+                            });
+
+                        conceptsCatalog.onChange(() => {
+                            editModel.set("ConceptTypeID", conceptsCatalog.getValue());
+                        });
+
+                        //Set validations
+                        $('#np_cat_saverecord').formValidation({
+                            framework: 'bootstrap',
+                            live: 'disabled',
+                            fields: {
+                                np_aodc_drpConcept: {
+                                    validators: {
+                                        notEmpty: { message: 'Debes seleccionar un concepto' }
+                                    }
+                                },
+                            },
+                            onSuccess: function (ev) {
+                                ev.preventDefault();
+                                UX.Common.ClearFocus();
+
+                                debugger;
+                                //Save data
+                                UX.Loaders.SetLoader('#' + modalID);
+                                UX.Cotorra.Catalogs.Do('POST', 'Overdraft', 'SaveConcept',
+                                    {
+                                        overdraftID: overdraftID,
+                                        conceptPaymentID: editModel.get('ConceptPaymentID'),
+                                        amount: editModel.get('Amount'),
+                                        value: editModel.get('Value')
+                                    },
+                                    () => {
+                                        //Refresh data
+                                        UX.Modals.CloseModal(modalID);
+                                        UX.Cotorra.Overdraft.UI.LoadConcepts();
+                                    },
+                                    (error) => { UX.Common.ErrorModal(error); },
+                                    (complete) => { UX.Loaders.RemoveLoader('#' + modalID); }
+                                );
+                            }
+                        })
+                            .on('err.validator.fv', function (e, data) { UX.Common.FVShowOneMessage(data); });
+
+                        //Init elements
+                        $('#np-addoverdraftconcept').initUIElements();
+
+                        //Set initial focus
+                        setTimeout(function () { $("#np_aodc_drpConcept").focus(); }, 800);
+                    });
+            },
+
+            ReloadEmployeeOverdraft: function () {
+                //Refresh overdraft on prepayroll list
+                UX.Cotorra.PrePayroll.UI.ReloadEmployeeOverdraft(UX.Cotorra.Overdraft.UI.Params.Row);
+            },
+
+            DeleteConcept: function (obj) {
+                let row = UX.Cotorra.Common.GetRowData(obj);
+
+                //Delete detail
+                UX.Loaders.SetLoader('#np-overdraft');
+                UX.Cotorra.Catalogs.Do('DELETE', 'Overdraft', 'DeleteConcept',
+                    {
+                        overdraftID: UX.Cotorra.Overdraft.UI.Params.Overdraft.ID,
+                        overdraftDetailID: row.dataItem.ID
+                    },
+                    () => {
+                        UX.Cotorra.Overdraft.UI.LoadConcepts();
+                    },
+                    (error) => { UX.Common.ErrorModal(error); }
+                );
+            },
+
+            EditImports: function (obj) {
+                if (UX.Cotorra.Common.GetRowData(obj).dataItem.ConceptPaymentCode === UX.Cotorra.Overdraft.FONACOTConceptCode) {
+                    UX.Cotorra.Overdraft.UI.EditFonacotImports(obj);
+                }
+                else {
+                    UX.Cotorra.Overdraft.UI.EditImportsConcept(obj);
+                }
+            },
+
+            EditImportsConcept: function (obj) {
+                //get data
+                let row = UX.Cotorra.Common.GetRowData(obj);
+                let params = UX.Cotorra.Overdraft.UI.Params;
+
+                var isAmountCapturedByUser = false;
+                var isValueCapturedByUser = false;
+
+                //Create modal
+                let modalID = UX.Modals.OpenModal(
+                    '' + row.dataItem.ConceptPaymentName,
+                    's', '<div id="np-editimports"></div>',
+                    function () {
+
+                        //Create ractive model
+                        let editModel = UX.Cotorra.Overdraft.UI.EditDetailModel = new Ractive({
+                            el: '#np-editimports',
+                            template: '#np-editimports-template',
+                            data: {
+                                ConceptPaymentType: row.dataItem.ConceptPaymentType,
+                                Overdraft: params.Overdraft
+                            }
+                        });
+
+                        //Get imports while UI is initilized
+                        UX.Loaders.SetLoader('#' + modalID);
+                        UX.Cotorra.Catalogs.Do('GET', 'Overdraft', 'GetImports',
+                            { overdraftDetailID: row.dataItem.ID },
+                            (data) => {
+                                let detail = data[0];
+                                editModel.set('Amount', detail.Amount);
+                                editModel.set('Value', detail.Value);
+                                editModel.set('Amount1', detail.Taxed);
+                                editModel.set('Amount2', detail.Exempt);
+                                editModel.set('Amount3', detail.IMSSTaxed);
+                                editModel.set('Amount4', detail.IMSSExempt);
+
+                                //Focus initial element
+                                $('#np_imp_txtTotalAmount').focus();
+
+                                editModel.observe('Amount', function (newValue, oldValue) {
+                                    newValue = parseFloat(newValue.toString().replace(/,/g, ''));
+                                    oldValue = parseFloat(oldValue.toString().replace(/,/g, ''));
+                                    isAmountCapturedByUser = newValue != oldValue;
+
+                                }, { init: false, defer: true });
+
+                                editModel.observe('Value', function (newValue, oldValue) {
+                                    newValue = parseFloat(newValue.toString().replace(/,/g, ''));
+                                    oldValue = parseFloat(oldValue.toString().replace(/,/g, ''));
+                                    isValueCapturedByUser = newValue != oldValue;
+                                }, { init: false, defer: true });
+
+                                //if (row.dataItem.ConceptPaymentType == 1) {
+                                //    //Calculate imports on change value of total amount
+                                //    editModel.observe('Amount', function (newValue, oldValue) {
+
+                                //        newValue = parseFloat(newValue.toString().replace(/,/g, ''));
+                                //        oldValue = parseFloat(oldValue.toString().replace(/,/g, ''));
+
+                                //        if (newValue != oldValue) {
+                                //            isValueCapturedByUser = true;
+                                //        }
+
+                                //        //if (newValue === '') {
+                                //        //    editModel.set('Amount1', '');
+                                //        //    editModel.set('Amount2', '');
+                                //        //    editModel.set('Amount3', '');
+                                //        //    editModel.set('Amount4', '');
+                                //        //    return;
+                                //        //}
+
+                                //        //if (parseFloat(newValue.toString().replace(/,/g, '')) !== parseFloat(oldValue.toString().replace(/,/g, ''))) {
+                                //        //    UX.Loaders.SetLoader('#' + modalID);
+                                //        //    UX.Cotorra.Catalogs.Do('POST', 'Overdraft', 'CalculateImports',
+                                //        //        {
+                                //        //            overdraftDetailID: row.dataItem.ID,
+                                //        //            amount: parseFloat(newValue.toString().replace(/,/g, ''))
+                                //        //        },
+                                //        //        (data) => {
+                                //        //            editModel.set('Amount1', data.Amount1);
+                                //        //            editModel.set('Amount2', data.Amount2);
+                                //        //            editModel.set('Amount3', data.Amount3);
+                                //        //            editModel.set('Amount4', data.Amount4);
+                                //        //        },
+                                //        //        (error) => { UX.Common.ErrorModal(error); },
+                                //        //        (complete) => { UX.Loaders.RemoveLoader('#' + modalID); }
+                                //        //    );
+                                //        //}
+                                //    }, { init: false, defer: true });
+                                //}
+
+                            },
+                            (error) => { UX.Common.ErrorModal(error); },
+                            (complete) => { UX.Loaders.RemoveLoader('#' + modalID); }
+                        );
+                        /***/
+
+                        //Masks
+                        $('#np_imp_txtValue').decimalMask(2);
+                        $('#np_imp_txtTotalAmount').decimalMask(2);
+                        $('#np_imp_txtTotalAmount1').decimalMask(2);
+                        $('#np_imp_txtTotalAmount2').decimalMask(2);
+                        $('#np_imp_txtTotalAmount3').decimalMask(2);
+                        $('#np_imp_txtTotalAmount4').decimalMask(2);
+
+                        //Fix focus
+                        var lastFocusedInput = '';
+                        $('#np_imp_txtValue, #np_imp_txtTotalAmount, #np_imp_txtTotalAmount1, #np_imp_txtTotalAmount2, #np_imp_txtTotalAmount3, #np_imp_txtTotalAmount4')
+                            .off('focus')
+                            .on('focus', function () {
+                                let $input = $(this);
+                                lastFocusedInput = $input.attr('id');
+                                setTimeout(function () {
+                                    if (lastFocusedInput === $input.attr('id')) {
+                                        $input.select();
+                                    }
+                                }, 25);
+                            });
+
+                        //Buttons behaviors
+                        $('#np_btnSaveImports').off('click').on('click', function (ev) {
+                            //Save changes on import
+                            ev.preventDefault();
+                            UX.Common.ClearFocus();
+
+                            UX.Loaders.SetLoader('#' + modalID);
+                            UX.Cotorra.Catalogs.Do('POST', 'Overdraft', 'UpdateAmount',
+                                {
+                                    overdraftDetailID: row.dataItem.ID,
+                                    value: isValueCapturedByUser ? editModel.get('Value') : null,
+                                    amount: isAmountCapturedByUser ? editModel.get('Amount') : null,
+                                    updateValue: isValueCapturedByUser,
+                                    updateAmount: isAmountCapturedByUser,
+                                },
+                                (data) => {
+                                    UX.Cotorra.Overdraft.UI.LoadConcepts();
+                                    UX.Modals.CloseModal(modalID);
+                                },
+                                (error) => { UX.Common.ErrorModal(error); },
+                                (complete) => { UX.Loaders.RemoveLoader('#' + modalID); }
+                            );
+
+                        });
+
+                        $('#np_btnCancelSaveImports').off('click').on('click', function (ev) {
+                            ev.preventDefault();
+                            UX.Modals.CloseModal(modalID);
+                        });
+
+                        //Init elements
+                        $('#np-imports').initUIElements();
+
+                    });
+            },
+
+            EditFonacotImports: function (obj) {
+
+                let row = UX.Cotorra.Common.GetRowData(obj);
+                let params = UX.Cotorra.Overdraft.UI.Params;
+
+                var isAmountCapturedByUser = false;
+                var isValueCapturedByUser = false;
+
+                //Create modal
+                let modalID = UX.Modals.OpenModal(
+                    '' + row.dataItem.ConceptPaymentName,
+                    'm', '<div id="np-editimports"></div>',
+                    function () {
+
+                        //Create ractive model
+                        let editModel = UX.Cotorra.Overdraft.UI.EditFonacotDetailModel = new Ractive({
+                            el: '#np-editimports',
+                            template: '#np-editimports-credit-template',
+                            data: {
+                                ConceptPaymentType: row.dataItem.ConceptPaymentType,
+                                Overdraft: params.Overdraft,
+                                Total: 0,
+                            }
+                        });
+
+                        //Get imports while UI is initilized
+                        UX.Loaders.SetLoader('#' + modalID);
+                        UX.Cotorra.Catalogs.Do('GET', 'EmployeeConceptsRelationDetail', 'Get',
+                            { OverdraftID: editModel.get('Overdraft.ID'), ConceptPaymentID: row.dataItem.ConceptPaymentID },
+                            (data) => {
+
+                                UX.Cotorra.Overdraft.UI.LoadGridFonacotImports(data);
+                                UX.Cotorra.Overdraft.UI.SetFonacotTotal();
+                            },
+                            (error) => { UX.Common.ErrorModal(error); },
+                            (complete) => { UX.Loaders.RemoveLoader('#' + modalID); }
+                        );
+                        /***/
+
+                        //Masks
+
+                        //Fix focus
+
+                        //Buttons behaviors
+                        $('#np_btnSaveImports').off('click').on('click', function (ev) {
+                            //Save changes on import
+                            ev.preventDefault();
+                            UX.Common.ClearFocus();
+
+                            UX.Loaders.SetLoader('#' + modalID);
+
+                            let ds = UX.Cotorra.Overdraft.UI.GetDataFromGrid({ GridSelector: '.np-imp-grid' }).map(x => {
+                                return {
+                                    ID: x.ID,
+                                    CreditNumber: x.CreditNumber,
+                                    Description: x.Description,
+                                    AmountApplied: x.AmountApplied,
+                                    IsAmountAppliedCapturedByUser: x.IsAmountAppliedCapturedByUser,
+                                }
+                            });
+
+                            UX.Cotorra.Catalogs.Do('POST', 'EmployeeConceptsRelationDetail', 'Save',
+                                {
+                                    OverdraftID: UX.Cotorra.Overdraft.UI.EditFonacotDetailModel.get('Overdraft.ID'),
+                                    OverdraftDetailID: row.dataItem.ID,
+                                    Amount: parseFloat(UX.Cotorra.Overdraft.UI.EditFonacotDetailModel.get('Total').trim().replace(/\$/g, '').replace(/,/g, '')),
+                                    ConceptRelationsAmountApplied: ds,
+                                },
+                                (data) => {
+                                    UX.Cotorra.Overdraft.UI.LoadConcepts();
+                                    UX.Modals.CloseModal(modalID);
+                                },
+                                (error) => { UX.Common.ErrorModal(error); },
+                                (complete) => { UX.Loaders.RemoveLoader('#' + modalID); }
+                            );
+
+                        });
+
+                        $('#np_btnCancelSaveImports').off('click').on('click', function (ev) {
+                            ev.preventDefault();
+                            UX.Modals.CloseModal(modalID);
+                        });
+
+                        $('#np_btnRestorImports').off('click').on('click', function (ev) {
+                            //Save changes on import
+                            ev.preventDefault();
+                            UX.Common.ClearFocus();
+
+                            UX.Loaders.SetLoader('#' + modalID);
+
+                            let ds = UX.Cotorra.Overdraft.UI.GetDataFromGrid({ GridSelector: '.np-imp-grid' }).map(x => {
+                                return {
+                                    ID: x.ID,
+                                    CreditNumber: x.CreditNumber,
+                                    Description: x.Description,
+                                    AmountApplied: x.AmountApplied,
+                                    IsAmountAppliedCapturedByUser: false,
+                                }
+                            });
+
+                            UX.Cotorra.Catalogs.Do('POST', 'EmployeeConceptsRelationDetail', 'Restore',
+                                {
+                                    OverdraftID: UX.Cotorra.Overdraft.UI.EditFonacotDetailModel.get('Overdraft.ID'),
+                                    OverdraftDetailID: row.dataItem.ID,
+                                    Amount: parseFloat(UX.Cotorra.Overdraft.UI.EditFonacotDetailModel.get('Total').trim().replace(/\$/g, '').replace(/,/g, '')),
+                                    ConceptRelationsAmountApplied: ds,
+                                },
+                                (data) => {
+                                    UX.Cotorra.Catalogs.Do('GET', 'EmployeeConceptsRelationDetail', 'Get',
+                                        { OverdraftID: editModel.get('Overdraft.ID'), ConceptPaymentID: row.dataItem.ConceptPaymentID },
+                                        (data) => {
+
+                                            UX.Cotorra.Overdraft.UI.LoadGridFonacotImports(data);
+                                            UX.Cotorra.Overdraft.UI.SetFonacotTotal();
+                                        },
+                                        (error) => { UX.Common.ErrorModal(error); },
+                                        (complete) => { UX.Loaders.RemoveLoader('#' + modalID); }
+                                    );
+                                    UX.Cotorra.Overdraft.UI.LoadConcepts();
+
+                                },
+                                (error) => { UX.Common.ErrorModal(error); },
+                                (complete) => { UX.Loaders.RemoveLoader('#' + modalID); }
+                            );
+
+                        });
+
+                        //Init elements
+                        $('#np-imports').initUIElements();
+
+                    });
+            },
+
+            EditFonacotImportsRow: function (obj) {
+                //get data
+                let row = UX.Cotorra.Common.GetRowData(obj);
+                let $div = $(obj).closest('div');
+                let $input = $('<input class="od-input-edit-amount" type="text" />');
+                let oldValue = row.dataItem.AmountApplied;
+
+                $div.append($input).find('a').hide();
+
+                //input events
+                $input.off('focus').on('focus', function () { setTimeout(function () { $input.select(); }, 50); });
+
+                $input.off('blur').on('blur', function () {
+                    let newValue = $input.val() === '' ? null : parseFloat($input.val().trim().replace(/,/g, ''));
+                    if (newValue == oldValue) {
+                        UX.Common.KendoFastRedrawRow(row.$kendoGrid, row.dataItem);
+                    }
+                    else {
+                        if (newValue === null) {
+                            row.dataItem.AmountApplied = 0;
+                        } else {
+                            if (newValue > row.dataItem.BalanceCalculated) {
+                                row.dataItem.AmountApplied = row.dataItem.BalanceCalculated;
+                            }
+                            else {
+                                row.dataItem.AmountApplied = newValue;
+                            }
+                        }
+                        row.dataItem.IsAmountAppliedCapturedByUser = true;
+
+                        UX.Common.KendoFastRedrawRow(row.$kendoGrid, row.dataItem);
+                        UX.Cotorra.Overdraft.UI.SetFonacotTotal();
+                    }
+                });
+
+                $input.off('keypress').on('keypress', function (ev) {
+                    if (ev.key == "Enter") {
+                        $input.blur();
+                    }
+                });
+
+                $input.val(row.dataItem.AmountApplied).decimalMask(2);
+                $input.focus();
+            },
+
+            SetFonacotTotal: function (obj) {
+                let ds = UX.Cotorra.Overdraft.UI.GetDataFromGrid({ GridSelector: '.np-imp-grid' }).map(x => {
+                    return {
+                        ID: x.ID,
+                        CreditNumber: x.CreditNumber,
+                        Description: x.Description,
+                        AmountApplied: x.AmountApplied,
+                    }
+                });
+                let total = 0;
+                ds.forEach(el => total += parseFloat(el.AmountApplied + ''.trim().replace(/,/g, '')));
+                UX.Cotorra.Overdraft.UI.EditFonacotDetailModel.set('Total', UX.Cotorra.Common.FormatCurrency(total));
+            },
+
+            GetDataFromGrid: (parameters) => {
+                let gridSelector = parameters.GridSelector;
+                let grid = $(gridSelector).data('kendoGrid');
+                if (!grid) {
+                    return grid;
+                }
+
+                return $(gridSelector).data('kendoGrid').dataSource._data;
+            },
+
+            LoadGridFonacotImports: (data = []) => {
+
+                //Set fields
+                let fields = {
+                    ID: { type: 'string' },
+                    CreditNumber: { type: 'string' },
+                    Description: { type: 'string' },
+                    AmountApplied: { type: 'string' },
+                    IsAmountAppliedCapturedByUser: { type: 'boolean' },
+                    BalanceCalculated: { type: 'number' },
+                };
+
+                //Set columns
+                let columns = [
+                    {
+                        field: 'CreditNumber', title: 'No. Crédito', width: 50,
+                    },
+                    {
+                        field: 'Description', title: 'Descripción', width: 120,
+                    },
+                    {
+                        field: 'AmountApplied', title: 'Importe', width: 80,
+                        template: kendo.template($('#fonacotAmountAppliedTemplate').html()),
+                    },
+                    {
+                        field: 'BalanceCalculated', title: 'Saldo', width: 80,
+                        template: UX.Cotorra.Common.GridFormatCurrency('BalanceCalculated'),
+                    }
+                ];
+
+                //Init grid
+                let $grid = UX.Common.InitGrid({ selector: '.np-imp-grid', data: data, fields: fields, columns: columns, pageable: { refresh: false, alwaysVisible: false, pageSizes: 20, } });
+            },
+
+            EditAmount: function (obj) {
+
+                //get data
+                let isValueField = $(obj).hasClass('od-edit-value');
+                let row = UX.Cotorra.Common.GetRowData(obj);
+
+                //If fonacot
+                if (row.dataItem.ConceptPaymentCode === UX.Cotorra.Overdraft.FONACOTConceptCode) {
+                    UX.Cotorra.Overdraft.UI.EditFonacotImports(obj);
+                }
+
+                let $div = $(obj).closest('div');
+                let $input = $('<input class="od-input-edit-amount" type="text" />');
+                let oldValue = row.dataItem.Amount;
+
+                if (isValueField) {
+                    oldValue = row.dataItem.Value;
+                }
+
+                $div.append($input).find('a').hide();
+
+                //input events
+                $input.off('focus').on('focus', function () { setTimeout(function () { $input.select(); }, 50); });
+
+                $input.off('blur').on('blur', function () {
+                    let newValue = $input.val() === '' ? null : parseFloat($input.val().trim().replace(/,/g, ''));
+
+                    if (newValue == oldValue) {
+                        UX.Common.KendoFastRedrawRow(row.$kendoGrid, row.dataItem);
+                    } else {
+                        updateAmount(row, newValue, isValueField);
+                    }
+                });
+
+                $input.off('keypress').on('keypress', function (ev) {
+                    if (ev.key == "Enter") {
+                        $input.blur();
+                    }
+                });
+
+                if (isValueField) {
+                    $input.val(row.dataItem.Value);
+                } else {
+                    $input.val(row.dataItem.Amount).decimalMask(2);
+                }
+
+                $input.focus();
+
+                let updateAmount = function (row, value, isValueField = false) {
+
+                    //Clear all focus
+                    setTimeout(function () { UX.Common.ClearFocus(); }, 25);
+
+                    row.dataItem[!isValueField ? 'Amount' : 'Value'] = value === null ? 0 : value;
+                    row.dataItem[!isValueField ? 'IsTotalAmountCapturedByUser' : 'IsValueCapturedByUser'] = value === null ? false : true;
+
+                    UX.Common.KendoFastRedrawRow(row.$kendoGrid, row.dataItem);
+                    //$('tr[data-uid="' + row.dataItem.uid + '"] a').animateCSS('flash');
+
+                    //Set loader
+                    let modalID = $(row.el).closest('.side-modal-container ').attr('id');
+
+                    UX.Loaders.SetLoader('#np-overdraft');
+                    UX.Cotorra.Catalogs.Do('POST', 'Overdraft', 'UpdateAmount',
+                        {
+                            overdraftDetailID: row.dataItem.ID,
+                            amount: !isValueField ? value : null,
+                            value: isValueField ? value : null,
+                            updateAmount: !isValueField,
+                            updateValue: isValueField,
+                        },
+                        (data) => {
+                            row.$kendoGrid.dataSource.sort(1);
+                            UX.Cotorra.Overdraft.UI.LoadConcepts();
+                        },
+                        (error) => {
+                            //TODO: back to original values
+                            UX.Common.ErrorModal(error);
+                            UX.Loaders.RemoveLoader('#np-overdraft');
+                        },
+                        (complete) => {
+                        }
+                    );
+                };
+            },
+
+            DownloadCFDI: function (params = {}) {
+                UX.Loaders.SetLoader('#np-overdraft');
+                UX.Cotorra.Catalogs.Do('GET', 'Overdraft', 'DownloadCFDI',
+                    {
+                        uuid: UX.Cotorra.Overdraft.UI.Params.Overdraft.UUID
+                    },
+                    (data) => {
+                        window.open(data.XMLUri);
+                        window.open(data.PDFUri);
+                    },
+                    (error) => {
+                        UX.Common.ErrorModal(error);
+                    },
+                    (complete) => {
+                        UX.Loaders.RemoveLoader('#np-overdraft');
+                    }
+                );
+            },
+
+            DownloadCancelledAcknowledgement: function (params = {}) {
+                UX.Loaders.SetLoader('#np-overdraft');
+                UX.Cotorra.Catalogs.Do('GET', 'Overdraft', 'DownloadCancelledAcknowledgement',
+                    {
+                        overdraftId: UX.Cotorra.Overdraft.UI.Params.Overdraft.ID
+                    },
+                    (data) => {
+                        window.open(data.XmlAcknowledgementUri);
+                    },
+                    (error) => {
+                        UX.Common.ErrorModal(error);
+                    },
+                    (complete) => {
+                        UX.Loaders.RemoveLoader('#np-overdraft');
+                    }
+                );
+            },
+
+            CancelCFDI: function (params = {}) {
+
+                UX.Modals.Confirm('Cancelar CFDI', 'La siguiente acción cancelará permanente el CFDI ¿Deseas continuar?', 'Sí, cancelar', 'No, espera',
+                    () => {
+
+                        UX.Loaders.SetLoader('#np-overdraft');
+                        UX.Cotorra.Catalogs.Do('POST', 'Overdraft', 'CancelCFDI',
+                            {
+                                overdraftID: params.overdraftID
+                            },
+                            (data) => {
+                                UX.Cotorra.PrePayroll.UI.RefreshWorkPeriod({
+                                    PeriodStatus: 2
+                                });
+                            },
+                            (error) => {
+                                UX.Common.ErrorModal(error);
+                            },
+                            (complete) => {
+                                UX.Loaders.RemoveLoader('#np-overdraft');
+                            }
+                        );
+                    },
+                    () => { });
+            }
+        },
+
+        Calculate: (formula = {}) => {
+
+            UX.Cotorra.Catalogs.Do('POST', 'Overdraft', 'CalculateFormula',
+                {
+                    overdraftID: UX.Cotorra.Overdraft.UI.Params.Overdraft.ID,
+                    formula: formula
+                },
+                (data) => {
+                    console.log('El resultado es : ' + data);
+                },
+                (error) => { UX.Common.ErrorModal(error); }
+            );
+        }
+    };
+
+    UX.Cotorra.PrePayroll.UI.Init();
+
+</script>
+
+
+

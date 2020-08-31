@@ -1,0 +1,932 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="periodsActionTemplate">
+    <div class="text-left">
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+                onclick="UX.Cotorra.Periods.UI.OpenSave(this);">
+            <i class="fad fa-pencil"></i>
+        </button>
+        &nbsp;
+        <button class="btn btn-icon-small" data-toggle="tooltip" title="Eliminar" data-placement="bottom"
+                onclick="UX.Cotorra.Periods.UI.Delete(this);">
+            <i class="fad fa-trash-alt"></i>
+        </button>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="periodDetailsActionTemplate">
+    <div class="text-left">
+        <!--<button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+                onclick="UX.Cotorra.Periods.UI.OpenSave(this);">
+            <i class="fad fa-pencil"></i>
+        </button>
+        &nbsp;
+        <button class="btn btn-icon-small" data-toggle="tooltip" title="Eliminar" data-placement="bottom"
+                onclick="UX.Cotorra.Periods.UI.Delete(this);">
+            <i class="fad fa-trash-alt"></i>
+        </button>-->
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="periodTypesTreeTemplate">
+    <div class="periods-tree-item">
+        #if(Type=='PeriodType'){#
+        <div class="header">
+            <!--<i class="fad fa-draw-circle"></i>-->
+            <span>#= Name #</span>
+        </div>
+        #}else if(Type=='FiscalYear'){#
+        <div class="year">
+            <a href="\\#" onclick="UX.Cotorra.Periods.UI.GetDetails(this, '#=ID#');">
+                <i class="fad fa-calendar-alt"></i>
+                <span>#= Name #</span>
+            </a>
+        </div>
+        #}else{#
+        <div class="noyear">
+            <i class="far fa-minus"></i>
+            <span>#= Name #</span>
+        </div>
+        #}#
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="periodTypesTreeActionsTemplate">
+    #if(Type=='PeriodType'){#
+    <div class="text-left">
+        #if(HasChildren){#
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar tipo de periodo" data-placement="bottom"
+                onclick="UX.Cotorra.PeriodTypes.UI.EditPeriodType(this);">
+            <i class="far fa-pencil"></i>
+        </button>
+        #}#
+        #if(!HasChildren){#
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Habilitar periodicidad" data-placement="bottom"
+                onclick="UX.Cotorra.PeriodTypes.UI.EnablePeriodType(this);">
+            <i class="far fa-calendar-check"></i>
+        </button>
+        #}#
+
+    </div>
+    #}#
+</script>
+
+<!--add/update modal-->
+<script id="periods_save_template" type="text/ractive">
+
+    <form id="np_cat_saverecord">
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group textfield required disabled">
+                    <label for="np_pt_txtPeriodNumber">No. periodo</label>
+                    <input type="text" class="form-control" id="np_pt_txtPeriodNumber" name="np_pt_txtPeriodNumber" value="{{Number}}"
+                           autocomplete="off" maxlength="100" required disabled="disabled">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group textfield required">
+                    <label for="np_pt_txtInitialDate">Fecha inicial</label>
+                    <input type="text" class="form-control" id="np_pt_txtInitialDate" name="np_pt_txtInitialDate" value="{{InitialDate}}"
+                           autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group textfield required">
+                    <label for="np_pt_txtFinalDate">Fecha final</label>
+                    <input type="text" class="form-control" id="np_pt_txtFinalDate" name="np_pt_txtFinalDate" value="{{FinalDate}}"
+                           autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group textfield required disabled">
+                    <label for="np_pt_txtFiscalYear">Ejercicio</label>
+                    <input type="text" class="form-control" id="np_pt_txtFiscalYear" name="np_pt_txtFiscalYear" value="{{FiscalYear}}"
+                           autocomplete="off" maxlength="100" required disabled="disabled">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group textfield required disabled">
+                    <label for="np_pt_txtMonth">Mes</label>
+                    <input type="text" class="form-control" id="np_pt_txtMonth" name="np_pt_txtMonth" value="{{Month}}"
+                           autocomplete="off" maxlength="2" required disabled="disabled">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group textfield required disabled">
+                    <label for="np_pt_txtPaymentDays">Días de pago</label>
+                    <input type="text" class="form-control" id="np_pt_txtPaymentDays" name="np_pt_txtPaymentDays" value="{{PaymentDays}}"
+                           autocomplete="off" maxlength="3" required disabled="disabled">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group select">
+                    <label for="np_pt_drpPeriodMonth">Manejo mes</label>
+                    <select class="form-control" id="np_pt_drpPeriodMonth" name="np_pt_drpPeriodMonth" value="{{PeriodMonth}}">
+                        <option value='0'>Ninguno</option>
+                        <option value='1'>Inicio mes</option>
+                        <option value='2'>Fin mes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group select">
+                    <label for="np_pt_drpPeriodBimonthlyIMSS">Manejo bimestre IMSS</label>
+                    <select class="form-control" id="np_pt_drpPeriodBimonthlyIMSS" name="np_pt_drpPeriodBimonthlyIMSS" value="{{PeriodBimonthlyIMSS}}">
+                        <option value='0'>Ninguno</option>
+                        <option value='1'>Inicio bimestre</option>
+                        <option value='2'>Fin bimestre</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group select">
+                    <label for="np_pt_drpPeriodFiscalYear">Manejo ejercicio</label>
+                    <select class="form-control" id="np_pt_drpPeriodFiscalYear" name="np_pt_drpPeriodFiscalYear" value="{{PeriodFiscalYear}}">
+                        <option value='0'>Ninguno</option>
+                        <option value='1'>Inicio ejercicio</option>
+                        <option value='2'>Fin ejercicio</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row p-t-10">
+        <div class="col-xs-4 col-xs-2">
+            <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-4">
+            <button id="np_btnSaveRecord" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/x-kendo-template" id="periodMonthsManagmentTemplate">
+    #if(PeriodMonth==0){#
+    #}else if(PeriodMonth==1){#
+    <div class="monthManagementPeriodMonth">Inicio mes</div>
+    #}else if(PeriodMonth==2){#
+    <div class="monthManagementPeriodMonth">Fin mes</div>
+    #}else if(PeriodMonth==3){#
+    <div class="monthManagementPeriodMonth">Inicio mes</div>
+    <div class="monthManagementPeriodMonth">Fin mes</div>
+    #}#
+
+    #if(PeriodBimonthlyIMSS==0){#
+    #}else if(PeriodBimonthlyIMSS==1){#
+    <div class="monthManagementPeriodBimonthlyIMSS">Inicio bimestre</div>
+    #}else if(PeriodBimonthlyIMSS==2){#
+    <div class="monthManagementPeriodBimonthlyIMSS">Fin bimestre</div>
+    #}#
+
+    #if(PeriodFiscalYear==0){#
+    #}else if(PeriodFiscalYear==1){#
+    <div class="monthManagementPeriodFiscalYear">Inicio ejercicio</div>
+    #}else if(PeriodFiscalYear==2){#
+    <div class="monthManagementPeriodFiscalYear">Fin ejercicio</div>
+    #}#
+</script>
+
+
+<script id="period_enable_template" type="text/ractive">
+    <form id="np_cat_enable">
+
+        {{>np_periodtype_enable_template}}
+
+    </form>
+
+    <div class="row p-t-10">
+        <div class="col-xs-6">
+            <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-6">
+            <button id="np_btnSaveRecord" class="btn btn-primary full-width">Habilitar</button>
+        </div>
+    </div>
+
+</script>
+
+<!--main container-->
+<div class="np-periodsyears-header">
+    <div class="header">
+
+    </div>
+    <div class="actions" style="height:59px;">
+        <button class="btn btn-primary hidden" id="np_btnAddPeriodType">
+            Agregar tipo de periodo
+            <i class="zmdi zmdi-plus"></i>
+        </button>
+    </div>
+
+</div>
+
+<div class="np-periodsyears-grid full-kendo-grid">
+</div>
+
+<div class="np-periodsdetails-header">
+    <div class="header">
+        <span class="selected-periodtype"></span>
+        <span class="selected-fiscalyear"></span>
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-primary " id="np_btnAddPeriodDetail" style="visibility:hidden !important">
+            Agregar periodo
+            <i class="zmdi zmdi-plus"></i>
+        </button>
+    </div>
+</div>
+
+<div class="np-periodsdetails-grid full-kendo-grid">
+</div>
+
+<!--styles-->
+<style>
+    #np-catalogs .generic-catalog-actions {
+        display: none;
+    }
+
+    #np-catalogs .generic-catalog-data {
+        top: 0px;
+        height: 100%;
+    }
+</style>
+
+<script type="text/javascript">
+    UX.Cotorra.Periods = {
+
+        UI: {
+
+            CatalogName: 'Periods',
+            ContainerSelector: '#np-catalogs',
+            TitleModalsString: 'Periodo',
+
+            Init: function () {
+                $('#np_periodtype_enable_template').remove();
+                $.get(UX.UrlApp + '/views/common/' + 'periodtypemodal.html', (html) => {
+                    $('body').append(html);
+                });
+
+                UX.Cotorra.GenericCatalog.UI.Init(this.CatalogName, this.ContainerSelector);
+            },
+
+            LoadGrid: function (data = []) {
+                if (data.length == 0) {
+                    return;
+                }
+
+                this.LoadGridDetails([]);
+
+                var periodTypesDS = new kendo.data.TreeListDataSource({
+                    data: data,
+                    schema: {
+                        model: {
+                            id: "id",
+                            parentId: "parentId",
+                            expanded: true,
+                        }
+                    },
+                });
+
+                let lastRowSelected = null;
+
+                $('.np-periodsyears-grid').kendoTreeList({
+                    dataSource: periodTypesDS,
+                    messages: { noRows: " " },
+                    filterable: false, scrollable: true, resizable: false, sortable: false, columnMenu: false, refresh: false,
+                    columns: [
+                        {
+                            field: "Name", title: "Tipos de periodo",
+                            template: kendo.template($("#periodTypesTreeTemplate").html()),
+                        },
+                        { title: " ", template: kendo.template($("#periodTypesTreeActionsTemplate").html()), width: 100 },
+                    ],
+                    dataBound: function (e) {
+                    },
+                    change: function (e) {
+                    }
+                });
+            },
+
+            LoadGridDetails: function (data = []) {
+
+                let cn = this.CatalogName.toLowerCase();
+
+                //Set fields
+                let fields = {
+                    ID: { type: 'string' },
+
+                    FiscalYear: { type: 'number' },
+                    Number: { type: 'number' },
+
+                    InitialDate: { type: 'date' },
+                    FinalDate: { type: 'date' },
+                    Month: { type: 'number' },
+                    PaymentDays: { type: 'number' },
+
+                    PeriodBimonthlyIMSS: { type: 'number' },
+                    PeriodMonth: { type: 'number' },
+                    PeriodFiscalYear: { type: 'number' }
+                };
+
+                //Set columns
+                let columns = [
+                    { field: 'Number', title: 'No.', width: 60 },
+                    {
+                        field: 'InitialDate', title: 'Fecha inicial', width: 100,
+                        template: UX.Cotorra.Common.GridFormatDate('InitialDate')
+                    },
+                    {
+                        field: 'FinalDate', title: 'Fecha final', width: 100,
+                        template: UX.Cotorra.Common.GridFormatDate('FinalDate')
+                    },
+                    {
+                        field: 'Month', title: 'Mes', width: 55,
+                    },
+                    {
+                        field: 'PaymentDays', title: 'Días de pago', width: 101,
+                    },
+                    {
+                        title: ' ',
+                        template: kendo.template($('#periodMonthsManagmentTemplate').html())
+                    },
+                    {
+                        title: ' ', width: 90,
+                        template: kendo.template($('#periodDetailsActionTemplate    ').html())
+                    }
+                ];
+
+                //Init grid
+                let kg = $('.np-periodsdetails-grid').data('kendoGrid');
+                if (kg) { kg.destroy(); $('.np-periodsdetails-grid').html(''); }
+                let $grid = UX.Common.InitGrid({
+                    selector: '.np-periodsdetails-grid', data: data, fields: fields, columns: columns, pageSize: 100,
+                    dataBound: function (e) {
+
+                        //Set actual period
+                        let actualPeriod = e.sender.dataSource._data.find((x) => { return x.PeriodStatus === 1 });
+                        if (actualPeriod !== undefined) {
+                            $('tr[data-uid="' + actualPeriod.uid + '"]').css('background-color', 'rgba(200,230,201,0.46)');
+                            $('tr[data-uid="' + actualPeriod.uid + '"]').attr('title', 'Period actual');
+                        }
+                    }
+                });
+            },
+
+            OpenSave: function (obj = null) {
+                let catNam = this.CatalogName;
+                let titStr = this.TitleModalsString;
+
+                let row = UX.Cotorra.Common.GetRowData(obj);
+                let containerID = 'record_save_wrapper';
+
+                let modalID = UX.Modals.OpenModal(
+                    !row ? 'Nuevo ' + titStr + '' : 'Editar ' + titStr + '', 'm', '<div id="' + containerID + '"></div>',
+                    function () {
+
+                        let $container = $('#' + containerID);
+
+                        //Init template
+                        var saveModel = new Ractive({
+                            el: '#' + containerID,
+                            template: '#' + catNam.toLowerCase() + '_save_template',
+                            data: {
+                                ID: row ? row.dataItem.ID : null,
+                                FiscalYear: row ? row.dataItem.FiscalYear : null,
+                                Number: row ? row.dataItem.Number : null,
+                                InitialDate: moment(row ? row.dataItem.InitialDate : new Date).format("DD/MM/YYYY"),
+                                FinalDate: moment(row ? row.dataItem.FinalDate : new Date).format("DD/MM/YYYY"),
+                                Month: row ? row.dataItem.Month : null,
+                                PaymentDays: row ? row.dataItem.PaymentDays : null,
+                                PeriodBimonthlyIMSS: row ? row.dataItem.PeriodBimonthlyIMSS : null,
+                                PeriodMonth: row ? row.dataItem.PeriodMonth : null,
+                                PeriodFiscalYear: row ? row.dataItem.PeriodFiscalYear : null,
+                            }
+                        });
+
+                        //Buttons
+                        $('#np_btnCancelSaveRecord').on('click', function () { UX.Modals.CloseModal(modalID); });
+                        $('#np_btnSaveRecord').on('click', function () { $('#np_cat_saverecord').data('formValidation').validate(); });
+
+                        //Set validations
+                        $('#np_cat_saverecord').formValidation({
+                            framework: 'bootstrap',
+                            live: 'disabled',
+                            fields: {
+                                np_ps_txtName: {
+                                    validators: {
+                                        notEmpty: { message: 'Debes capturar el nombre del periodo' }
+                                    }
+                                }
+                            },
+                            onSuccess: function (ev) {
+                                ev.preventDefault();
+                                UX.Common.ClearFocus
+
+                                //Set loader
+                                UX.Loaders.SetLoader('#' + modalID);
+
+                                //Save data
+                                let data = saveModel.get();
+                                UX.Cotorra.Catalogs.Save(
+                                    catNam,
+                                    data,
+                                    (id) => {
+
+                                        let grid = row ? row.$kendoGrid : $('.np-' + catNam.toLowerCase() + '-grid').data('kendoGrid');
+
+                                        if (!row) {
+                                            //Set data
+                                            data.ID = id;
+
+                                            //Insert
+                                            let dataItem = grid.dataSource.insert(0, data);
+                                            $('tr[data-uid="' + dataItem.uid + '"]').animateCSS('flash');
+
+                                        } else {
+                                            //Update data
+                                            let dataItem = row.dataItem;
+                                            dataItem.Name = data.Name;
+
+                                            //Redraw
+                                            UX.Common.KendoFastRedrawRow(grid, dataItem);
+                                            $('tr[data-uid="' + dataItem.uid + '"]').animateCSS('flash');
+                                        }
+
+                                        UX.Modals.CloseModal(modalID);
+                                    },
+                                    (error) => {
+                                        UX.Common.ErrorModal(error);
+                                    },
+                                    (complete) => {
+                                        UX.Loaders.RemoveLoader('#' + modalID);
+                                    }
+                                );
+                            }
+                        })
+                            .on('err.validator.fv', function (e, data) { UX.Common.FVShowOneMessage(data); });
+
+                        //Init elements
+                        $container.initUIElements();
+
+                        //Get data (if applicable)
+                    });
+            },
+
+            Delete: function (obj) {
+                UX.Cotorra.GenericCatalog.UI.Delete(obj, 'Eliminar ' + this.TitleModalsString, '¿Deseas eliminar el ' + this.TitleModalsString + '?',
+                    this.CatalogName, this.ContainerSelector);
+            },
+
+            GetDetails: function (obj, periodID) {
+                let row = UX.Cotorra.Common.GetRowData(obj);
+                var type = row.el.prev('.k-treelist-group').find('.periods-tree-item .header span').html();
+                $('.np-periodsdetails-header .selected-periodtype').html(type);
+                $('.np-periodsdetails-header .selected-fiscalyear').html($(obj).find('span').html());
+
+                if (type === "Semanal") {
+                    //$('#np_btnAddPeriodDetail').css('visibility', 'visible');
+                }
+                else {
+                    $('#np_btnAddPeriodDetail').css('visibility', 'hidden');
+                }
+
+                $('#np_btnAddPeriodDetail').off('click').on('click', function () {
+                    alert();
+                });
+
+                UX.Loaders.SetLoader('#np-catalogs');
+                UX.Cotorra.Catalogs.GetDetails(
+                    "Periods",
+                    { periodID: periodID },
+                    (data) => {
+
+                        UX.Cotorra.Periods.UI.LoadGridDetails(data);
+                    },
+                    (error) => { UX.Common.ErrorModal(error); },
+                    (complete) => { UX.Loaders.RemoveLoader('#np-catalogs') });
+            },
+        }
+    };
+
+    UX.Cotorra.PeriodTypes = {
+
+        PaymentPeriodicityOptions: [
+            { id: '01', description: 'Diario', defaultValue: 1 },
+            { id: '02', description: 'Semanal', defaultValue: 7 },
+            { id: '03', description: 'Catorcenal', defaultValue: 14 },
+            { id: '04', description: 'Quincenal', defaultValue: 15 },
+            { id: '05', description: 'Mensual', defaultValue: 30 },
+            { id: '06', description: 'Bimestral', defaultValue: 60 },
+            { id: '07', description: 'Unidad obra', defaultValue: 0 },
+            { id: '08', description: 'Comisión', defaultValue: 0 },
+            { id: '09', description: 'Precio alzado', defaultValue: 0 },
+            { id: '10', description: 'Decenal', defaultValue: 0 },
+            { id: '99', description: 'Otra periodicidad', defaultValue: 0 }
+        ],
+
+        FortnightPaymentDaysOptions: [
+            { id: 1, description: 'Pagar los días de pago' },
+            { id: 2, description: 'Pagar los días calendario del periodo' }
+        ],
+
+        UI: {
+
+            CatalogName: 'PeriodTypes',
+            ContainerSelector: '#np-catalogs',
+            TitleModalsString: 'Tipo de periodo',
+
+            Init: function () {
+                UX.Cotorra.GenericCatalog.UI.Init(this.CatalogName, this.ContainerSelector);
+            },
+
+            LoadGrid: function (data) {
+
+                let cn = this.CatalogName.toLowerCase();
+                //Set fields
+                let fields = {
+                    ID: { type: 'string' },
+                    Name: { type: 'string' },
+                    ExtraordinaryPeriod: { type: 'boolean' },
+                    PeriodTotalDays: { type: 'number' },
+                    PaymentDays: { type: 'number' },
+                    MonthCalendarFixed: { type: 'boolean' },
+                    FortnightPaymentDays: { type: 'number' },
+                    PaymentPeriodicity: { type: 'string' },
+                    IsEnabled: { type: 'boolean' },
+                    SeventhDayPosition: { type: 'string' },
+                    HolidayPremiumPaymentType: { type: 'string' },
+                };
+
+                //Set columns
+                let columns = [
+                    { field: 'Name', title: 'Nombre', width: 250 },
+                    { field: 'PeriodTotalDays', title: 'Días del periodo', width: 130 },
+                    { field: 'PaymentDays', title: 'Días de pago', width: 130 },
+                    {
+                        field: 'PaymentPeriodicity', title: 'Periodicidad',
+                        template: UX.Cotorra.Common.GridFormatCatalogProp('UX.Cotorra.PeriodTypes.PaymentPeriodicityOptions', 'PaymentPeriodicity', 'id', 'description')
+                    },
+                    {
+                        field: 'ExtraordinaryPeriod', title: 'Extraordinario', width: 120,
+                        template: UX.Cotorra.Common.GridFormatBoolean('ExtraordinaryPeriod')
+                    },
+                    {
+                        title: ' ', width: 100,
+                        template: kendo.template($('#' + cn + 'ActionTemplate').html())
+                    }
+                ];
+
+                //Init grid
+                let $grid = UX.Common.InitGrid({ selector: '.np-' + cn + '-grid', data: data, fields: fields, columns: columns });
+
+            },
+
+            OpenSave: function (obj = null) {
+
+                let catNam = this.CatalogName;
+                let titStr = this.TitleModalsString;
+
+                let row = UX.Cotorra.Common.GetRowData(obj);
+                let containerID = 'record_save_wrapper';
+
+                let modalID = UX.Modals.OpenModal(
+                    !row ? 'Nuevo ' + titStr + '' : 'Editar ' + titStr + '', 's', '<div id="' + containerID + '"></div>',
+                    function () {
+
+                        let $container = $('#' + containerID);
+                        //Init template
+                        let saveModel = new Ractive({
+                            el: '#' + containerID,
+                            template: '#' + catNam.toLowerCase() + '_save_template',
+                            data: {
+                                ID: row ? row.dataItem.ID : null,
+                                Name: row ? row.dataItem.Name : '',
+                                ExtraordinaryPeriod: row ? row.dataItem.ExtraordinaryPeriod : false,
+                                PeriodTotalDays: row ? row.dataItem.PeriodTotalDays : '',
+                                PaymentDays: row ? row.dataItem.PaymentDays : '',
+                                MonthCalendarFixed: row ? row.dataItem.MonthCalendarFixed : false,
+                                FortnightPaymentDays: row ? row.dataItem.FortnightPaymentDays : 1,
+                                PaymentPeriodicity: row ? row.dataItem.PaymentPeriodicity : null,
+
+                                PaymentPeriodicityOptions: UX.Cotorra.PeriodTypes.PaymentPeriodicityOptions,
+                                FortnightPaymentDaysOptions: UX.Cotorra.PeriodTypes.FortnightPaymentDaysOptions,
+                                SeventhDayPosition: row ? row.dataItem.SeventhDayPosition : "-1",
+                                WeeklySeventhDayOptions: [
+                                    { id: "-1", description: 'No tomar en cuenta séptimo día para los días de pago' },
+                                    { id: "0", description: 'Lunes' },
+                                    { id: "1", description: 'Martes' },
+                                    { id: "2", description: 'Miércoles' },
+                                    { id: "3", description: 'Jueves' },
+                                    { id: "4", description: 'Viernes' },
+                                    { id: "5", description: 'Sábado' },
+                                    { id: "6", description: 'Domingo' }
+                                ],
+                                HolidayPremiumPaymentType: row ? row.dataItem.HolidayPremiumPaymentType : '0',
+                            }
+                        });
+
+                        //Buttons
+                        $('#np_btnCancelSaveRecord').on('click', function () { UX.Modals.CloseModal(modalID); });
+                        $('#np_btnSaveRecord').on('click', function () { $('#np_cat_saverecord').data('formValidation').validate(); });
+
+                        //Masks
+                        $("#np_pt_txtPeriodDays").mask('000');
+                        $("#np_pt_txtPaymentDays").decimalMask(2);
+
+                        //Set validations
+                        $('#np_cat_saverecord').formValidation({
+                            framework: 'bootstrap',
+                            live: 'disabled',
+                            fields: {
+                                np_pt_txtName: {
+                                    validators: {
+                                        notEmpty: { message: 'Debes capturar el nombre' }
+                                    }
+                                },
+                                np_pt_txtPeriodDays: {
+                                    validators: {
+                                        notEmpty: { message: 'Debes capturar los días del periodo' }
+                                    }
+                                },
+                                np_pt_txtPaymentDays: {
+                                    validators: {
+                                        notEmpty: { message: 'Debes capturar los días de pago' }
+                                    }
+                                },
+                                np_txtName: {
+                                    validators: {
+                                        notEmpty: { message: 'Debes capturar el nombre' }
+                                    }
+                                },
+                                np_pt_drpPaymentPeriodicity: {
+                                    validators: {
+                                        notEmpty: { message: 'Debes seleccionar la periodicidad' }
+                                    }
+                                }
+                            },
+                            onSuccess: function (ev) {
+                                ev.preventDefault();
+                                UX.Common.ClearFocus();
+
+                                //Set loader
+                                UX.Loaders.SetLoader('#' + modalID);
+
+                                //Save data
+                                let data = saveModel.get();
+                                UX.Cotorra.Catalogs.Save(
+                                    catNam,
+                                    data,
+                                    (id) => {
+
+                                        let grid = row ? row.$kendoGrid : $('.np-' + catNam.toLowerCase() + '-grid').data('kendoGrid');
+
+                                        if (!row) {
+                                            //Set data
+                                            data.ID = id;
+
+                                            //Insert
+                                            let dataItem = grid.dataSource.insert(0, data);
+                                            $('tr[data-uid="' + dataItem.uid + '"]').animateCSS('flash');
+
+                                        } else {
+                                            //Update data
+                                            let dataItem = row.dataItem;
+                                            dataItem.Name = data.Name;
+
+                                            //Redraw
+                                            UX.Common.KendoFastRedrawRow(grid, dataItem);
+                                            $('tr[data-uid="' + dataItem.uid + '"]').animateCSS('flash');
+                                        }
+
+                                        UX.Modals.CloseModal(modalID);
+                                    },
+                                    (error) => {
+                                        UX.Common.ErrorModal(error);
+                                    },
+                                    (complete) => {
+                                        UX.Loaders.RemoveLoader('#' + modalID);
+                                    }
+                                );
+                            }
+                        })
+                            .on('err.validator.fv', function (e, data) { UX.Common.FVShowOneMessage(data); });
+
+                        //Init elements
+                        $container.initUIElements();
+
+                        //Get data (if applicable)
+
+                        //
+                        saveModel.observe('SeventhDayPosition', function (newValue) {
+                            saveModel.set('PaymentDays', newValue === "-1" ? "7" : "6");
+                        }, { init: false, defer: true });
+                    });
+            },
+
+            Delete: function (obj) {
+                let ts = this.TitleModalsString;
+                UX.Cotorra.GenericCatalog.UI.Delete(obj, 'Eliminar ' + ts, '¿Deseas eliminar el ' + ts + '?',
+                    this.CatalogName, this.ContainerSelector);
+            },
+
+            EditPeriodType: function (obj) {
+                UX.Cotorra.PeriodTypes.UI.EnablePeriodType(obj, true);
+            },
+
+            EnablePeriodType: function (obj = null, isEditing = false) {
+                let catNam = 'Periods';
+                var fv = null;
+
+                let row = UX.Cotorra.Common.GetRowData(obj);
+                let containerID = 'record_save_wrapper';
+
+                let modalID = UX.Modals.OpenModal(
+                    (isEditing ? 'Editar periodicidad ' : 'Habilitar periodicidad ') + row.dataItem.Name, 's', '<div id="' + containerID + '"></div>',
+                    function () {
+                        $('#' + modalID).css('max-width', '450px');
+                        let $container = $('#' + containerID);
+                        let actualYear = new Date().getFullYear();
+
+                        switch (row.dataItem.Name.toLowerCase()) {
+                            case 'semanal': row.dataItem.PeriodType = 'Weekly'; break;
+                            case 'quincenal': row.dataItem.PeriodType = 'BiWeekly'; break;
+                            case 'mensual': row.dataItem.PeriodType = 'Monthly'; break;
+                        }
+
+                        //Init template
+                        let saveModel = UX.Test1 = new Ractive({
+                            el: '#' + containerID,
+                            template: '#period_enable_template',
+                            data: {
+                                ID: row ? row.dataItem.ID : null,
+                                Name: row ? row.dataItem.Name : '',
+                                ExtraordinaryPeriod: false,
+
+                                CurrentFiscalYear: actualYear,
+                                PeriodType: row.dataItem.PeriodType,
+                                InitialDate: '',
+                                PeriodTotalDays: row ? row.dataItem.PeriodTotalDays : '',
+                                PaymentDays: row ? row.dataItem.PaymentDays : '7',
+                                CurrentPeriod: '',
+                                FortnightPaymentDays: '',
+                                WeeklySeventhDay: row ? row.dataItem.SeventhDayPosition : '-1',
+                                CurrentFiscalYear: actualYear,
+                                FortnightPaymentDays: row ? row.dataItem.FortnightPaymentDays : 1,
+                                PaymentPeriodicity: row ? row.dataItem.PaymentPeriodicity : null,
+                                SeventhDayPosition: row ? row.dataItem.SeventhDayPosition : '-1',
+
+                                //to hide and disable
+                                IsDisabled: true,
+                                IsHidden: true,
+                                IsEditing: isEditing,
+
+                                //Options
+                                CurrentFiscalYearOptions: [
+                                    { id: (actualYear - 1), description: (actualYear - 1).toString() },
+                                    { id: (actualYear), description: (actualYear).toString() },
+                                    { id: (actualYear + 1), description: (actualYear + 1).toString() },
+                                ],
+                                PaymentPeriodicityOptions: UX.Cotorra.PeriodTypes.PaymentPeriodicityOptions,
+                                FortnightPaymentDaysOptions: UX.Cotorra.PeriodTypes.FortnightPaymentDaysOptions,
+                                WeeklySeventhDayOptions: [
+                                    { id: '-1', description: 'No tomar en cuenta séptimo día para los días de pago' },
+                                    { id: '0', description: 'Lunes' },
+                                    { id: '1', description: 'Martes' },
+                                    { id: '2', description: 'Miércoles' },
+                                    { id: '3', description: 'Jueves' },
+                                    { id: '4', description: 'Viernes' },
+                                    { id: '5', description: 'Sábado' },
+                                    { id: '6', description: 'Domingo' }
+                                ],
+
+                            }
+                        });
+
+                        if (row.dataItem.PeriodType === 'Weekly') {
+                            saveModel.observe('WeeklySeventhDay', function (newValue) {
+                                saveModel.set('SeventhDayPosition', newValue);
+                                saveModel.set('PaymentDays', newValue === '-1' ? '7' : '6');
+                            }, { init: true, defer: true });
+                        }
+
+                        var getPeriods = function () {
+
+                            let model = saveModel;
+                            let periodType = model.get('PeriodType');
+                            let initialDate = model.get('InitialDate');
+                            let periodTotalDays = model.get('PeriodTotalDays');
+
+                            if (periodType === '' || initialDate === '' || periodTotalDays == '') { model.set("CurrentPeriodOptions", []); return; }
+
+                            let date = UX.Common.ValidateDate(initialDate);
+                            if (date === null) {
+                                model.set("CurrentPeriodOptions", []);
+                                return;
+                            } else {
+                                initialDate = date;
+                                let year = parseInt(initialDate.split('/')[2]);
+                                let cfy = model.get('CurrentFiscalYear');
+
+                                if (year !== cfy && year !== (cfy - 1)) {
+                                    model.set("CurrentPeriodOptions", []);
+                                    return;
+                                }
+                            }
+
+                            $.ajax({
+                                url: CotorraAppURL + '/companyassistant/getperiods',
+                                type: 'POST',
+                                data: {
+                                    paymentPeriodicity: periodType,
+                                    initialDate: initialDate,
+                                    periodTotalDays: periodTotalDays,
+                                },
+                                async: true,
+                                success: function (periods) {
+                                    model.set('CurrentPeriod', 1);
+                                    model.set("CurrentPeriodOptions", periods);
+                                },
+                                error: function (error) { UX.Modals.ErrorModal(error); },
+                                complete: function () { }
+                            });
+                        };
+
+                        saveModel.observe('CurrentFiscalYear',
+                            function (newValue, oldValue) {
+                                saveModel.set('InitialDate', '01/01/' + newValue);
+                                getPeriods();
+                            },
+                            { init: true, defer: true });
+
+                        //Buttons
+                        $('#np_btnCancelSaveRecord').on('click', function () { UX.Modals.CloseModal(modalID); });
+                        $('#np_btnSaveRecord').on('click', function () { $('#np_cat_enable').data('formValidation').validate(); });
+
+                        //Masks
+                        $("#np_pt_txtPeriodDays").mask('000');
+                        $("#np_pt_txtPaymentDays").decimalMask(2);
+                        $('#ca_initialdate').mask('00/00/0000');
+
+                        //Set validations
+                        fv = $('#np_cat_enable').formValidation({
+                            framework: 'bootstrap',
+                            live: 'disabled',
+                            fields: {
+                            },
+                            onSuccess: function (ev) {
+                                ev.preventDefault();
+                                UX.Common.ClearFocus();
+
+                                //Set loader
+                                UX.Loaders.SetLoader('#' + modalID);
+
+                                //Save data
+                                let dataToGo = new Object({
+                                    PeriodTypeId: saveModel.get('ID'),
+                                    Year: saveModel.get('CurrentFiscalYear'),
+                                    InitialDate: saveModel.get('InitialDate'),
+                                    PaymentDays: saveModel.get('PaymentDays'),
+                                    SeventhDayPosition: saveModel.get('SeventhDayPosition'),
+                                    IsEditing: saveModel.get('IsEditing'),
+                                    FortnightPaymentDays: saveModel.get('FortnightPaymentDays'),
+                                    CurrentPeriod: saveModel.get('CurrentPeriod')
+                                });
+
+                                UX.Cotorra.Catalogs.Save(
+                                    catNam,
+                                    dataToGo,
+                                    () => {
+                                        UX.Modals.CloseModal(modalID);
+                                        //UX.Cotorra.PeriodTypes.UI.Init();
+                                        $(".pill-view.active > .refresh-pill").click();
+                                        UX.Cotorra.Catalogs.Reload({ catalog: 'PeriodTypes' });
+                                    },
+                                    (error) => {
+                                        UX.Common.ErrorModal(error);
+                                    },
+                                    (complete) => {
+                                        UX.Loaders.RemoveLoader('#' + modalID);
+                                    }
+                                );
+                            }
+                        })
+                            .on('err.validator.fv', function (e, data) { UX.Common.FVShowOneMessage(data); });
+
+                        //Init elements
+                        $container.initUIElements();
+                    });
+            }
+        }
+    };
+</script>

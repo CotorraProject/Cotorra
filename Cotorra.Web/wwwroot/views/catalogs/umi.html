@@ -1,0 +1,49 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="umiActionTemplate">
+</script>
+
+<!--top actions-->
+<div class="top-actions">
+</div>
+
+<!--main container-->
+<div class="np-umi-grid full-kendo-grid">
+</div>
+
+<!--add/update modal-->
+<script id="umi_save_template" type="text/ractive">
+
+    <form id="np_cat_saverecord">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_InitialDate">Fecha de inicio</label>
+                    <input type="text" class="form-control" id="np_InitialDate" name="np_InitialDate" value="{{InitialDate}}"
+                           autocomplete="off" maxlength="100" required placeholder="ej. 20/10/2018">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required currency">
+                    <label for="np_Value">Valor UMI</label>
+                    <input type="text" class="form-control currency-input" id="np_Value" name="np_Value" value="{{Value}}"
+                           autocomplete="off" maxlength="20" required>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row p-t-20">
+        <div class="col-xs-6">
+            <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-6">
+            <button id="np_btnSaveRecord" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+
+</script>

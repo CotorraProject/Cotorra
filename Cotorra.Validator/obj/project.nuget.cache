@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "sggDyk+DUAHKC91gtjNnLsn+zF4h9hvpRsx3oTjSb44CrYw6tA0gRuxI3HUvgzYMqSkRI1xWsc3Ps7gPNW1y7A==",
+  "success": true,
+  "projectFilePath": "C:\\devgit\\LeCotorre\\Cotorra.Validator\\Cotorra.Validator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\serialize.linq\\1.8.1\\serialize.linq.1.8.1.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.7.0\\system.security.cryptography.protecteddata.4.7.0.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
+    "C:\\Users\\Louis.Murillo\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

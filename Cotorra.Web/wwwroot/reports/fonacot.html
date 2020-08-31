@@ -1,0 +1,309 @@
+﻿<script id="report-template" type="text/ractive">
+    <form id="report-fonacot-filters">
+        <div class="filters col-xs-3">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="title">
+                        <label>Parámetros</label>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="title">
+                        <label>Estado de cuenta créditos FONACOT</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group select required">
+                        <label for="np_drpFonacotReportFiscalYearInitial">Ejercicio inicial</label>
+                        <select class="form-control" id="np_drpFonacotReportFiscalYearInitial" name="np_drpFonacotReportFiscalYearInitial" value="{{InitialFiscalYear}}">
+                            {{#FiscalYearOptions}}
+                            <option value='{{ID}}'>{{Name}}</option>
+                            {{/FiscalYearOptions}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group select required">
+                        <label for="np_drpFonacotReportMonthInitial">Mes inicial</label>
+                        <select class="form-control" id="np_drpFonacotReportMonthInitial" name="np_drpFonacotReportMonthInitial" value="{{InitialMonth}}">
+                            {{#MonthsOptions}}
+                            <option value='{{Number}}'>{{Name}}</option>
+                            {{/MonthsOptions}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group select required">
+                        <label for="np_drpFonacotReportFiscalYearFinal">Ejercicio final</label>
+                        <select class="form-control" id="np_drpFonacotReportFiscalYearFinal" name="np_drpFonacotReportFiscalYearFinal" value="{{FinalFiscalYear}}">
+                            {{#FiscalYearOptions}}
+                            <option value='{{ID}}'>{{Name}}</option>
+                            {{/FiscalYearOptions}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group select required">
+                        <label for="np_drpFonacotReportMonthFinal">Mes final</label>
+                        <select class="form-control" id="np_drpFonacotReportMonthFinal" name="np_drpFonacotReportMonthFinal" value="{{FinalMonth}}">
+                            {{#MonthsOptions}}
+                            <option value='{{Number}}'>{{Name}}</option>
+                            {{/MonthsOptions}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group select required">
+                        <label for="np_drpFonacotReportEmployee">Colaborador</label>
+                        <select class="form-control" id="np_drpFonacotReportEmployee" name="np_drpFonacotReportEmployee" value="{{EmployeeFilter}}">
+                            <option value=''>Todos</option>
+                            {{#EmployeeOptions}}
+                            <option value='{{ID}}'>{{FullName}}</option>
+                            {{/EmployeeOptions}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group select required">
+                        <label for="np_drpFonacotReportCreditStatus">Estado de crédito</label>
+                        <select class="form-control" id="np_drpFonacotReportCreditStatus" name="np_drpFonacotReportCreditStatus" value="{{CreditStatus}}">
+                            {{#CreditStatusOptions}}
+                            <option value='{{Code}}'>{{Name}}</option>
+                            {{/CreditStatusOptions}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group select required">
+                        <label for="np_drpFonacotReportEmployeeStatus">Estado de colaborador</label>
+                        <select class="form-control" id="np_drpFonacotReportEmployeeStatus" name="np_drpFonacotReportEmployeeStatus" value="{{EmployeeStatus}}">
+                            {{#EmployeeStatusOptions}}
+                            <option value='{{Code}}'>{{Name}}</option>
+                            {{/EmployeeStatusOptions}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary full-width" id="btnProcess">
+                        Ejecutar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="viewer col-xs-9" id="viewer">
+
+    </div>
+    <div class="viewer col-xs-9" id="designer">
+
+    </div>
+</script>
+
+
+<script type="text/javascript">
+    UX.Reports.FonacotReport = {
+        MonthsOptions: [
+            {
+                Number: 1,
+                Name: 'Enero',
+            },
+            {
+                Number: 2,
+                Name: 'Febrero',
+            },
+            {
+                Number: 3,
+                Name: 'Marzo',
+            },
+            {
+                Number: 4,
+                Name: 'Abril',
+            },
+            {
+                Number: 5,
+                Name: 'Mayo',
+            },
+            {
+                Number: 6,
+                Name: 'Junio',
+            },
+            {
+                Number: 7,
+                Name: 'Julio',
+            },
+            {
+                Number: 8,
+                Name: 'Agosto',
+            },
+            {
+                Number: 9,
+                Name: 'Septiembre',
+            },
+            {
+                Number: 10,
+                Name: 'Octubre',
+            },
+            {
+                Number: 11,
+                Name: 'Noviembre',
+            },
+            {
+                Number: 12,
+                Name: 'Diciembre',
+            },
+        ],
+
+        CreditStatusOptions: [
+            {
+                Code: -1,
+                Name: 'Todos',
+
+            },
+            {
+                Code: 1,
+                Name: 'Activo',
+
+            },
+            {
+                Code: 0,
+                Name: 'Inactivo',
+            },
+        ],
+
+        EmployeeStatusOptions: [
+            {
+                Code: -1,
+                Name: 'Todos',
+
+            },
+            {
+                Code: 0,
+                Name: 'Activo',
+
+            },
+            {
+                Code: 1,
+                Name: 'Baja',
+            },
+        ],
+
+        UI: {
+            Init: function () {
+                var reportModel = UX.Reports.FonacotReport.UI.FiltersModel = new Ractive({
+                    el: '.main-container',
+                    template: '#report-template',
+                    data: {
+                        InitialFiscalYear: '',
+                        FinalFiscalYear: '',
+                        FiscalYearOptions: [],
+                        MonthsOptions: UX.Reports.FonacotReport.MonthsOptions,
+                        CreditStatusOptions: UX.Reports.FonacotReport.CreditStatusOptions,
+                        EmployeeStatusOptions: UX.Reports.FonacotReport.EmployeeStatusOptions,
+                        CreditStatus: '',
+                        EmployeeStatus: '',
+                        InitialMonth: '',
+                        FinalMonth: '',
+                        EmployeeFilter: '',
+                    }
+                });
+
+                //Get necessary catalogs
+                UX.Loaders.SetLoader('body');
+                (async function () {
+
+                    //Load data
+                    await UX.Cotorra.Catalogs.Require({
+                        catalogs: ['Employees', 'Periods'],
+                        forceLoad: true
+                    });
+
+
+                    UX.Reports.FonacotReport.UI.SetDefaultFilters();
+
+                    UX.Loaders.RemoveLoader('body');
+                })();
+
+                $('#report-fonacot-filters').formValidation({
+                    framework: 'bootstrap',
+                    live: 'disabled',
+                    fields: {
+                        np_drpFonacotReportEmployeeStatus: {
+                            validators: {
+                                notEmpty: { message: 'Debes capturar el dato' }
+                            }
+                        },
+                    },
+                    onSuccess: function (ev) {
+                        ev.preventDefault();
+                        UX.Reports.FonacotReport.UI.ExecuteReport();
+                    }
+                }).on('err.validator.fv', function (e, data) { UX.Common.FVShowOneMessage(data); });
+
+
+            },
+
+
+            ExecuteReport: (params) => {
+                let filtersModel = UX.Reports.FonacotReport.UI.FiltersModel.get();
+                let params2 = {
+                    ReportParams: {
+                        InitialFiscalYear: filtersModel.InitialFiscalYear.ID,
+                        InitialMonth: filtersModel.InitialMonth,
+                        FinalFiscalYear: filtersModel.FinalFiscalYear.ID,
+                        FinalMonth: filtersModel.FinalMonth, 
+                        EmployeeFilter: filtersModel.EmployeeFilter,
+                        CreditStatus: filtersModel.CreditStatus,
+                        EmployeeStatus: filtersModel.EmployeeStatus,
+                    }, ReportName: 'fonacot', ReportParamsType: 'FonacotReportParams'
+                }
+                UX.Reports.Process(params2);
+            },
+
+            SetDefaultFilters: (params) => {
+                let reportModel = UX.Reports.FonacotReport.UI.FiltersModel;
+                let date = new Date(); 
+                let periods = UX.Cotorra.Catalogs.Periods.filter(el => el.Type === 'FiscalYear');
+                 
+
+                let filtered = periods.map(x => x.Year).filter((value, index, self) => { return self.indexOf(value) === index }).map(x => { return { ID: x, Name: x } })
+                reportModel.set('FiscalYearOptions', filtered);
+
+                let periodByActualYear = filtered.find(el => el.ID === date.getFullYear());
+
+                if (periodByActualYear) {
+                    reportModel.set('InitialFiscalYear', periodByActualYear);
+                    reportModel.set('FinalFiscalYear', periodByActualYear);
+                }
+
+                reportModel.set('FinalMonth', date.getMonth() + 1);
+                reportModel.set('InitialMonth', date.getMonth() + 1); 
+                reportModel.set('EmployeeOptions', UX.Cotorra.Catalogs.Employees);
+                reportModel.set('CreditStatus', '1');
+                reportModel.set('EmployeeStatus', '0');
+
+
+            }
+        }
+    }
+    $(document).ready(function () {
+        UX.Reports.FonacotReport.UI.Init();
+    });
+
+</script>

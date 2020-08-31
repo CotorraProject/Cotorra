@@ -1,0 +1,65 @@
+﻿<div class="np-dashboard">
+
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="welcome dashboard-widget">
+                <h1 class="username">!Bienvenido, Yamani!</h1>
+                <h4 class="statistics">Aquí tienes tus estadísticas al día de hoy.</h4>
+                <h4 class="extra-data">¡Ten un excelente y productivo día!</h4>
+                <img src="//devapp.Cotorria.mx/assets/img/dashboard-banner-1.png" />
+                <button class="btn btn-primary" onclick="UX.Cotorra.Menu.OpenPrePayroll();">
+                    Ver la prenómina
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="my-payrolls dashboard-widget">
+                <h1>Mis nóminas</h1>
+
+                <div class="row filters">
+                    <div class="col-xs-12">
+                        <div class="form-group select required">
+                            <select class="form-control" id="np_emp_drpContractType" name="np_emp_drpContractType" value="{{ContractType}}">
+                                <option value="Biweekly">Quincenal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row kpis">
+
+                    <div class="col-xs-3">
+                        <h5>Nómina neta</h5>
+                        <h4>$8,125,066.18</h4>
+                        <div class="img">
+                            <img src="//devapp.Cotorria.mx/assets/img/dashboard-nominaneta.svg" />
+                        </div>
+
+                    </div>
+                    <div class="col-xs-3">
+                        <h5>Subsidio empleo</h5>
+                        <h4>$233,088.04</h4>
+                        <div class="img">
+                            <img src="//devapp.Cotorria.mx/assets/img/dashboard-subsidio.svg" />
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <h5>ISR</h5>
+                        <h4>$325,998.77</h4>
+                        <div class="img">
+                            <img src="//devapp.Cotorria.mx/assets/img/dashboard-isr.svg" style="width:20px;" />
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <h5>Obligaciones</h5>
+                        <h4>$89,741.29</h4>
+                        <div class="img">
+                            <img src="//devapp.Cotorria.mx/assets/img/dashboard-obligaciones.svg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>%24/Cotorra/Dev/Cotorra.ClientProxy</SccProjectName>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccAuxPath>https://dev.azure.com/cotorra</SccAuxPath>
+    <SccLocalPath>.</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <TieredCompilation>true</TieredCompilation>
+    <ProjectGuid>{8D41B785-50C5-4838-A2D3-24CD234E6010}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL.Client" Version="3.1.3" />
+    <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="3.1.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.3.0-beta1-final" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Serialize.Linq" Version="1.8.1" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cotorra.Client\Cotorra.Client.csproj" />
+    <ProjectReference Include="..\Cotorra.Schema\Cotorra.Schema.csproj" />
+  </ItemGroup>
+
+</Project>

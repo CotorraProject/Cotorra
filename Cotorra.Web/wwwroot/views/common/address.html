@@ -1,0 +1,88 @@
+﻿
+<script id="np-address-template" type="text/ractive">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="form-group textfield required">
+                <label for="np_er_txtZipCode">Código postal</label>
+                <input type="text" class="form-control" id="np_er_txtZipCode" name="np_er_txtZipCode" value="{{ZipCode}}"
+                       autocomplete="off" maxlength="5" required title="Ingresa tu código postal y presiona enter para buscarlo"
+                       style="width:calc(100% - 40px); display:inline-block;">
+                <a id="np_btnSearchZipCode" class="btn btn-white"
+                   title="Buscar código postal"
+                   style="padding: 6px; margin-top: -5px; padding-left: 10px; padding-right: 10px;">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group select required">
+                <label for="np_er_drpFederalEntity">Entidad federativa</label>
+                <select class="form-control" id="np_er_drpFederalEntity" name="np_er_drpFederalEntity" value="{{FederalEntity}}" required>
+                    {{#FederalEntityOptions}}
+                    <option value='{{id}}'>{{description}}</option>
+                    {{/FederalEntityOptions}}
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-5">
+            <div class="form-group select required">
+                <label for="np_er_drpMunicipality">Municipio/Localidad</label>
+                <select class="form-control" id="np_er_drpMunicipality" name="np_er_drpMunicipality" value="{{Municipality}}" required>
+                    {{#MunicipalityOptions}}
+                    <option value='{{id}}'>{{description}}</option>
+                    {{/MunicipalityOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="form-group textfield">
+                <label for="np_er_txtStreet">Calle</label>
+                <input type="text" class="form-control" id="np_er_txtStreet" name="np_er_txtStreet" value="{{Street}}"
+                       autocomplete="off" maxlength="100">
+            </div>
+        </div>
+
+        <div class="col-xs-2">
+            <div class="form-group textfield">
+                <label for="np_er_txtExteriorNumber">No. exterior</label>
+                <input type="text" class="form-control" id="np_er_txtExteriorNumber" name="np_er_txtExteriorNumber" value="{{ExteriorNumber}}"
+                       autocomplete="off" maxlength="10">
+            </div>
+        </div>
+
+        <div class="col-xs-2">
+            <div class="form-group textfield">
+                <label for="np_er_txtInteriorNumber">No. interior</label>
+                <input type="text" class="form-control" id="np_er_txtInteriorNumber" name="np_er_txtInteriorNumber" value="{{InteriorNumber}}"
+                       autocomplete="off" maxlength="10">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-5">
+            <div class="form-group select">
+                <label for="np_er_drpSuburb">Colonia</label>
+                <select class="form-control" id="np_er_drpSuburb" name="np_er_drpSuburb" value="{{Suburb}}">
+                    <option value=''>- - -</option>
+                    {{#SuburbOptions}}
+                    <option value='{{id}}'>{{description}}</option>
+                    {{/SuburbOptions}}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-7">
+            <div class="form-group textfield">
+                <label for="np_er_txtBetweenStreets">Referencia/Entre calles</label>
+                <input type="text" class="form-control" id="np_er_txtBetweenStreets" name="np_er_txtBetweenStreets"
+                       value="{{Reference}}"
+                       autocomplete="off" maxlength="200">
+            </div>
+        </div>
+    </div>
+</script>

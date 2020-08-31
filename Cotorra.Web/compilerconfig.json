@@ -1,0 +1,62 @@
+﻿[
+  {
+    "outputFile": "wwwroot/assets/css/cotorra.css",
+    "inputFile": "wwwroot/assets/css/cotorra.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/redesign.css",
+    "inputFile": "wwwroot/assets/css/redesign.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/reportviewer.css",
+    "inputFile": "wwwroot/assets/css/reportviewer.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/initialloader.css",
+    "inputFile": "wwwroot/assets/css/initialloader.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/company-configuration.css",
+    "inputFile": "wwwroot/assets/css/company-configuration.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/generic-grid.css",
+    "inputFile": "wwwroot/assets/css/generic-grid.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/generic-catalog.css",
+    "inputFile": "wwwroot/assets/css/generic-catalog.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/fonts.css",
+    "inputFile": "wwwroot/assets/css/fonts.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/employees.css",
+    "inputFile": "wwwroot/assets/css/employees.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/modals.css",
+    "inputFile": "wwwroot/assets/css/modals.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/main.css",
+    "inputFile": "wwwroot/assets/css/main.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/labels.css",
+    "inputFile": "wwwroot/assets/css/labels.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/buttons.css",
+    "inputFile": "wwwroot/assets/css/buttons.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/prepayroll.css",
+    "inputFile": "wwwroot/assets/css/prepayroll.scss"
+  },
+  {
+    "outputFile": "wwwroot/assets/css/textfields.css",
+    "inputFile": "wwwroot/assets/css/textfields.scss"
+  }
+]

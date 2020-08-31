@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "appInsights1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/microsoft.insights/components/CotorraInsightDev",
+      "type": "appInsights.azure",
+      "connectionId": "APPINSIGHTS_INSTRUMENTATIONKEY",
+      "secretStore": null
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroup')]/providers/Microsoft.Sql/servers/cotorra/databases/cotorra",
+      "type": "mssql.azure",
+      "connectionId": "ConfigConnectionString",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

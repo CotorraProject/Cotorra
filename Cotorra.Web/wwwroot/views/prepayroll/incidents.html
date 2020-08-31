@@ -1,0 +1,111 @@
+﻿<!--kendo grid templates-->
+
+
+<!--add incidents modal-->
+<script id="np-editincidents-template" type="text/ractive">
+    <div id="np-incidents">
+        <style>
+            .modal-main-container .side-modal-wrapper .side-modal-container.medium {
+                max-width: 550px;
+            }
+        </style>
+        <div class="generic-catalog">
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-actions">
+                    <div class="top-action-filter flex" style="width:60% !important;">
+                        <i class="fad fa-user-circle"></i>
+                        <div class="title">ID {{Employee.Code}}</div>
+                        <div class="description">{{Employee.Name}}</div>
+                    </div>
+                    <div class="top-action-filter flex" style="width:40% !important;">
+                        <i class="fad fa-calendar-day"></i>
+                        <div class="title">Fecha</div>
+                        <div class="description">{{IncidentDate}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="generic-catalog" style="height:250px !important;">
+            <div class="generic-catalog-menu scrollbar-macosx">
+                <div class="group-title">
+                </div>
+                <ul id="catalogs-options"></ul>
+            </div>
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-data" style="top: 0px !important; height:100%;">
+                    <div class="catalog-content p-10">
+                        {{#if Incidents.length > 0}}
+                        <div class="row titles">
+                            <div class="col-xs-3">
+                                <div class="form-group textfield">
+                                    <label>Valor</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="form-group textfield">
+                                    <label for="np_emp_txtEntryDate">Tipo de incidencia</label>
+                                </div>
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        {{#Incidents}}
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <div class="form-group textfield required">
+                                    <input type="text" class="form-control incident-value" value="{{Value}}" autocomplete="off" maxlength="6" />
+                                </div>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="form-group select required">
+                                    <select class="form-control" value="{{IncidentTypeID}}" required>
+                                        <option value=''>Selecciona una opción</option>
+                                        {{#IncidentTypesOptions}}
+                                    <option {{#if (DisableDaysOptions && TypeOfIncident==2 && Incidents.length>1) || ActualIncidentsIDs.indexOf(ID) > -1}} 
+                                            disabled 
+                                            {{/if}} 
+                                            value='{{ID}}'>{{Name}} ({{Code}})</option>
+                                        {{/IncidentTypesOptions}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-1">
+                                <div class="form-group textfield required text-center">
+                                    <button class="btn btn-white btn-delete" title="Eliminar incidencia"
+                                            on-click="removeIncident" 
+                                            style="background-color: transparent !important; border: none !important; padding-top: 6px !important; border-radius: 0px; padding-bottom: 6px !important;">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {{/Incidents}}
+
+                        <div class="row p-t-15 p-b-15">
+                            <div class="col-xs-3 col-xs-offset-3">
+                                <button id="btnAddIncident" class="btn btn-primary full-width" on-click="addIncident"
+                                        {{#if DisableAddIncident}} disabled="disabled" {{/if}}>
+                                    Añadir
+                                    <i class="far fa-plus-circle"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-3">
+                                <button id="btnSaveIncidents" class="btn btn-primary full-width" on-click="applyChanges"
+                                        {{#if DisableApplyChanges}} disabled="disabled" {{/if}}>
+                                    Guardar
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                            <!--<div class="col-xs-4">
+                                <button id="btnCancelIncidents" class="btn btn-white full-width" on-click="closeModal">
+                                    Cancelar
+                                </button>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+

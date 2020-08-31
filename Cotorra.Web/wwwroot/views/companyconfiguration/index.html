@@ -1,0 +1,264 @@
+﻿<!--company configuration-->
+<div id="np-company-configuration">
+    <div class="view-title m-b-20">
+        Configuración general de la empresa
+    </div>
+
+    <div class="tabs-container">
+        <ul class="tab-nav" role="tablist">
+            <li class="active">
+                <a href="#np_cc_company_data" aria-controls="np_cc_company_data" role="tab" data-toggle="tab" aria-expanded="true">Datos generales</a>
+            </li>
+            <li class="">
+                <a href="#np_cc_about" aria-controls="np_cc_about" role="tab" data-toggle="tab" aria-expanded="true">Acerca de tu empresa</a>
+            </li>
+            <li class="">
+                <a href="#np_cc_vacation_configuration" aria-controls="np_cc_vacation_configuration" role="tab" data-toggle="tab" aria-expanded="true">Vacaciones</a>
+            </li>
+        </ul>
+        <div class="tab-content tab-content-pp">
+            <div id="np_cc_company_data" class="tab-pane active">
+            </div>
+
+            <div id="np_cc_about" class="tab-pane">
+            </div>
+
+            <div id="np_cc_vacation_configuration" class="tab-pane">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script id="np_companyconfiguration_generaldata_template" type="text/ractive">
+    <form id="np_er_savecompanygeneraldata">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group textfield disabled">
+                    <label for="np_er_txtRFC">RFC</label>
+                    <input type="text" class="form-control" id="np_er_txtRFC" name="np_er_txtRFC" value="{{RFC}}"
+                           autocomplete="off" maxlength="13" disabled>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group textfield {{#if IsPerson == true}} required {{else}} disabled {{/if}}">
+                    <label for="np_er_txtCURP">CURP</label>
+                    <input type="text" class="form-control" id="np_er_txtCURP" name="np_er_txtCURP" value="{{CURP}}"
+                           autocomplete="off" maxlength="18" {{#if IsPerson == true}} required {{else}} disabled {{/if}}>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group select required">
+                    <label for="np_drpSalaryZone">Zona de salario</label>
+                    <select class="form-control" id="np_drpSalaryZone" name="np_drpSalaryZone" value="{{SalaryZone}}">
+                        {{#SalaryZonesOptions}}
+                        <option value='{{ID}}'>{{Name}}</option>
+                        {{/SalaryZonesOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="form-group select required {{#if IsPerson == false && IsBusiness == false}} disabled {{/if}}">
+                    <label for="np_fiscalregime">Régimen fiscal</label>
+                    <select id="np_fiscalregime" name="np_fiscalregime" class="form-control" value="{{FiscalRegime}}" required>
+                        <option value='' selected>Selecciona una opcion</option>
+                        {{#FiscalRegimesOptions}}
+                        {{#if IsPerson == true && IsPhysicalPerson == true}}
+                        <option value='{{FiscalRegime}}'>{{FiscalRegime}} {{Description}}</option>
+                        {{elseif IsBusiness == true && IsMoralPerson == true}}
+                        <option value='{{FiscalRegime}}'>{{FiscalRegime}} {{Description}}</option>
+                        {{/if}}
+                        {{/FiscalRegimesOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="group-container" data-title="Domicilio">
+            {{>np-address-template}}
+        </div>
+
+        <div class="row m-t-10 m-b-10">
+            <div class="col-xs-12">
+                <button id="np_btncompanyconfiguration_generaldata" class="btn btn-primary">Actualizar datos generales</button>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script id="np_companyconfiguration_about_template" type="text/ractive">
+    <form id="np_er_savecompanyabout">
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="form-group textfield">
+                    <label for="ca_commercialname">Nombre comercial</label>
+                    <input type="text" class="form-control" id="ca_commercialname" name="ca_commercialname" value="{{ComercialName}}"
+                           autocomplete="off" maxlength="100" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group select required">
+                    <label for="ca_heading">Giro</label>
+                    <select id="ca_heading" name="ca_heading" class="form-control" value="{{CompanyBusinessSector}}" required>
+                        <option value=''>- - -</option>
+                        <option value='1'>Micro empresa</option>
+                        <option value='2'>Comercio</option>
+                        <option value='3'>Servicios</option>
+                        <option value='4'>Manufactura</option>
+                        <option value='4'>PyME</option>
+                        <option value='0'>Otros</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="form-group select">
+                    <label for="ca_ambit">Tu empresa tiene ámbito</label>
+                    <select id="ca_ambit" name="ca_ambit" class="form-control" value="{{CompanyScope}}">
+                        <option value=''>- - -</option>
+                        <option value='1'>Local</option>
+                        <option value='2'>Regional</option>
+                        <option value='3'>Nacional</option>
+                        <option value='4'>Multinacional</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="form-group textfield">
+                    <label for="ca_foundationdate">Fecha de fundación</label>
+                    <input type="text" class="form-control" id="ca_foundationdate" name="ca_foundationdate" value="{{CompanyCreationDate}}"
+                           autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+
+                <div class="form-group textfield">
+                    <label for="ca_companyabout">Cuéntanos un poco sobre tu empresa</label>
+                    <textarea name="ca_companyabout" class="form-control" id="ca_companyabout"
+                              value="{{CompanyInformation}}" autocomplete="off" maxlength="150"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="np_companyconfiguration_socialnetworks" class="row" style="background-color: rgba(0,0,0,0.05); clear: both; padding: 0px; padding-top: 5px; padding-left: 5px; padding-right: 5px;">
+            <div class="col-xs-4 assis-website">
+                <div class="form-group textfield">
+                    <label for="ca_website">Website</label>
+                    <input type="text" class="form-control" id="ca_website" name="ca_website" value="{{CompanyWebSite}}"
+                           autocomplete="off" maxlength="100" />
+                    <i class="far fa-globe"></i>
+
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="form-group textfield assis-facebook">
+                    <label for="ca_facebook">Facebook</label>
+                    <input type="text" class="form-control" id="ca_facebook" name="ca_facebook" value="{{Facebook}}"
+                           autocomplete="off" maxlength="100" />
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="form-group textfield assis-instagram">
+                    <label for="ca_instagram">Instagram</label>
+                    <input type="text" class="form-control" id="ca_instagram" name="ca_instagram" value="{{Instagram}}"
+                           autocomplete="off" maxlength="100" />
+                    <i class="fab fa-instagram"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-t-10 m-b-10">
+            <div class="col-xs-12">
+                <button id="np_btncompanyconfiguration_about" class="btn btn-primary">Actualizar datos acerca de tu empresa</button>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script id="np_companyconfiguration_vacation_template" type="text/ractive">
+    <form id="np_er_savevacationconfigdata">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group select required">
+                    <label for="ca_HolidayPremiumPaymentType">Pago de prima vacacional</label>
+                    <select id="ca_HolidayPremiumPaymentType" name="ca_HolidayPremiumPaymentType" class="form-control" value="{{HolidayPremiumPaymentType}}" required>
+                        {{#HolidayPremiumPaymentTypeOptions}}
+                        <option value='{{ID}}'>{{Name}}</option>
+                        {{/HolidayPremiumPaymentTypeOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-t-10 m-b-10">
+            <div class="col-xs-12">
+                <button id="np_btnSavepayrollcompanyconfiguration" class="btn btn-primary">Actualizar configuración</button>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script>
+    UX.Cotorra.CompanyConfiguration.UI.Init();
+</script>
+
+<style>
+    #np_companyconfiguration_socialnetworks svg {
+        position: absolute;
+        position: absolute;
+        top: 26px;
+        left: 12px;
+        font-size: 18px;
+    }
+
+    #np_companyconfiguration_socialnetworks .assis-website svg {
+        color: rgba(3,155,229,1);
+    }
+
+    #np_companyconfiguration_socialnetworks .assis-facebook svg {
+        left: 15px;
+        color: rgba(57,73,171,1);
+    }
+
+    #np_companyconfiguration_socialnetworks .assis-instagram svg {
+        color: rgba(194,24,91,1);
+    }
+
+    #np_companyconfiguration_socialnetworks .assis-website input,
+    #np_companyconfiguration_socialnetworks .assis-facebook input,
+    #np_companyconfiguration_socialnetworks .assis-instagram input {
+        padding-left: 30px;
+    }
+
+    #np_er_savecompanyabout textarea {
+        border: solid 1px rgba(0,0,0,0.2) !important;
+        background-color: #fff;
+        overflow: hidden;
+        border: solid 1px #c8c8c8;
+        color: #323232;
+        border-radius: 0;
+        font-size: 13px;
+        font-family: "Open Sans";
+        margin: 0;
+        width: 100%;
+        height: 95px !important;
+        transition: all 180ms ease-in;
+        border-radius: 2px;
+        padding: 7px !important;
+        overflow-y: scroll;
+    }
+</style>

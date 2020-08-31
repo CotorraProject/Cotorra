@@ -1,0 +1,47 @@
+﻿
+<script id="employee-contribution-salary-template" type="ractive/text">
+    <div class="row">
+        <div class="col-xs-5">
+            <div class="form-group select required">
+                <label for="np_emp_drpContributionBase">Base de cotización</label>
+                <select class="form-control" id="np_emp_drpContributionBase" name="np_emp_drpContributionBase" value="{{ContributionBase}}" required>
+                    {{#ContributionBasesOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/ContributionBasesOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="form-group textfield currency required {{#if IsNew === false || ContributionBase === 2 }} disabled {{/if}}">
+                <label for="np_emp_txtSBCFixedPart">SBC parte fija</label>
+                <input type="text" class="form-control currency-input" id="np_emp_txtSBCFixedPart" name="np_emp_txtSBCFixedPart" value="{{SBCFixedPart}}"
+                       autocomplete="off" maxlength="25" {{#if IsNew === false || ContributionBase === 2  }} disabled {{/if}} />
+            </div>
+        </div>
+        <div class="col-xs-1">
+            <div class="form-group">
+                <button id="np_emp_calculateSBC"  class="btn btn-icon-small" data-toggle="tooltip" title="Calcular SBC parte fija" data-placement="bottom"
+                        style="margin : 17px 0px 0px 0px">
+                    <i class="fas fa-calculator"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="form-group textfield currency required   {{#if ContributionBase === 1 || IsNew ===  false }} disabled {{/if}} ">
+                <label for="np_emp_txtSBCVariablePart">SBC parte variable</label>
+                <input type="text" class="form-control currency-input" id="np_emp_txtSBCVariablePart" name="np_emp_txtSBCVariablePart" value="{{SBCVariablePart}}"
+                       autocomplete="off" maxlength="25" {{#if ContributionBase === 1 || IsNew ===  false }} disabled {{/if}}/>
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="form-group textfield currency required disabled">
+                <label for="np_emp_txtSBCMax25UMA">SBC (tope 25 UMA)</label>
+                <input type="text" class="form-control currency-input" id="np_emp_txtSBCMax25UMA" name="np_emp_txtSBCMax25UMA" value="{{SBCMax25UMA}}"
+                       autocomplete="off" maxlength="25" disabled="disabled" />
+            </div>
+        </div>
+    </div>
+</script>

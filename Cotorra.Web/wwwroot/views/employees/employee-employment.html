@@ -1,0 +1,108 @@
+﻿
+<script id="employee-employment-template" type="ractive/text">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="form-group textfield required">
+                <label for="np_emp_txtCode">ID</label>
+                <input type="text" class="form-control" id="np_emp_txtCode" name="np_emp_txtCode" value="{{Code}}"
+                       autocomplete="off" maxlength="10" />
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="form-group textfield required">
+                <label for="np_emp_txtEntryDate">Fecha de ingreso</label>
+                <input type="text" class="form-control" id="np_emp_txtEntryDate" name="np_emp_txtEntryDate" value="{{EntryDate}}"
+                       autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="form-group select required">
+                <label for="np_emp_drpContractType">Tipo de contrato</label>
+                <select class="form-control" id="np_emp_drpContractType" name="np_emp_drpContractType" value="{{ContractType}}">
+                    {{#ContractTypesOptions}}
+                    <option value='{{ID}}'>{{#if ID.toString().length == 1 }}0{{ID}}{{else}}{{ID}}{{/if}} {{Name}}</option>
+                    {{/ContractTypesOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-7">
+            <div class="form-group select required">
+                <label for="np_drpRegimeType">Tipo de régimen</label>
+                <select class="form-control" id="np_drpRegimeType" name="np_drpRegimeType" value="{{RegimeType}}" required>
+                    {{#RegimeTypesOptions}}
+                    <option value='{{ID}}'>{{#if ID.toString().length == 1 }}0{{ID}}{{else}}{{ID}}{{/if}} {{Name}}</option>
+                    {{/RegimeTypesOptions}}
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-5">
+            <div class="form-group select required">
+                <label for="np_emp_drpSalaryType">Periodicidad de pago</label>
+                <select class="form-control" id="np_emp_drpPeriodType" name="np_emp_drpPeriodType" value="{{PeriodTypeID}}">
+                    <option value=''>- - -</option>
+                    {{#PeriodTypesOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/PeriodTypesOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="form-group select required">
+                <label for="np_drpWorkShift">Turno</label>
+                <select class="form-control" id="np_drpWorkShift" name="np_drpWorkShift" value="{{WorkShiftID}}">
+                    <option value=''>- - -</option>
+                    {{#WorkShiftsOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/WorkShiftsOptions}}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group select">
+                <label for="np_drpUnionized">Sindicalizado</label>
+                <select class="form-control" id="np_drpUnionized" name="np_drpUnionized" value="{{EmployeeTrustLevel}}">
+                    <option value='2'>NO</option>
+                    <option value='1'>SÍ</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group select">
+                <label for="np_drpBenefitType">Tipo de prestación</label>
+                <select class="form-control" id="np_drpBenefitType" name="np_drpBenefitType" value="{{BenefitType}}">
+                    <option value='2'>Personalizada</option>
+                    <option value='1'>De Ley</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group select required">
+                <label for="np_drpSalaryZone">Zona de salario</label>
+                <select class="form-control" id="np_drpSalaryZone" name="np_drpSalaryZone" value="{{SalaryZone}}">
+                    {{#SalaryZonesOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/SalaryZonesOptions}}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group textfield required currency">
+                <label for="np_emp_sal_txtDailySalary">Salario diario</label>
+                <input type="text" class="form-control currency-input" id="np_emp_sal_txtDailySalary" name="np_emp_sal_txtDailySalary" value="{{DailySalary}}"
+                       autocomplete="off" maxlength="100" />
+            </div>
+        </div>
+    </div>
+</script>

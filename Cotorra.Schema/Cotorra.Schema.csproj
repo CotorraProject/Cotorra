@@ -1,0 +1,253 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>%24/Cotorra/Dev/Cotorra.Schema</SccProjectName>
+    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <SccAuxPath>https://dev.azure.com/cotorra</SccAuxPath>
+    <SccLocalPath>.</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <TieredCompilation>true</TieredCompilation>
+    <ProjectGuid>{F1272874-A4AA-4532-AC73-A10ADA0FA57D}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="fiscal\cfdi33nom12\catCFDI.xsd" />
+    <None Remove="fiscal\cfdi33nom12\catNomina.xsd" />
+    <None Remove="fiscal\cfdi33nom12\cfdv33.xsd" />
+    <None Remove="fiscal\cfdi33nom12\nomina12.xsd" />
+    <None Remove="fiscal\cfdi33nom12\preview\companyLogo.png" />
+    <None Remove="fiscal\cfdi33nom12\tdCFDI.xsd" />
+    <None Remove="fiscal\cfdi33nom12\TimbreFiscalDigitalv11.xsd" />
+    <None Remove="fiscal\cfdi33nom12\xslt\AcreditamientoIEPS10.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\aerolineas.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\cadenaoriginal_3_3.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\cadenaoriginal_TFD_1_1.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\certificadodedestruccion.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\cfdiregistrofiscal.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\ComercioExterior10.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\ComercioExterior11.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\consumodecombustibles.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\detallista.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\divisas.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\donat11.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\ecb.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\ecc.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\ecc11.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\iedu.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\implocal.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\ine10.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\ine11.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\leyendasFisc.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\nomina11.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\nomina12.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\notariospublicos.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\obrasarteantiguedades.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\pagoenespecie.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\Pagos10.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\pfic.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\psgecfd.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\renovacionysustitucionvehiculos.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\servicioparcialconstruccion.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\spei.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\terceros11.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\TuristaPasajeroExtranjero.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\utilerias.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\valesdedespensa.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\vehiculousado.xslt" />
+    <None Remove="fiscal\cfdi33nom12\xslt\ventavehiculos11.xslt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="fiscal\cfdi33nom12\xsd\catCFDI.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xsd\catNomina.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xsd\cfdv33.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xsd\nomina12.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\preview\catalogoCFDI33.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\preview\companyLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\preview\transformPayRollXMLToHTML33.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xsd\tdCFDI.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xsd\TimbreFiscalDigitalv11.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\AcreditamientoIEPS10.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\aerolineas.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\cadenaoriginal_3_3.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\cadenaoriginal_TFD_1_1.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\certificadodedestruccion.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\cfdiregistrofiscal.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\ComercioExterior10.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\ComercioExterior11.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\consumodecombustibles.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\detallista.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\divisas.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\donat11.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\ecb.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\ecc.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\ecc11.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\iedu.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\implocal.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\ine10.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\ine11.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\leyendasFisc.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\nomina11.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\nomina12.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\notariospublicos.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\obrasarteantiguedades.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\pagoenespecie.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\Pagos10.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\pfic.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\psgecfd.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\renovacionysustitucionvehiculos.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\servicioparcialconstruccion.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\spei.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\terceros11.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\TuristaPasajeroExtranjero.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\utilerias.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\valesdedespensa.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\vehiculousado.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fiscal\cfdi33nom12\xslt\ventavehiculos11.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Serialize.Linq" Version="1.8.1" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="domain\common\CodedIdentityCatalogEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\Area.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\WorkCenter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\IdentityCatalogEntityExt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\Department.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\Employee.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\EmployeeConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\EmployerRegistration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\JobPosition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\PayrollCompanyConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\PeriodType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="domain\Workshift.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTO\Calculate\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+﻿<head>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+            crossorigin="anonymous"></script>
+</head>
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<script>
+    var url = window.location.href.split('?')[0];
+    $.ajax(
+        {
+            method: 'GET',
+            url: url + 'Home/GetVersionExecutionTime/',
+            data: {
+
+            },
+            success: function (data) {
+                document.write('COTORRAi&reg; Parrots - Build date: ' + data);
+            },
+            error: function (ex) {
+                document.write(JSON.stringify(ex));
+            },
+            complete: {}
+        });
+</script>

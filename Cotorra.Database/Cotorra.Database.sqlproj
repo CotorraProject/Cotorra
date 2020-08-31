@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Cotorra.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{2eccfc28-8ee7-48b3-8982-0d1fe163248b}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Cotorra.Database</RootNamespace>
+    <AssemblyName>Cotorra.Database</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="PostDeploy" />
+    <Folder Include="dbo\User Defined Types\" />
+    <Folder Include="dbo\Functions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Employee.sql" />
+    <Build Include="dbo\Tables\PayrollCompanyConfiguration.sql" />
+    <Build Include="dbo\Tables\Status.sql" />
+    <Build Include="dbo\Tables\Department.sql" />
+    <Build Include="dbo\Tables\JobPosition.sql" />
+    <Build Include="dbo\Tables\PeriodType.sql" />
+    <Build Include="dbo\Tables\Workshift.sql" />
+    <Build Include="dbo\Tables\EmployerRegistration.sql" />
+    <PostDeploy Include="Script.PostDeployment.sql" />
+    <Build Include="dbo\Tables\MinimunSalary.sql" />
+    <Build Include="dbo\Tables\MonthlyIncomeTax.sql" />
+    <Build Include="dbo\Tables\UMA.sql" />
+    <Build Include="dbo\Tables\MonthlyEmploymentSubsidy.sql" />
+    <Build Include="dbo\Tables\AnualIncomeTax.sql" />
+    <Build Include="dbo\Tables\IMSSFare.sql" />
+    <Build Include="dbo\Tables\ConceptPayment.sql" />
+    <Build Include="dbo\Tables\NOMEvaluationPeriod.sql" />
+    <Build Include="dbo\Tables\NOMEvaluationQuestion.sql" />
+    <Build Include="dbo\Tables\NOMEvaluationPhase.sql" />
+    <Build Include="dbo\Tables\NOMEvaluationSurvey.sql" />
+    <Build Include="dbo\Tables\IncidentType.sql" />
+    <Build Include="dbo\Tables\AccumulatedType.sql" />
+    <Build Include="dbo\Tables\IncidentTypeRelationship.sql" />
+    <Build Include="dbo\Tables\Period.sql" />
+    <Build Include="dbo\Tables\PeriodDetail.sql" />
+    <Build Include="dbo\Tables\NOMEvaluationGuide.sql" />
+    <Build Include="dbo\Tables\WorkCenter.sql" />
+    <Build Include="dbo\Tables\NOMAnswer.sql" />
+    <Build Include="dbo\Tables\NOMSurveyReply.sql" />
+    <Build Include="dbo\Tables\Area.sql" />
+    <Build Include="dbo\Tables\NOMEvaluationCategory.sql" />
+    <Build Include="dbo\Tables\NOMEvaluationDomain.sql" />
+    <Build Include="dbo\Tables\Overdraft.sql" />
+    <Build Include="dbo\Tables\OverdraftDetail.sql" />
+    <Build Include="dbo\Tables\Incident.sql" />
+    <Build Include="dbo\Tables\PermanentMovement.sql" />
+    <Build Include="dbo\Tables\FonacotMovement.sql" />
+    <Build Include="dbo\Tables\Vacation.sql" />
+    <Build Include="dbo\Tables\Inhability.sql" />
+    <Build Include="dbo\Tables\InfonavitMovement.sql" />
+    <Build Include="dbo\Tables\HistoricEmployee.sql" />
+    <Build Include="dbo\Tables\HistoricAccumulatedEmployee.sql" />
+    <Build Include="dbo\Tables\ConceptPaymentRelationship.sql" />
+    <Build Include="dbo\Tables\Settlement.sql" />
+    <Build Include="dbo\Tables\Bank.sql" />
+    <Build Include="dbo\Tables\EmployerFiscalInformation.sql" />
+    <Build Include="dbo\Tables\HistoricEmployeeSalaryAdjustment.sql" />
+    <Build Include="dbo\Tables\SGDFLimits.sql" />
+    <Build Include="dbo\Tables\IMSSEmployerTable.sql" />
+    <Build Include="dbo\Tables\IMSSEmployeeTable.sql" />
+    <Build Include="dbo\Tables\IMSSWorkRisk.sql" />
+    <Build Include="dbo\Tables\SettlementCatalog.sql" />
+    <Build Include="dbo\Tables\AnualEmploymentSubsidy.sql" />
+    <Build Include="dbo\Tables\AccumulatedEmployee.sql" />
+    <Build Include="dbo\Views\vwVacation.sql" />
+    <Build Include="dbo\Views\vwUMA.sql" />
+    <Build Include="dbo\Views\vwSGDFLimits.sql" />
+    <Build Include="dbo\Views\vwSettlementCatalog.sql" />
+    <Build Include="dbo\Views\vwMonthlyIncomeTax.sql" />
+    <Build Include="dbo\Views\vwMonthlyEmploymentSubsidy.sql" />
+    <Build Include="dbo\Views\vwMinimunSalary.sql" />
+    <Build Include="dbo\Views\vwInhability.sql" />
+    <Build Include="dbo\Views\vwInfonavitMovement.sql" />
+    <Build Include="dbo\Views\vwIncident.sql" />
+    <Build Include="dbo\Views\vwIMSSWorkRisk.sql" />
+    <Build Include="dbo\Views\vwIMSSEmployerTable.sql" />
+    <Build Include="dbo\Views\vwIMSSEmployeeTable.sql" />
+    <Build Include="dbo\Views\vwFonacotMovement.sql" />
+    <Build Include="dbo\Views\vwAnualIncomeTax.sql" />
+    <Build Include="dbo\Views\vwAnualEmploymentSubsidy.sql" />
+    <Build Include="dbo\Views\vwAccumulatedEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\GetRequiredOverdraftCalculationData.sql" />
+    <Build Include="dbo\Views\vwIncidentType.sql" />
+    <Build Include="dbo\Views\vwAccumulatedType.sql" />
+    <Build Include="dbo\Views\vwConceptPaymentRelationship.sql" />
+    <Build Include="dbo\Tables\BenefitType.sql" />
+    <Build Include="dbo\Tables\Version.sql" />
+    <Build Include="dbo\Views\vwConceptPayment.sql" />
+    <Build Include="dbo\Tables\Address.sql" />
+    <Build Include="dbo\Tables\Seniority.sql" />
+    <Build Include="dbo\Tables\EmployeeIdentityRegistration.sql" />
+    <Build Include="dbo\Stored Procedures\AuthorizeOverdraft.sql" />
+    <Build Include="dbo\Stored Procedures\CreateHistoricAccumulatedEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\CreateOverdraftByEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\RecalculateAuthorizeOverdraft.sql" />
+    <Build Include="dbo\Stored Procedures\CancelAuthorizeOverdraft.sql" />
+    <Build Include="dbo\Tables\catCFDI_CodigoPostal.sql" />
+    <Build Include="dbo\Stored Procedures\StampOverdraft.sql" />
+    <Build Include="dbo\User Defined Types\stampoverdrafttabletype.sql" />
+    <Build Include="dbo\User Defined Types\guidlisttabletype.sql" />
+    <Build Include="dbo\Stored Procedures\CalculousOverdraft.sql" />
+    <Build Include="dbo\User Defined Types\stampoverdraftdetailtabletype.sql" />
+    <Build Include="dbo\Tables\UserCustomSettings.sql" />
+    <Build Include="dbo\Tables\EmployeeSalaryIncrease.sql" />
+    <Build Include="dbo\Stored Procedures\ApplySalaryAdjustments.sql" />
+    <Build Include="dbo\Stored Procedures\UnApplySalaryAdjustments.sql" />
+    <Build Include="dbo\Tables\EmployeeNode.sql" />
+    <Build Include="dbo\Tables\BossOfEdge.sql" />
+    <Build Include="dbo\Stored Procedures\AddConceptPaymentAutomaticGlobal.sql" />
+    <Build Include="dbo\Stored Procedures\CreateEmployeesNodes.sql" />
+    <Build Include="dbo\Stored Procedures\GetAccumulates.sql" />
+    <Build Include="dbo\Stored Procedures\CreateUpdateConceptPayment.sql" />
+    <Build Include="dbo\Tables\CancelationFiscalDocument.sql" />
+    <Build Include="dbo\Tables\CancelationFiscalDocumentDetail.sql" />
+    <Build Include="dbo\Stored Procedures\CreateCancelationStamp.sql" />
+    <Build Include="dbo\User Defined Types\cancelstampoverdrafttabletype.sql" />
+    <Build Include="dbo\Tables\VacationDaysOff.sql" />
+    <Build Include="dbo\Views\vwVacationDaysOff.sql" />
+    <Build Include="dbo\Stored Procedures\Report_Raya.sql" />
+    <Build Include="dbo\Stored Procedures\CreateVacationsConcepts.sql" />
+    <Build Include="dbo\Stored Procedures\CreateVacationsConceptsForAuhtorization.sql" />
+    <Build Include="dbo\Stored Procedures\DeleteEmployeeInformation.sql" />
+    <Build Include="dbo\Stored Procedures\CreateHistoricAccumulatedEmployeebyFiscalYear.sql" />
+    <Build Include="dbo\Stored Procedures\AuthorizeByOverdrafts.sql" />
+    <Build Include="dbo\Tables\HistoricEmployeeSBCAdjustment.sql" />
+    <Build Include="dbo\Tables\EmployeeSBCAdjustment.sql" />
+    <Build Include="dbo\Tables\EmployeeConceptsRelation.sql" />
+    <Build Include="dbo\Views\vwEmployeeConceptsRelation.sql" />
+    <Build Include="dbo\Views\vwEmployeeConceptsRelationDetail.sql" />
+    <Build Include="dbo\Tables\EmployeeConceptsRelationDetail.sql" />
+    <Build Include="dbo\Stored Procedures\UnApplySBCAdjustments.sql" />
+    <Build Include="dbo\Functions\getAccumulatedAmountWithHeld.sql" />
+    <Build Include="dbo\Stored Procedures\AddConceptPayment_FromEmployeeConceptsRelation.sql" />
+    <Build Include="dbo\Stored Procedures\RemoveConceptPayment_FromEmployeeConceptsRelation.sql" />
+    <Build Include="dbo\Stored Procedures\ApplyConceptsRelation.sql" />
+    <Build Include="dbo\Stored Procedures\Report_Fonacot.sql" />
+    <Build Include="dbo\Functions\getDescriptionMonth.sql" />
+    <Build Include="dbo\Stored Procedures\GetRequiredOverdraftDICalculationData.sql" />
+    <Build Include="dbo\Tables\UMI.sql" />
+    <Build Include="dbo\Tables\InfonavitInsurance.sql" />
+    <Build Include="dbo\Views\vwInfonavitInsurance.sql" />
+    <Build Include="dbo\Views\vwUMI.sql" />
+    <Build Include="dbo\Stored Procedures\GetWorkPeriod.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Nomipaq.Database.Azure.publish.xml" />
+    <None Include="SqlSchemaCompare_Dev.scmp" />
+    <None Include="Nomipaq.Database.Azure.Test.publish.xml" />
+    <None Include="Nomipaq.Database.Azure.QAS.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Nomipaq.Database.refactorlog" />
+  </ItemGroup>
+</Project>

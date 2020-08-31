@@ -1,0 +1,34 @@
+﻿
+<script id="employee-social-security-template" type="ractive/text">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="form-group textfield required">
+                <label for="np_emp_txtNSS">NSS</label>
+                <input type="text" class="form-control" id="np_emp_txtNSS" name="np_emp_txtNSS" value="{{NSS}}"
+                       autocomplete="off" maxlength="14" placeholder="0000-00-0000-0" />
+            </div>
+        </div>
+
+        <div class="col-xs-8">
+            <div class="form-group select">
+                <label for="np_drpEmployerRegistration">Registro patronal</label>
+                <select class="form-control" id="np_drpEmployerRegistration" name="np_drpEmployerRegistration" value="{{EmployerRegistrationID}}">
+                    <option value=''>- - -</option>
+                    {{#EmployerRegistrationOptions}}
+                    <option value='{{ID}}'>{{Code}}</option>
+                    {{/EmployerRegistrationOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group textfield">
+                <label for="np_emp_txtUMF">UMF</label>
+                <input type="text" class="form-control" id="np_emp_txtUMF" name="np_emp_txtUMF" value="{{UMF}}"
+                       autocomplete="off" maxlength="50" />
+            </div>
+        </div>
+    </div>
+</script>

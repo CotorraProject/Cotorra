@@ -1,0 +1,111 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="employerfiscalinformationActionTemplate">
+    <div class="text-left">
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+                onclick="UX.Cotorra.EmployerFiscalInformation.UI.OpenSave(this);">
+            <i class="fad fa-pencil"></i>
+        </button>
+        &nbsp;
+        <button class="btn btn-icon-small" data-toggle="tooltip" title="Eliminar" data-placement="bottom"
+                onclick="UX.Cotorra.EmployerFiscalInformation.UI.Delete(this);">
+            <i class="fad fa-trash-alt"></i>
+        </button>
+    </div>
+</script>
+
+
+<!--top actions-->
+<div class="top-actions employerfiscalinformation-actions">
+    <button class="btn btn-primary" id="np_btnAddEmployerFiscalInformation">
+        <i class="far fa-plus-circle"></i>
+    </button>
+</div>
+
+<!--main container-->
+<div class="np-employerfiscalinformation-grid full-kendo-grid">
+</div>
+
+<!--add employerFiscalInformation modal-->
+<script id="employerfiscalinformation_save_template" type="text/ractive">
+
+
+    <div class="row">
+        <div class="form-group textfield disabled">
+            <label for="dwl_rfcinput">RFC</label>
+            <input id="dwl_rfcinput" type="text" class="form-control" disabled value="{{RFC}}">
+            <p></p>
+            {{#if CertificateNumber != '0000000000'}}
+            <table style="font-family: arial, sans-serif; border-collapse: collapse; width: 100%;">
+                <tr>
+                    <th style=" border: 1px solid #dddddd;text-align: left;padding: 8px;">No. Certificado</th>
+                    <th style=" border: 1px solid #dddddd;text-align: left;padding: 8px;">Fecha inicio</th>
+                    <th style=" border: 1px solid #dddddd;text-align: left;padding: 8px;">Fecha Expiración</th>
+                </tr>
+                <tr>
+                    <td style=" border: 1px solid #dddddd;text-align: left;padding: 8px;">{{CertificateNumber}}</td>
+                    <td style=" border: 1px solid #dddddd;text-align: left;padding: 8px;">{{StartDate}}</td>
+                    <td style=" border: 1px solid #dddddd;text-align: left;padding: 8px;">{{ExpirationDate}}</td>
+                </tr>
+            </table>
+            <label>Si lo deseas puedes reemplazar el certificado existente cargando otro.</label>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="row">
+        <label for="img">Selecciona el certificado:</label>
+        <input type="file" id="certificate" name="certificate" accept=".cer">
+        <br />
+        <label for="img">Selecciona la llave:</label>
+        <input type="file" id="key" name="key" accept=".key">
+    </div>
+
+    <div class="row m-t-20">
+        <div class="form-group textfield required">
+            <label for="np_er_txtPassword">Contraseña de clave privada</label>
+            <input id="np_er_txtPassword" name="np_er_txtPassword" type="password" class="form-control" value="{{pfb}}" autocomplete="new-password">
+        </div>
+    </div>
+
+    <div class="row p-t-20 employerfiscalinformation-footer">
+        <div class="col-xs-4 col-xs-offset-2">
+            <button id="np_btnCancelSaveEmployerFiscalInformation" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-4">
+            <button id="np_btnSaveEmployerFiscalInformation" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        //GetRequiredData
+        $.ajax({
+            method: 'GET',
+            url: CotorraAppURL + '/EmployerFiscalInformation/GetRequiredData/',
+            data: {},
+            success: function (data) {
+                UX.Cotorra.EmployerFiscalInformation.ivService = data.IV;
+                UX.Cotorra.EmployerFiscalInformation.saltService = data.Salt;
+                UX.Cotorra.EmployerFiscalInformation.psService = data.Ps;
+            },
+            error: {},
+            complete: {}
+        });
+
+        //GetRFC
+        $.ajax({
+            method: 'GET',
+            url: CotorraAppURL + '/EmployerFiscalInformation/GetRFC/',
+            data: {},
+            success: function (data) {
+                UX.Cotorra.EmployerFiscalInformation.rfc = data;
+            },
+            error: {},
+            complete: {}
+        });
+
+    });
+</script>

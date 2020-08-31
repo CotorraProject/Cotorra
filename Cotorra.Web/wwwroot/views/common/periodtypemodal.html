@@ -1,0 +1,138 @@
+﻿<!--add periodtype modal-->
+
+    <script id="np_periodtype_enable_template" type="text/ractive">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group select required {{#IsDisabled}} disabled {{/if}}">
+                    <label for="ca_periodtype">Periodicidad de pago</label>
+                    <select id="ca_periodtype" name="ca_periodtype" class="form-control" value="{{PeriodType}}" {{#IsDisabled}} disabled="disabled" {{/if}}>
+                        <option value=''>- - -</option>
+                        <option value='Weekly'>Semanal</option>
+                        <option value='BiWeekly'>Quincenal</option>
+                        <option value='Monthly'>Mensual</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-6 {{#if IsEditing}} hidden {{/if}}">
+                <div class="form-group select required">
+                    <label for="ca_currentfiscalyear1">Ejercicio vigente</label>
+                    <select class="form-control" id="ca_currentfiscalyear1" name="ca_currentfiscalyear1" value="{{CurrentFiscalYear}}" required>
+                        {{#CurrentFiscalYearOptions}}
+                        <option value='{{id}}'>{{description}}</option>
+                        {{/CurrentFiscalYearOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row {{#if IsEditing}} hidden {{/if}}">
+            <div class="col-xs-6">
+                {{#if PeriodType == 'Weekly'}}
+                <div class="form-group required select">
+                    <label for="ca_initialdate2">Fecha inicial</label>
+                    <select class="form-control" id="ca_initialdate2" name="ca_initialdate2" value="{{InitialDate}}" required>
+                        <option value='26/12/{{CurrentFiscalYear - 1}}'>26/dic/{{CurrentFiscalYear - 1}}</option>
+                        <option value='27/12/{{CurrentFiscalYear - 1}}'>27/dic/{{CurrentFiscalYear - 1}}</option>
+                        <option value='28/12/{{CurrentFiscalYear - 1}}'>28/dic/{{CurrentFiscalYear - 1}}</option>
+                        <option value='29/12/{{CurrentFiscalYear - 1}}'>29/dic/{{CurrentFiscalYear - 1}}</option>
+                        <option value='30/12/{{CurrentFiscalYear - 1}}'>30/dic/{{CurrentFiscalYear - 1}}</option>
+                        <option value='31/12/{{CurrentFiscalYear - 1}}'>31/dic/{{CurrentFiscalYear - 1}}</option>
+                        <option value='01/01/{{CurrentFiscalYear}}'>01/ene/{{CurrentFiscalYear}}</option>
+                        <option value='02/01/{{CurrentFiscalYear}}'>02/ene/{{CurrentFiscalYear}}</option>
+                        <option value='03/01/{{CurrentFiscalYear}}'>03/ene/{{CurrentFiscalYear}}</option>
+                        <option value='04/01/{{CurrentFiscalYear}}'>04/ene/{{CurrentFiscalYear}}</option>
+                        <option value='05/01/{{CurrentFiscalYear}}'>05/ene/{{CurrentFiscalYear}}</option>
+                        <option value='06/01/{{CurrentFiscalYear}}'>06/ene/{{CurrentFiscalYear}}</option>
+                        <option value='07/01/{{CurrentFiscalYear}}'>07/ene/{{CurrentFiscalYear}}</option>
+                    </select>
+                </div>
+                {{else}}
+                <div class="form-group required textfield disabled">
+                    <label for="ca_initialdate">Fecha inicial</label>
+                    <input type="text" class="form-control" id="ca_initialdate" name="ca_initialdate" value="{{InitialDate}}"
+                           autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" disabled="disabled" required />
+                </div>
+                {{/if}}
+            </div>
+
+            <div class="col-xs-6">
+                <div class="form-group select required">
+                    <label for="ca_currentperiod">Periodo vigente</label>
+                    <select class="form-control" id="ca_currentperiod"
+                            name="ca_currentperiod" value="{{CurrentPeriod}}"
+                            required>
+                        {{#if CurrentPeriodOptions.length == 0}}
+                        <option value=''>- - -</option>
+                        {{/if}}
+                        {{#CurrentPeriodOptions}}
+                        <option value='{{id}}'>({{id}}) - {{description}}</option>
+                        {{/CurrentPeriodOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group textfield required disabled hidden">
+                    <label for="ca_periodtotaldays">Días del periodo</label>
+                    <input type="text" class="form-control" id="ca_periodtotaldays" name="ca_periodtotaldays" value="{{PeriodTotalDays}}" disabled="disabled"
+                           autocomplete="off" maxlength="3" required>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group textfield required disabled hidden">
+                    <label for="ca_paymentdays">Días de pago</label>
+                    <input type="text" class="form-control" id="ca_paymentdays" name="ca_paymentdays" value="{{PaymentDays}}"
+                           autocomplete="off" maxlength="6" required disabled="disabled">
+                </div>
+            </div>
+        </div>
+
+        {{#if PeriodType == 'BiWeekly' || PeriodType == 'Monthly' }}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group select">
+                    {{#if PeriodType == 'BiWeekly'}}
+                    <label for="np_pt_drpFortnightPaymentDays">Días pagados en quincena de 16 días o febrero</label>
+                    {{/if}}
+                    {{#if PeriodType == 'Monthly'}}
+                    <label for="np_pt_drpFortnightPaymentDays">Días pagados en meses de 31 días o febrero</label>
+                    {{/if}}
+                    <select class="form-control" id="np_pt_drpFortnightPaymentDays"
+                            name="np_pt_drpFortnightPaymentDays" value="{{FortnightPaymentDays}}"
+                            required>
+                        {{#FortnightPaymentDaysOptions}}
+                        <option value='{{id}}'>{{description}}{{#if id==1}} ({{PaymentDays}} días){{/if}}</option>
+                        {{/FortnightPaymentDaysOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        {{#if PeriodType == 'Weekly' }}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group select">
+                    <label for="np_pt_drpWeeklySeventehDay">Día del séptimo día (descanso)</label>
+                    <select class="form-control" id="np_pt_drpWeeklySeventhDay"
+                            name="np_pt_drpFortnightPaymentDays" value="{{WeeklySeventhDay}}"
+                            required>
+                        {{#WeeklySeventhDayOptions}}
+                        <option value='{{id}}'>{{description}}</option>
+                        {{/WeeklySeventhDayOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if !IsHidden}}
+        <div class="row m-t-10">
+            <div class="col-xs-8">
+                <h5><b>NOTA:</b> Si tu empresa utiliza mas de un tipo de periodo, no te preocupes, puedes configurar mas tipos en la sección de catálogos</h5>
+            </div>
+        </div>
+        {{/if}}
+    </script>

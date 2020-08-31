@@ -1,0 +1,84 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="monthlyincometaxActionTemplate">
+    <!--<div class="text-left">
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+                onclick="UX.Cotorra.MonthlyIncomeTax.UI.OpenSave(this);">
+            <i class="fad fa-pencil"></i>
+        </button>
+        &nbsp;
+        <button class="btn btn-icon-small" data-toggle="tooltip" title="Eliminar" data-placement="bottom"
+                onclick="UX.Cotorra.MonthlyIncomeTax.UI.Delete(this);">
+            <i class="fad fa-trash-alt"></i>
+        </button>
+    </div>-->
+</script>
+
+<!--top actions-->
+<div class="top-actions">
+    <!--<button class="btn btn-primary" id="np_btnAddRecord">
+        Agregar ISR mensual
+        <i class="zmdi zmdi-plus"></i>
+    </button>-->
+</div>
+
+<!--top filters-->
+<div class="top-filters">
+    <div class="top-action-filter" style="width:250px;">
+        <div class="form-group select">
+            <label for="np_fc_drpValidity">En vigor</label>
+            <select id="np_fc_drpValidity" name="np_fc_drpValidity" class="form-control" value="">
+            </select>
+        </div>
+    </div>
+</div>
+
+<!--main container-->
+<div class="np-monthlyincometax-grid full-kendo-grid">
+</div>
+
+<!--add/update modal-->
+<script id="monthlyincometax_save_template" type="text/ractive">
+
+    <form id="np_cat_saverecord">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required currency">
+                    <label for="np_LowerLimit">Límite inferior</label>
+                    <input type="text" class="form-control currency-input" id="np_LowerLimit" name="np_LowerLimit" value="{{LowerLimit}}"
+                           autocomplete="off" maxlength="30" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required currency">
+                    <label for="np_FixedFee">Cuota fija</label>
+                    <input type="text" class="form-control currency-input" id="np_FixedFee" name="np_FixedFee" value="{{FixedFee}}"
+                           autocomplete="off" maxlength="30" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_Rate">Tasa</label>
+                    <input type="text" class="form-control" id="np_Rate" name="np_Rate" value="{{Rate}}"
+                           autocomplete="off" maxlength="30" required>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="row p-t-20">
+        <div class="col-xs-6">
+            <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-6">
+            <button id="np_btnSaveRecord" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+
+</script>

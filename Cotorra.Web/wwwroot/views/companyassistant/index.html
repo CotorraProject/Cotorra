@@ -1,0 +1,414 @@
+﻿
+<div class="company-assistant" style="z-index:999; background-color:rgba(0,0,0,0.26);">
+    <div class="company-assistant-wrapper">
+        <div class="company-assistant-cell">
+
+        </div>
+    </div>
+</div>
+
+<script id="companyassistant-template" type="text/ractive">
+
+    <style>
+
+        .company-assistant-modal {
+            height: 520px !important;
+            max-height: 520px !important;
+        }
+
+        .cs-right-content {
+            padding-left: 25px !important;
+            padding-top: 20px !important;
+            padding-bottom: 0px !important;
+        }
+    </style>
+
+    <div class="company-assistant-modal card z-depth-2">
+
+        <div class="cs-title">
+            <h3>Asistente de creación de empresa</h3>
+            <a href="#" id="btnCloseCompanyAssistantCross" class="{{ step == 99 ? 'hidden' : '' }}">
+                <span>Cerrar</span><i class="zmdi zmdi-close"></i>
+            </a>
+        </div>
+
+        <form class="cs-body">
+
+            <!--New company creation-->
+            <div class="cs-newcompany" intro='fade:{"delay":50,"duration":200}' outro='fade:{"duration":0}'>
+                <div class="cs-left-menu">
+                    <div class="{{ step == 1 ? "selected" : ""}}">
+                        Proporciona los datos de tu empresa
+                    </div>
+                    <div class="{{ step == 2 ? "selected" : ""}}">
+                        Registro patronal
+                    </div>
+                    <div class="{{ step == 3 ? "selected" : ""}}">
+                        Configuración de periodo
+                    </div>
+                    <div class="{{ step == 4 ? "selected" : ""}}">
+                        Cuéntanos sobre tu empresa
+                    </div>
+                    <div class="{{ step == 99 ? "selected" : ""}}">
+                        Finalización del asistente
+                    </div>
+                </div>
+                <div class="cs-right-content">
+
+                    <!--STEP 1-->
+                    <div class="{{#if step != 1}} hidden {{/if}}" intro='fade:{"delay":50,"duration":200}' outro='fade:{"duration":0}'>
+
+                        <h3>Datos de tu empresa</h3>
+
+                        <div id="ca_ciecvalidationform">
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group select required">
+                                        <label for="ca_license">Licencia</label>
+                                        <select id="ca_license" name="ca_license" class="form-control" value="{{LicenseServiceID}}">
+                                            {{#Licenses}}
+                                            <option value='{{LicenseServiceID}}'>{{LicenseOwnerInfo}}</option>
+                                            {{/Licenses}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group textfield required">
+                                        <label for="ca_socialreason">Nombre o raz&oacute;n social</label>
+                                        <input type="text" class="form-control" id="ca_socialreason" value="{{CompanySocialReason}}" placeholder="e.g. Mi empresa S.A de C.V." name="ca_socialreason" autocomplete="off"
+                                               maxlength="150" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="form-group textfield required">
+                                        <label for="ca_rfc">RFC</label>
+                                        <input type="text" name="ca_rfc" class="form-control" id="ca_rfc" value="{{CompanyRFC}}" placeholder="e.g. MEBP010101AB1" autocomplete="off" maxlength="13" />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="form-group textfield required {{#if IsPerson == false }} disabled {{/if}}">
+                                        <label for="ca_curp">CURP</label>
+                                        <input type="text" class="form-control" id="ca_curp" value="{{CompanyCURP}}" name="ca_curp" autocomplete="off"
+                                               maxlength="18" required {{#if IsPerson == false }} disabled="disabled" {{/if}} />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="form-group select required">
+                                        <label for="ca_salaryzone">Zona de salario</label>
+                                        <select id="ca_salaryzone" name="ca_salaryzone" class="form-control" value="{{SalaryZone}}">
+                                            <option value='1'>Resto del país</option>
+                                            <!--<option value='B' selected>B</option>-->
+                                            <option value='3'>Zona libre de la frontera norte</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group select required {{#if IsPerson == false && IsBusiness == false}} disabled {{/if}}">
+                                        <label for="ca_fiscalregime">Régimen fiscal</label>
+                                        <select id="ca_fiscalregime" name="ca_fiscalregime" class="form-control" value="{{FiscalRegime}}" required>
+                                            <option value='' selected>Selecciona una opcion</option>
+                                            {{#FiscalRegimesOptions}}
+                                            {{#if IsPerson == true && IsPhysicalPerson == true}}
+                                            <option value='{{FiscalRegime}}'>{{Description}}</option>
+                                            {{elseif IsBusiness == true && IsMoralPerson == true}}
+                                            <option value='{{FiscalRegime}}'>{{Description}}</option>
+                                            {{/if}}
+                                            {{/FiscalRegimesOptions}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield required">
+                                        <label for="ca_zipcode">Código postal</label>
+                                        <input type="text" class="form-control" id="ca_zipcode" name="ca_zipcode" value="{{ZipCode}}"
+                                               autocomplete="off" maxlength="6" required title="Ingresa tu código postal y presiona enter para buscarlo"
+                                               style="width:calc(100% - 40px); display:inline-block;">
+                                        <a id="np_btnSearchZipCode" class="btn btn-white"
+                                           title="Buscar código postal"
+                                           style="padding: 5px; margin-top: -3px; padding-left: 10px; padding-right: 10px; margin-left: -5px; border: solid 1px rgba(0,0,0,0.16);">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group select required">
+                                        <label for="ca_federalentity">Entidad federativa</label>
+                                        <select class="form-control" id="ca_federalentity" name="ca_federalentity" value="{{FederalEntity}}" required>
+                                            {{#FederalEntityOptions}}
+                                            <option value='{{id}}'>{{description}}</option>
+                                            {{/FederalEntityOptions}}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="form-group select">
+                                        <label for="ca_municipality">Municipio/Localidad</label>
+                                        <select class="form-control" id="ca_municipality" name="ca_municipality" value="{{Municipality}}" required>
+                                            {{#MunicipalityOptions}}
+                                            <option value='{{id}}'>{{description}}</option>
+                                            {{/MunicipalityOptions}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row hidden">
+                                <div class="col-xs-7">
+                                    <div id="ca_currency_div" class="form-group select2 required ">
+                                        <label for="ca_currency">Moneda base a utilizar</label>
+                                        <select id="ca_currency" name="ca_currency" class="form-control" value="{{CurrencyID}}"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row hidden">
+                                <div class="form-group textfield required">
+                                    <label for="ca_nondeductiblefactor">Factor no deducible por ingresos exentos</label>
+                                    <input id="ca_nondeductiblefactor" name="ca_nondeductiblefactor" value="{{NonDeductibleFactor}}"
+                                           type="text" class="form-control" autocomplete="off" maxlength="4" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!--STEP 2-->
+                    <div class="np-assis-employerregistration {{#if step != 2}} hidden {{/if}}" intro='fade:{"delay":50,"duration":200}' outro='fade:{"duration":0}'>
+
+                        <h3>Registro patronal</h3>
+
+                        <div class="col-xs-12 m-b-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="ca_hasimss" name="ca_hasimss"
+                                           type="checkbox" checked="{{HasIMSS}}">
+                                    <i class="input-helper"></i>
+                                    Mi empresa cuenta con seguridad social
+                                </label>
+                            </div>
+                        </div>
+
+                        {{>employerregistration_save_template}}
+
+                    </div>
+
+                    <!--STEP 3-->
+                    <div class="{{#if step != 3}} hidden {{/if}} np-assis-employerregistration" intro='fade:{"delay":50,"duration":200}' outro='fade:{"duration":0}'>
+                        <h3>Configuración de periodo</h3>
+
+                        <div id="ca_configurationform" style="max-width:450px;"> 
+
+                            {{>np_periodtype_enable_template}}
+
+                        </div>
+
+                    </div>
+
+                    <!--STEP 4-->
+                    <div class="{{#if step != 4}} hidden {{/if}}" intro='fade:{"delay":50,"duration":200}' outro='fade:{"duration":0}'>
+                        <h3>Acerca de tu empresa</h3>
+
+                        <style>
+                            #ca_configurationform svg {
+                                position: absolute;
+                                position: absolute;
+                                top: 26px;
+                                left: 12px;
+                                font-size: 18px;
+                            }
+
+                            #ca_configurationform .assis-website svg {
+                                color: rgba(3,155,229,1);
+                            }
+
+                            #ca_configurationform .assis-facebook svg {
+                                left: 15px;
+                                color: rgba(57,73,171,1);
+                            }
+
+                            #ca_configurationform .assis-instagram svg {
+                                color: rgba(194,24,91,1);
+                            }
+
+                            #ca_configurationform .assis-website input,
+                            #ca_configurationform .assis-facebook input,
+                            #ca_configurationform .assis-instagram input {
+                                padding-left: 30px;
+                            }
+                        </style>
+
+                        <div id="ca_configurationform">
+                            <div class="row" style=" width: 55%; float: left;">
+                                <div class="col-xs-12">
+                                    <style>
+                                        textarea {
+                                            border: solid 1px rgba(0,0,0,0.2) !important;
+                                            background-color: #fff;
+                                            overflow: hidden;
+                                            border: solid 1px #c8c8c8;
+                                            color: #323232;
+                                            border-radius: 0;
+                                            font-size: 13px;
+                                            font-family: "Open Sans";
+                                            margin: 0;
+                                            width: 100%;
+                                            height: 95px !important;
+                                            transition: all 180ms ease-in;
+                                            border-radius: 2px;
+                                            padding: 7px !important;
+                                            overflow-y: scroll;
+                                        }
+                                    </style>
+                                    <div class="form-group textfield">
+                                        <label for="ca_companyabout">Cuéntanos un poco sobre tu empresa</label>
+                                        <textarea name="ca_companyabout" class="form-control" id="ca_companyabout"
+                                                  value="{{CompanyInformation}}" autocomplete="off" maxlength="150"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <div class="form-group textfield">
+                                        <label for="ca_commercialname">Nombre comercial</label>
+                                        <input type="text" class="form-control" id="ca_commercialname" name="ca_commercialname" value="{{ComercialName}}"
+                                               autocomplete="off" maxlength="100" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style=" width: 45%; float: right;">
+                                <div class="col-xs-12">
+                                    <div class="form-group select required">
+                                        <label for="ca_heading">Giro</label>
+                                        <select id="ca_heading" name="ca_heading" class="form-control" value="{{CompanyBusinessSector}}" required>
+                                            <option value=''>- - -</option>
+                                            <option value='1'>Micro empresa</option>
+                                            <option value='2'>Comercio</option>
+                                            <option value='3'>Servicios</option>
+                                            <option value='4'>Manufactura</option>
+                                            <option value='4'>PyME</option>
+                                            <option value='0'>Otros</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group textfield">
+                                        <label for="ca_foundationdate">Fecha de fundación</label>
+                                        <input type="text" class="form-control" id="ca_foundationdate" name="ca_foundationdate" value="{{CompanyCreationDate}}"
+                                               autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group select">
+                                        <label for="ca_ambit">Tu empresa tiene ámbito</label>
+                                        <select id="ca_ambit" name="ca_ambit" class="form-control" value="{{CompanyScope}}">
+                                            <option value=''>- - -</option>
+                                            <option value='1'>Local</option>
+                                            <option value='2'>Regional</option>
+                                            <option value='3'>Nacional</option>
+                                            <option value='4'>Multinacional</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="background-color: rgba(0,0,0,0.05); clear: both; padding: 0px; padding-top: 5px; padding-left: 5px; padding-right: 5px;">
+                                <div class="col-xs-4 assis-website">
+                                    <div class="form-group textfield">
+                                        <label for="ca_website">Website</label>
+                                        <input type="text" class="form-control" id="ca_website" name="ca_website" value="{{CompanyWebSite}}"
+                                               autocomplete="off" maxlength="100" />
+                                        <i class="far fa-globe"></i>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <div class="form-group textfield assis-facebook">
+                                        <label for="ca_facebook">Facebook</label>
+                                        <input type="text" class="form-control" id="ca_facebook" name="ca_facebook" value="{{Facebook}}"
+                                               autocomplete="off" maxlength="100" />
+                                        <i class="fab fa-facebook-f"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-4">
+                                    <div class="form-group textfield assis-instagram">
+                                        <label for="ca_instagram">Instagram</label>
+                                        <input type="text" class="form-control" id="ca_instagram" name="ca_instagram" value="{{Instagram}}"
+                                               autocomplete="off" maxlength="100" />
+                                        <i class="fab fa-instagram"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{#if step == 99}}
+                    <div intro='fade:{"delay":50,"duration":200}' outro='fade:{"duration":0}'>
+                        <div class="company-assistant-done">
+                            <div>
+                                <label class="company-done-title">
+                                    ¡TU EMPRESA SE HA CREADO EXITOSAMENTE!
+                                </label>
+                            </div>
+                            <div>
+                                <i class="zmdi zmdi-check-circle"></i>
+                            </div>
+                            <div>
+                                <label class="company-done-subtitle">
+                                    A partir de este momento ya puedes hacer uso de la empresa <b><u>{{SocialReason}}</u></b><br />
+                                    <b>IMPORTANTE:</b> Existen varios procesos que sigues trabajando en segundo plano; recarga la aplicación si al consultar alguno de tus catálogos no se muestra correctamente.
+                                    Para continuar da clic en finalizar.
+                                </label>
+                            </div>
+                            <div>
+                                <img src="/AssetsV2/img/crear-empresa-finalizado.svg" />
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+
+        </form>
+
+        <div class="cs-footer" style="{{ step > 0 ? 'display:block;' : 'display:none;' }}">
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <a id="btnCompanyAssistantPrev" class="btn btn-white" style="{{ step == 99 || step == 1 ? 'display:none;' : '' }} " formnovalidate>
+                        <i class="zmdi zmdi-chevron-left"></i>&nbsp;&nbsp;
+                        Regresar
+                    </a>
+
+                    {{#if step < 99}}
+                    <button id="btnCompanyAssistantNext" class="btn btn-primary btnCompanyAssistantNext">
+                        Siguiente&nbsp;&nbsp;<i class="zmdi zmdi-chevron-right"></i>
+                    </button>
+                    {{else}}
+                    <a href="#" id="btnCompanyAssistantFinish" class="btn btn-primary" formnovalidate>
+                        Finalizar
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</script>

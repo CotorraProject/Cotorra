@@ -1,0 +1,44 @@
+﻿
+<script id="employee-jobposition-template" type="ractive/text">
+    <div class="row">
+        <div class="col-xs-5">
+            <div class="form-group select required">
+                <label for="np_drpDepartment">Departamento</label>
+                <select class="form-control" id="np_drpDepartment" name="np_drpDepartment" value="{{DepartmentID}}">
+                    <option value=''>- - -</option>
+                    {{#DepartmentsOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/DepartmentsOptions}}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-7">
+            <div class="form-group select required">
+                <label for="np_drpJobPosition">Puesto</label>
+                <select class="form-control" id="np_drpJobPosition" name="np_drpJobPosition" value="{{JobPositionID}}">
+                    <option value=''>- - -</option>
+                    {{#JobPositionsOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/JobPositionsOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group select  ">
+                <label for="np_drpRegimeType">Líder</label>
+                <select class="form-control" id="np_drpLider" name="np_drpLider" value="{{ImmediateLeaderEmployeeID}}">
+                    <option value=''>Ninguno</option>
+                    {{#ImmediateLeaderOptions}}
+                    {{#if ~/ID != ID }}}
+                    <option value='{{ID}}'>{{Code}} - {{FullName}}</option>
+                    {{/if}}
+                    {{/ImmediateLeaderOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+</script>

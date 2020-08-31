@@ -1,0 +1,353 @@
+﻿<!--concepts grid-->
+<script type="text/x-kendo-template" id="settlementApplyTemplate">
+    <div class="text-center">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" #if(Apply){# checked #}# onclick="UX.Cotorra.SettlementProcess.UI.ApplyConcept(this);" />
+                <i class="input-helper"></i>
+            </label>
+        </div>
+    </div>
+</script>
+
+<script type="text/x-kendo-template" id="settlementDaysTemplate">
+    <div class="text-right">
+        <a class="od-edit-amount"
+           title="Importe capturado por el usuario"
+           href="\\#"
+           onfocus="UX.Cotorra.SettlementProcess.UI.EditDays(this);"
+           onclick="UX.Cotorra.SettlementProcess.UI.EditDays(this);">
+            #=  TotalDays #
+        </a>
+    </div>
+</script>
+
+<!--settlement modal-->
+<script id="np-settlement-process-modal-template" type="text/ractive">
+    <div id="np-settlement-process-modal">
+        <div class="generic-catalog" style="height:60px !important;">
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-actions">
+                    <div class="top-action-filter flex">
+                        <i class="fad fa-user-circle"></i>
+                        <div class="title">ID {{EmployeeCode}}</div>
+                        <div class="description">{{EmployeeName}}</div>
+                    </div>
+                    <div class="top-action-filter flex">
+                        <i class="fad fa-scrubber"></i>
+                        <div class="title">Puesto</div>
+                        <div class="description">{{EmployeeJobPositionName}}</div>
+                    </div>
+                    <div class="top-action-filter flex">
+                        <i class="fad fa-badge-dollar"></i>
+                        <div class="title">Sueldo</div>
+                        <div class="description">{{EmployeeSalary}}</div>
+                    </div>
+                    <div class="top-action-filter flex">
+                        <i class="fad fa-calendar-week"></i>
+                        <div class="title">Fecha de ingreso</div>
+                        <div class="description">{{EmployeeEntryDateFormated}}</div>
+                    </div>
+                    <div class="top-actions">
+                        {{#if  HasBeenSettle === false}}
+                        <button class="btn btn-primary" hidden id="np_btnCalculateSettlement" title="Calcular finiquito"
+                                onclick="UX.Cotorra.SettlementProcess.UI.EventCalculation();">
+                            <i class="fal fa-calculator-alt"></i>
+                        </button>
+                        {{/if}}
+                        {{#if OverdraftID !== '' && HasBeenSettle === false}}
+                        <button class="btn btn-primary btn-red" id="np_btnAppllySettlement" title="Aplicar finiquito"
+                                onclick="UX.Cotorra.SettlementProcess.UI.AppllySettlementOrCheckConcepts(); ">
+                            <i class="far fa-sad-cry"></i>
+                        </button>
+                        {{/if}}
+                        {{#if OverdraftID !== ''}}
+                        <button class="btn btn-primary" id="np_btnGenerateSettlementLetter" title="Generar carta finiquito"
+                                onclick="UX.Cotorra.SettlementProcess.UI.DownloadSettlementLetter(); ">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </button>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="generic-catalog" style="height:400px;">
+            <div class="generic-catalog-menu">
+                <div class="group-title">
+                </div>
+                <ul id="catalogs-options"></ul>
+            </div>
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-data" style="top: 0px !important; height:100%;">
+                    <div class="catalog-content">
+                        <!--configuration parameters-->
+                        <div class="col-xs-6 p-r-15 p-t-20" style="height:100%; background-color:rgba(197,202,233,0.16)">
+                            <h4 class="sub-title">
+                                Configuración del cálculo del finiquito
+                            </h4>
+                            <div class="row" style="padding-top:20px">
+                                <div class="form-group textfield col-xs-3 text-right">
+                                    <label for="np_sett_baseSalary">Salario base finiquito</label>
+                                </div>
+                                <div class="form-group textfield required col-xs-3">
+                                    <input type="text" class="form-control" id="np_sett_baseSalary" name="np_sett_baseSalary" value="{{SettlementBaseSalary}}"
+                                           autocomplete="off" maxlength="14" required>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield text-right">
+                                        <label for="np_sett_txtEntryDate">Fecha baja finiquito *</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield required">
+                                        <input type="text" class="form-control" id="np_sett_txtEntryDate" name="np_sett_txtEntryDate" value="{{SettlementEmployeeSeparationDate}}"
+                                               autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield text-right disabled">
+                                        <label for="np_sett_txtAntiquity">Antigüedad</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield disabled">
+                                        <input type="text" class="form-control" id="np_sett_txtAntiquity" name="np_sett_txtAntiquity" value="{{Seniority}}"
+                                               autocomplete="off" maxlength="10" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield text-right disabled">
+                                        <label for="np_sett_txtDaysPassedInYear">Días transc. en el año</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield disabled ">
+                                        <input type="text" class="form-control" id="np_sett_txtDaysPassedInYear" name="np_sett_txtDaysPassedInYear" value="{{DaysPassedInYear}}"
+                                               autocomplete="off" maxlength="10" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield text-right disabled">
+                                        <label for="np_sett_txtSMZonaEmp">S.M. Zona Emp.</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield disabled ">
+                                        <input type="text" class="form-control" id="np_sett_txtSMZonaEmp" name="np_sett_txtSMZonaEmp" value="{{MinimumSalaryEmpoyeeZone}}"
+                                               autocomplete="off" maxlength="10" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield text-right disabled">
+                                        <label for="np_sett_txtSMDF">S.M.D.F.</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div class="form-group textfield disabled ">
+                                        <input type="text" class="form-control" id="np_sett_txtSMDF" name="np_sett_txtSMDF" value="{{SMDF}}"
+                                               autocomplete="off" maxlength="10" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <div class="form-group  text-right select">
+                                        <label for="np_sett_drpSettlementCause">Causa del finiquito</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-9">
+                                    <div class="form-group select">
+                                        <select class="form-control" id="np_sett_drpSettlementCause" name="np_sett_drpSettlementCause" value="{{SettlementCause}}" required>
+                                            {{#SetllementCauses}}
+                                            <option value='{{value}}'>{{Name}}</option>
+                                            {{/SetllementCauses}}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 class="sub-title">
+                                Criterios fiscales para el calculo de finiquito
+                            </h4>
+                            <div class="row">
+                                <div class="col-xs-3 m-t-15">
+                                    <div class="form-group textfield ">
+                                        <label for="np_sett_txtISRAntiquity">Años completos ISR</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 m-t-10">
+                                    <div class="form-group textfield ">
+                                        <input type="text" class="form-control" id="np_sett_txtISRAntiquity" name="np_sett_txtISRAntiquity" value="{{CompleteISRYears}}"
+                                               autocomplete="off" maxlength="10" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h4 style="
+                                padding-left: 5px;
+                                padding-right: 0;
+                                font-family: 'SF Display';
+                                font-size: 11.5px;
+                                text-align: left;
+                                margin: 20px auto;
+                                margin-bottom: 10px;
+                                color: rgba(0,0,0,1);
+                                font-weight: 700;">
+                                    Asegurate de capturar las vacaciones pendientes y la prima vacacional
+                                </h4>
+                            </div>
+                        </div>
+
+                        <!--grid and more-->
+                        <div class="col-xs-6 p-t-20 p-l-15 p-r-10" style="height:100%;  background-color:rgba(197,202,233,0.06)">
+                            <h4 class="sub-title">
+                                Definición de conceptos en el finiquito
+                            </h4>
+                            <div class="np-settlement-grid full-kendo-grid"
+                                 style="max-height:350px; position:absolute; left:0px; bottom:0px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<!-- apply settlement modal-->
+<script id="np-settlement-process-modal-apply-template" type="text/ractive">
+    <div id="np-settlement-process-modal-apply">
+        <div class="generic-catalog" style="height:95px !important;">
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-actions">
+                    <div class="top-action-filter flex">
+                        <div class="description">De acuerdo a las especificaciones de la Guía de llenado, los pagos por separación con clave SAT 022, 023 y 025 deberán estar en otro CFDI clasificado con el tipo de régimen 13.</div>
+                        <div class="description">Por lo anterior, se ha dividió el finiquito en dos recibos:</div>
+                        <br />
+                        <ul>
+                            <li><div class="description">Finiquito (Ordinario), los pagos que se identifican como ordinarios según su clave SAT.</div></li>
+                            <li><div class="description">Finiquito (Indemnización), los pagos por separación o indemnización según su clave SAT.</div></li>
+                        </ul>
+                    </div>
+                    <div class="top-actions">
+                        {{#if ShowApply !== false}}
+                        <button class="btn btn-primary btn-red" id="np_btnAppllySettlement" title="Aplicar finiquito"
+                                onclick="UX.Cotorra.SettlementProcess.UI.SaveConceptsModificationsAndApplySettlement(); ">
+                            <i class="far fa-sad-cry"></i>
+                        </button>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="generic-catalog" style="height:420px;">
+            <div class="generic-catalog-menu">
+                <div class="group-title">
+                </div>
+                <ul id="catalogs-options"></ul>
+            </div>
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-data" style="top: 0px !important; height:100%;">
+                    <div class="catalog-content">
+                        <div class="row">
+                            <div>
+                                <div style="float:left; width:46% ; height:280px">
+                                    <div class="sub-title">
+                                        Finiquito (ordinario)
+                                        <a href="#"></a>
+                                    </div>
+                                    <div class="np-settlement-apply-ordinary-grid full-kendo-grid"></div>
+                                </div>
+                                <div style="float:left; width:8%; height:280px">
+                                    <div class="row">
+                                        <button class="btn btn-primary" style="margin:50px 12px 12px 12px;" id="np_moveConceptRight" title="Mover todo a la derecha"
+                                                onclick="UX.Cotorra.SettlementProcess.UI.MoveConceptSettlement('allRight');">
+                                            <i class="fas fa-angle-double-right"></i>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <button class="btn btn-primary" style="margin:12px" id="np_moveAllConceptRight" title="Mover a la derecha"
+                                                onclick="UX.Cotorra.SettlementProcess.UI.MoveConceptSettlement('right');">
+                                            <i class="fas fa-angle-right"></i>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <button class="btn btn-primary" style="margin:12px" id="np_moveConceptLeft" title="Mover a la izquierda"
+                                                onclick="UX.Cotorra.SettlementProcess.UI.MoveConceptSettlement('left');">
+                                            <i class="fas fa-angle-left"></i>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <button class="btn btn-primary" style="margin:12px" id="np_moveAllConceptLeft" title="Mover todo a la izquierda"
+                                                onclick="UX.Cotorra.SettlementProcess.UI.MoveConceptSettlement('allLeft');">
+                                            <i class="fas fa-angle-double-left"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="float:left; width:46%; height:280px">
+                                    <div class="sub-title">
+                                        Finiquito (indemnización)
+                                        <a href="#"></a>
+                                    </div>
+                                    <div class="np-settlement-apply-indemnization-grid full-kendo-grid"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:25px">
+                            <div style="float:left; width:46%; height:60px;  background-color:rgba(100,202,233,.16);  text-align:right; padding-right:15px;">
+                                <div class="row" style="margin-top:15px;">
+                                    <div class="col-xs-6">
+                                        <span>Total percepciones:&nbsp;</span>
+                                        <label>{{OrdinaryPerceptions}}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span>Total deducciones:&nbsp;</span>
+                                        <label>{{OrdinaryDeductions}}</label>
+                                    </div>
+                                </div>
+                                <div class="row" style="text-align:right;">
+                                    <div class="col-xs-12">
+                                        <span>Neto:&nbsp;</span>
+                                        <label>{{OrdinaryNet}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="float:left; width:8%; height:60px; background-color:rgba(100,202,233,.16);">
+                            </div>
+
+                            <div style="float:left; width:46%; height:60px; background-color:rgba(100,202,233,.16); text-align:right; padding-right:15px;">
+                                <div class="row" style="margin-top:15px;">
+                                    <div class="col-xs-6">
+                                        <span>Total percepciones:&nbsp;</span>
+                                        <label>{{IndemnizationPerceptions}}</label>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <span>Total deducciones:&nbsp;</span>
+                                        <label>{{IndemnizationDeductions}}</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <span>Neto:&nbsp;</span>
+                                        <label>{{IndemnizationNet}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="description" style="padding: 15px 0">
+                                    Solo se permite mover los movimientos de deducciones de un recibo a otro, excepto: Deducciones marcadas como especie, 101 ISR finiquito, Conceptos con acumulado
+                                    "Subsidio al empleo acreditado" y Conceptos con clave agrupadora OP002 y OP008.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

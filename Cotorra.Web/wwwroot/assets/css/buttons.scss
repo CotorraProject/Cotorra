@@ -1,0 +1,50 @@
+﻿
+/*Buttons*/
+
+.btn {
+    font-family:'Proxima Soft' !important;
+    font-weight:300 !important;
+    border-radius:5px;
+    font-size:12.5px;
+}
+
+.btn.btn-amber {
+    border: solid 1px rgba(255,160,0,1) !important;
+    background-color: rgba(255,143,0,1) !important;
+}
+
+.btn.btn-red {
+    border: solid 1px rgba(239,154,154,1) !important;
+    background-color: rgba(229,115,115,1) !important;
+    color: white !important;
+}
+
+.btn.btn-lime {
+    border: solid 1px rgba(156,204,101,1) !important;
+    background-color: rgba(156,204,101,1) !important;
+    color: white !important;
+}
+
+.btn.btn-cyan {
+    border: solid 1px rgba(38,198,218,1) !important;
+    background-color: rgba(38,198,218,1) !important;
+    color: white !important;
+}
+
+button.btn {
+    
+    font-weight: 500;
+    letter-spacing: 0.15px;
+    font-size: 13px;
+
+    > i,
+    > svg {
+        float: left !important;
+        font-size: 15px;
+        margin-right: 5px;
+        margin-top: 1px;
+    }
+
+    &.btn-primary {
+    }
+}

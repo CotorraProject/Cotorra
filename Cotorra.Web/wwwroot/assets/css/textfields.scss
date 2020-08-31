@@ -1,0 +1,343 @@
+﻿
+
+/*Textfield regular*/
+$textfield-font-family: 'Proxima Soft';
+$textfieldlabel-font-family: 'Proxima Soft';
+$textfield-border-color: rgba(200,200,200,0.00);
+$textfield-color: rgb(67,83,116);
+$textfieldlabel-color: rgb(151,184,217);
+$textfield-boxshadow-color: rgba(88,102,128,0.26);
+
+/*Textfield hover*/
+$textfield-border-color-hover: rgba(150,150,150,1);
+$textfieldlabel-color-hover: rgba(50,50,50,1);
+
+/*Textfield focus*/
+$textfield-border-color-focus: rgba(103,148,245,0.5);
+$textfield-color-focus: rgba(103,148,245,1);
+$textfieldlabel-color-focus: rgba(0,123,255,1);
+
+/*Textfield disabled*/
+$textfield-border-color-disabled: rgba(200,200,200,1);
+$textfield-color-disables: rgba(50,50,50,1);
+
+/*Transition*/
+$transition: all 180ms ease-in;
+
+.select {
+    display:none;
+}
+
+.tags {
+
+    tags {
+        background-color: white;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: solid 1px $textfield-border-color;        
+        border-radius: 0px;
+        font-size: 13px;
+        margin: 0px;
+        min-height: 30px;
+        width: 100%;
+        transition: $transition;
+        border-radius: 2px;
+        padding: 0px;
+        padding-top: 5px;
+        padding-left: 7px;
+        padding-right: 7px;
+
+        > div {
+            font-family: $textfield-font-family !important;
+            color: $textfield-color;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        &.tagify--focus {
+            border-color: $textfield-border-color-focus;
+            transition: $transition !important;
+            box-shadow: 0px 0px 15px 8px rgba(103,148,245,0.16) !important;
+            background-color: rgba(0,0,0,0);
+            background-color: white;
+        }
+
+        tag {
+            margin: 0px;
+            margin-right: 4px;
+
+
+            > x {
+                top: 10px;
+            }
+
+            > div {
+                font-family: $textfield-font-family !important;
+                padding-top: 1px;
+                padding-bottom: 1px;
+                padding-left: 0px;
+                margin: 0px;
+                /*background-color: #75B6FC;*/
+                background-color: rgba(0,0,0,0.08);
+                /*border: dotted 1px rgba(0,0,0,0.26);*/
+                border-radius: 0px;
+                margin-bottom: 4px;
+                margin-top: -1px;
+
+                &:before {
+                    box-shadow: none !important;
+                }
+            }
+        }
+
+        tag.non-text-tag {
+            pointer-events: none !important;
+
+            > div {
+                background-color: rgba(117,182,252,0.86);
+                color: white;
+                border-radius: 0px;
+                /*border: dotted 1px rgba(0,0,0,0.16);*/
+            }
+
+            x {
+                pointer-events: all !important;
+            }
+        }
+
+        tag.operation-tag {
+            pointer-events: none !important;
+
+            > div {
+                background-color: darkorange;
+                color: white;
+                border-radius: 0px;
+                /*border: dotted 1px rgba(0,0,0,0.16);*/
+            }
+
+            x {
+                pointer-events: all !important;
+            }
+        }
+
+        tag.text-tag {
+            pointer-events: none !important;
+
+            x {
+                pointer-events: all !important;
+            }
+        }
+
+        tag {
+            pointer-events: none !important;
+
+            x {
+                pointer-events: all !important;
+            }
+        }
+    }
+
+    label {
+        font-family: $textfieldlabel-font-family;
+        color: $textfieldlabel-color;
+        font-weight: 600;
+        font-size: 11px;
+        letter-spacing: 0.2px;
+        margin: 0px;
+        cursor: pointer;
+        margin-bottom: 3px;
+        transition: $transition;
+    }
+
+    &:hover label {
+        color: $textfieldlabel-color-hover;
+        transition: $transition;
+    }
+}
+
+.textfield,
+.textfield-icon {
+
+    input[type='text'].form-control,
+    input[type='number'].form-control,
+    input[type='password'].form-control,
+    input[type='tel'].form-control {
+        background-color: white;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: solid 1px $textfield-border-color;
+        color: $textfield-color;
+        padding: 7px;
+        padding-top: 22px;
+        padding-left: 9px;
+        padding-bottom:7px;
+        border-radius: 2px !important;
+        font-size: 12.5px;
+        font-family: $textfield-font-family;
+        margin: 0px;
+        height: auto;
+        width: 100%;
+        transition: $transition;
+        border-radius: 2px;
+        line-height: normal !important;
+        /*box-shadow: 0px 0px 3px 0px $textfield-boxshadow-color !important;*/
+    }
+
+    label {
+        font-family: $textfieldlabel-font-family;
+        color: $textfieldlabel-color;
+        font-weight: 600;
+        font-size: 10.5px;
+        letter-spacing: 0.2px;
+        margin: 0px;
+        cursor: pointer;
+        transition: $transition;
+        position: absolute;
+        top: 8px !important;
+        left: 15px !important;
+    }
+
+    &:hover label {
+        color: $textfieldlabel-color-hover;
+        transition: $transition;
+    }
+
+    &:hover input[type='text'].form-control,
+    &:hover input[type='number'].form-control,
+    &:hover input[type='password'].form-control,
+    &:hover {
+        border-color: $textfield-border-color-hover;
+        transition: $transition;
+    }
+
+    &.focused label {
+        color: $textfieldlabel-color-focus;
+        transition: $transition;
+    }
+
+    &.focused input[type='text'].form-control,
+    &.focused input[type='number'].form-control,
+    &.focused input[type='password'].form-control {
+        /*color: $textfield-color-focus;*/
+        border-color: $textfield-border-color-focus;
+        transition: $transition !important;
+        box-shadow: 0px 0px 10px 3px rgba(103,148,245,0.40) !important;
+        background-color: rgba(0,0,0,0);
+        background-color: white;
+    }
+
+    &.disabled {
+        label {
+            color: rgba(0,0,0,0.46) !important;
+            cursor: not-allowed;
+        }
+
+        input {
+            color: rgba(0,0,0,0.46) !important;
+            border-color: rgba(0,0,0,0.16) !important;
+            background-color: rgba(0,0,0,0.04) !important;
+        }
+    }
+
+    &.currency {
+
+        input {
+            padding-left: 30px !important;
+            padding-right: 38px !important;
+        }
+
+        &:before {
+            content: "$";
+            position: absolute;
+            top: 21px;
+            left: 6px;
+            background-color: rgba(0,0,0,0.015);
+            border-right: solid 1px rgba(0,0,0,0.10);
+            width: 22px;
+            text-align: center;
+            font-family: 'Open Sans';
+            line-height: 28px;
+        }
+
+        &:after {
+            content: attr(data-currency-code);
+            position: absolute;
+            top: 21px;
+            right: 6px;
+            background-color: rgba(0,0,0,0.10);
+            color: rgba(0,0,0,0.56);
+            font-family: 'Open Sans';
+            font-weight: bold;
+            font-size: 10px;
+            width: 32px;
+            text-align: center;
+            line-height: 28px;
+            font-size: 10px !important;
+        }
+    }
+}
+
+
+.textfield,
+.select,
+.select2,
+.textfield-icon {
+
+    &.required {
+
+        > label {
+            position: absolute;
+
+            &:before {
+                content: '';
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                border-radius: 100px;
+                background-color: red;
+                top: 4px;
+                right: -10px;
+                z-index: 100;
+                opacity: 0.7;
+            }
+        }
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    /*background-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    transition: background-color 5000s ease-in-out 0s !important;*/
+}
+
+
+.textfieldicon {
+    input[type=text] {
+        padding-right: 50px !important;
+    }
+
+    svg {
+        position: absolute;
+        top: 21px;
+        right: 6px;
+        background-color: rgb(235, 235, 235);
+        width: auto !important;
+        width: 38px !important;
+        height: 28px;
+        padding: 9px;
+    }
+}
+
+.autocomplete-suggestions {
+    width: auto !important;
+    max-width: 300px !important;
+}

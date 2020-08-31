@@ -1,0 +1,4 @@
+﻿CREATE TYPE [dbo].[stampoverdrafttabletype] AS TABLE (
+    [ID]   UNIQUEIDENTIFIER NOT NULL,
+    [UUID] UNIQUEIDENTIFIER NOT NULL);
+

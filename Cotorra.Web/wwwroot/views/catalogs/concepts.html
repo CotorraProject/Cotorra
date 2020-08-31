@@ -1,0 +1,542 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="conceptsActionTemplate">
+    <div class="text-left">
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+                onclick="UX.Cotorra.Concepts.UI.OpenSave(this);">
+            <i class="fad fa-pencil"></i>
+        </button>
+        &nbsp;
+        <button class="btn btn-icon-small" data-toggle="tooltip" title="Eliminar" data-placement="bottom"
+                onclick="UX.Cotorra.Concepts.UI.Delete(this);">
+            <i class="fad fa-trash-alt"></i>
+        </button>
+    </div>
+</script>
+
+<!--top actions-->
+<div class="top-actions">
+    <button class="btn btn-primary" id="np_btnAddRecord">
+        <i class="far fa-plus-circle"></i>
+    </button>
+</div>
+
+<!--main container-->
+<div class="np-concepts-grid full-kendo-grid">
+</div>
+
+<!--add/update modal-->
+<script id="concepts_save_template" type="text/ractive">
+    <div>
+
+        <form id="np_cat_saverecord">
+
+            <div role="tabpanel">
+
+                <ul class="tab-nav" role="tablist">
+                    <li class="active"><a href="#np_con_general" aria-controls="np_con_general" role="tab" data-toggle="tab" aria-expanded="true">General</a></li>
+                    <li class=""><a href="#np_emp_totalamount" aria-controls="np_emp_totalamount" role="tab" data-toggle="tab" aria-expanded="false">Importe total</a></li>
+                    {{#if ConceptType == 'P'}}
+                    <li class=""><a href="#np_emp_amount1" aria-controls="np_emp_amount1" role="tab" data-toggle="tab" aria-expanded="false">ISR Gravado</a></li>
+                    <li class=""><a href="#np_emp_amount2" aria-controls="np_emp_amount2" role="tab" data-toggle="tab" aria-expanded="false">ISR Exento</a></li>
+                    <li class=""><a href="#np_emp_amount3" aria-controls="np_emp_amount3" role="tab" data-toggle="tab" aria-expanded="false">IMSS Gravado</a></li>
+                    <li class=""><a href="#np_emp_amount4" aria-controls="np_emp_amount4" role="tab" data-toggle="tab" aria-expanded="false">IMSS Exento</a></li>
+                    {{/if}}
+                </ul>
+
+            </div>
+
+            <div class="tab-content">
+                <!--GENERAL-->
+                <div id="np_con_general" class="tab-pane active">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-group textfield required {{#if ID != null }} disabled {{/if}} ">
+                                <label for="np_ps_txtCode">Número</label>
+                                <input type="text" class="form-control" id="np_ps_txtCode" name="np_ps_txtCode" value="{{Code}}"
+                                       autocomplete="off" maxlength="4" required {{#if ID != null }} disabled="disabled" {{/if}}>
+                            </div>
+                        </div>
+                        <div class="col-xs-8">
+                            <div class="form-group textfield required">
+                                <label for="np_ps_txtName">Nombre de la percepción</label>
+                                <input type="text" class="form-control" id="np_ps_txtName" name="np_ps_txtName" value="{{Name}}"
+                                       autocomplete="off" maxlength="40" required>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 {{#if ConceptType == 'L'}} hidden {{/if}}">
+                            <div class="form-group select2">
+                                <label for="np_ps_drpSATCode">Código agrupador del SAT</label>
+                                <select decorator="select2" id="np_ps_drpSATCode" name="np_ps_drpSATCode" class="form-control" value="{{SATGroupCode}}"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="np_ps_chkGlobalAutomatic" name="np_ps_chkGlobalAutomatic"
+                                           type="checkbox" checked="{{GlobalAutomatic}}">
+                                    <i class="input-helper"></i>
+                                    Default
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="np_ps_chkKind" name="np_ps_chkKind"
+                                           type="checkbox" checked="{{Kind}}">
+                                    <i class="input-helper"></i>
+                                    Especie
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="np_ps_chkAutomaticDismissal" name="np_ps_chkAutomaticDismissal"
+                                           type="checkbox" checked="{{AutomaticDismissal}}">
+                                    <i class="input-helper"></i>
+                                    Mostrar en liquidación
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="np_ps_chkPrint" name="np_ps_chkPrint"
+                                           type="checkbox" checked="{{Print}}">
+                                    <i class="input-helper"></i>
+                                    Imprimir
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--TOTAL AMOUNT-->
+                <div id="np_emp_totalamount" class="tab-pane formula-pane">
+                    <!--Formula-->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountLabel">Leyenda del importe total</label>
+                                <input type="text" class="form-control" id="np_ps_txtTotalAmountLabel" name="np_ps_txtTotalAmountLabel" value="{{Label}}"
+                                       autocomplete="off" disabled="disabled" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountFormula">Fórmula del importe total</label>
+                                <textarea class="form-control" id="np_ps_txtTotalAmountFormula" name="np_ps_txtTotalAmountFormula" value="{{Formula}}"
+                                          autocomplete="off" disabled="disabled" style="height:205px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Accumulated-->
+                    <div class="row">
+                        <!--List-->
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmountAccumulatedTypes">Tipos de acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmountAccumulatedTypes"
+                                        name="np_ps_drpTotalAmountAccumulatedTypes" value="{{TotalAmountAccumulatedType}}">
+                                    <option value=''>- - -</option>
+                                    {{#each TotalAmountAccumulatedTypes}}
+                                    <option value='{{ID}}'
+                                            {{#if TotalAmountFiscalAccumulated.indexOf(this) !== -1 || TotalAmountOtherAccumulated.indexOf(this) !== -1}} disabled{{/if}}>
+                                        {{Name}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnAddATTotalAmount" data-type="T" href="#"
+                                        {{#if TotalAmountAccumulatedType == ""}} disabled="disabled" {{/if}}
+                                        title="Asociar acumulado" on-click="addTAAccumulated">
+                                    <i class="fas fa-level-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Fiscal-->
+                        <div class="col-xs-12 {{#if ConceptType != 'P'}} only-fiscal-accumulated {{/if}}">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmountFiscalAccumulated">Acumulados fiscales</label>
+                                <select class="form-control" id="np_ps_drpTotalAmountFiscalAccumulated" name="np_ps_drpTotalAmountFiscalAccumulated"
+                                        multiple style="height:90px;" value="{{TotalAmountFiscalAccumulatedIDs}}">
+                                    {{#TotalAmountFiscalAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmountFiscalAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveATTotalAmount" data-type="T" href="#"
+                                        {{#if TotalAmountFiscalAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAFiscalAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Other-->
+                        {{#if ConceptType == 'P'}}
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmountOtherAccumulated">Otros acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmountOtherAccumulated" name="np_ps_drpTotalAmountOtherAccumulated"
+                                        multiple style="height:80px;" value="{{TotalAmountOtherAccumulatedIDs}}">
+                                    {{#TotalAmountOtherAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmountOtherAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveOATotalAmount" data-type="T" href="#"
+                                        {{#if TotalAmountOtherAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAOtherAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+
+                <!--AMOUNT 1-->
+                <div id="np_emp_amount1" class="tab-pane formula-pane">
+                    <!--Formula-->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountLabel1">Leyenda del ISR gravado</label>
+                                <input type="text" class="form-control" id="np_ps_txtTotalAmountLabel1" name="np_ps_txtTotalAmountLabel1" value="{{Label1}}"
+                                       autocomplete="off" disabled="disabled" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountFormula">Fórmula del ISR gravado</label>
+                                <textarea class="form-control" id="np_ps_txtTotalAmountFormula1" name="np_ps_txtTotalAmountFormula1" value="{{Formula1}}"
+                                          autocomplete="off" disabled="disabled" style="height:205px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Accumulated-->
+                    <div class="row">
+                        <!--List-->
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount1AccumulatedTypes">Tipos de acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount1AccumulatedTypes"
+                                        name="np_ps_drpTotalAmount1AccumulatedTypes" value="{{TotalAmount1AccumulatedType}}">
+                                    <option value=''>- - -</option>
+                                    {{#each TotalAmount1AccumulatedTypes}}
+                                    <option value='{{ID}}'
+                                            {{#if TotalAmount1FiscalAccumulated.indexOf(this) !== -1 || TotalAmount1OtherAccumulated.indexOf(this) !== -1}} disabled{{/if}}>
+                                        {{Name}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnAddATTotalAmount1" data-type="T" href="#"
+                                        {{#if TotalAmount1AccumulatedType == ""}} disabled="disabled" {{/if}}
+                                        title="Asociar acumulado" on-click="addTAAccumulated">
+                                    <i class="fas fa-level-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Fiscal-->
+                        <div class="col-xs-12 {{#if ConceptType != 'P'}} only-fiscal-accumulated {{/if}}">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount1FiscalAccumulated">Acumulados fiscales</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount1FiscalAccumulated" name="np_ps_drpTotalAmount1FiscalAccumulated"
+                                        multiple style="height:90px;" value="{{TotalAmount1FiscalAccumulatedIDs}}">
+                                    {{#TotalAmount1FiscalAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmount1FiscalAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveATTotalAmount1" data-type="T" href="#"
+                                        {{#if TotalAmount1FiscalAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAFiscalAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Other-->
+                        {{#if ConceptType == 'P'}}
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount1OtherAccumulated">Otros acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount1OtherAccumulated" name="np_ps_drpTotalAmount1OtherAccumulated"
+                                        multiple style="height:80px;" value="{{TotalAmount1OtherAccumulatedIDs}}">
+                                    {{#TotalAmount1OtherAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmount1OtherAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveOATotalAmount1" data-type="T" href="#"
+                                        {{#if TotalAmount1OtherAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAOtherAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+
+                <!--AMOUNT 2-->
+                <div id="np_emp_amount2" class="tab-pane formula-pane">
+                    <!--Formula-->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountLabel2">Leyenda del ISR exento</label>
+                                <input type="text" class="form-control" id="np_ps_txtTotalAmountLabel2" name="np_ps_txtTotalAmountLabel2" value="{{Label2}}"
+                                       autocomplete="off" disabled="disabled" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountFormula2">Fórmula del ISR exento</label>
+                                <textarea class="form-control" id="np_ps_txtTotalAmountFormula2" name="np_ps_txtTotalAmountFormula2" value="{{Formula2}}"
+                                          autocomplete="off" disabled="disabled" style="height:205px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Accumulated-->
+                    <div class="row">
+                        <!--List-->
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount2AccumulatedTypes">Tipos de acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount2AccumulatedTypes"
+                                        name="np_ps_drpTotalAmount2AccumulatedTypes" value="{{TotalAmount2AccumulatedType}}">
+                                    <option value=''>- - -</option>
+                                    {{#each TotalAmount2AccumulatedTypes}}
+                                    <option value='{{ID}}'
+                                            {{#if TotalAmount2FiscalAccumulated.indexOf(this) !== -1 || TotalAmount2OtherAccumulated.indexOf(this) !== -1}} disabled{{/if}}>
+                                        {{Name}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnAddATTotalAmount2" data-type="T" href="#"
+                                        {{#if TotalAmount2AccumulatedType == ""}} disabled="disabled" {{/if}}
+                                        title="Asociar acumulado" on-click="addTAAccumulated">
+                                    <i class="fas fa-level-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Fiscal-->
+                        <div class="col-xs-12 {{#if ConceptType != 'P'}} only-fiscal-accumulated {{/if}}">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount2FiscalAccumulated">Acumulados fiscales</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount2FiscalAccumulated" name="np_ps_drpTotalAmount2FiscalAccumulated"
+                                        multiple style="height:90px;" value="{{TotalAmount2FiscalAccumulatedIDs}}">
+                                    {{#TotalAmount2FiscalAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmount2FiscalAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveATTotalAmount2" data-type="T" href="#"
+                                        {{#if TotalAmount2FiscalAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAFiscalAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Other-->
+                        {{#if ConceptType == 'P'}}
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount2OtherAccumulated">Otros acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount2OtherAccumulated" name="np_ps_drpTotalAmount2OtherAccumulated"
+                                        multiple style="height:80px;" value="{{TotalAmount2OtherAccumulatedIDs}}">
+                                    {{#TotalAmount2OtherAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmount2OtherAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveOATotalAmount2" data-type="T" href="#"
+                                        {{#if TotalAmount2OtherAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAOtherAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+
+                <!--AMOUNT 3-->
+                <div id="np_emp_amount3" class="tab-pane formula-pane">
+                    <!--Formula-->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountLabel3">Leyenda del IMSS gravado</label>
+                                <input type="text" class="form-control" id="np_ps_txtTotalAmountLabel3" name="np_ps_txtTotalAmountLabel3" value="{{Label3}}"
+                                       autocomplete="off" disabled="disabled" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountFormula3">Fórmula del IMSS gravado</label>
+                                <textarea class="form-control" id="np_ps_txtTotalAmountFormula3" name="np_ps_txtTotalAmountFormula3" value="{{Formula3}}"
+                                          autocomplete="off" disabled="disabled" style="height:205px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Accumulated-->
+                    <div class="row">
+                        <!--List-->
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount3AccumulatedTypes">Tipos de acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount3AccumulatedTypes"
+                                        name="np_ps_drpTotalAmount3AccumulatedTypes" value="{{TotalAmount3AccumulatedType}}">
+                                    <option value=''>- - -</option>
+                                    {{#each TotalAmount3AccumulatedTypes}}
+                                    <option value='{{ID}}'
+                                            {{#if TotalAmount3FiscalAccumulated.indexOf(this) !== -1 || TotalAmount3OtherAccumulated.indexOf(this) !== -1}} disabled{{/if}}>
+                                        {{Name}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnAddATTotalAmount3" data-type="T" href="#"
+                                        {{#if TotalAmount3AccumulatedType == ""}} disabled="disabled" {{/if}}
+                                        title="Asociar acumulado" on-click="addTAAccumulated">
+                                    <i class="fas fa-level-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Fiscal-->
+                        <div class="col-xs-12 {{#if ConceptType != 'P'}} only-fiscal-accumulated {{/if}}">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount3FiscalAccumulated">Acumulados fiscales</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount3FiscalAccumulated" name="np_ps_drpTotalAmount3FiscalAccumulated"
+                                        multiple style="height:90px;" value="{{TotalAmount3FiscalAccumulatedIDs}}">
+                                    {{#TotalAmount3FiscalAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmount3FiscalAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveATTotalAmount3" data-type="T" href="#"
+                                        {{#if TotalAmount3FiscalAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAFiscalAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Other-->
+                        {{#if ConceptType == 'P'}}
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount3OtherAccumulated">Otros acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount3OtherAccumulated" name="np_ps_drpTotalAmount3OtherAccumulated"
+                                        multiple style="height:80px;" value="{{TotalAmount3OtherAccumulatedIDs}}">
+                                    {{#TotalAmount3OtherAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmount3OtherAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveOATotalAmount3" data-type="T" href="#"
+                                        {{#if TotalAmount3OtherAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAOtherAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+
+                <!--AMOUNT 3-->
+                <div id="np_emp_amount4" class="tab-pane formula-pane">
+                    <!--Formula-->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountLabel4">Leyenda del IMSS exento</label>
+                                <input type="text" class="form-control" id="np_ps_txtTotalAmountLabel4" name="np_ps_txtTotalAmountLabel4" value="{{Label4}}"
+                                       autocomplete="off" disabled="disabled" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group textfield disabled">
+                                <label for="np_ps_txtTotalAmountFormula4">Fórmula del IMSS exento</label>
+                                <textarea class="form-control" id="np_ps_txtTotalAmountFormula4" name="np_ps_txtTotalAmountFormula4" value="{{Formula4}}"
+                                          autocomplete="off" disabled="disabled" style="height:205px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Accumulated-->
+                    <div class="row">
+                        <!--List-->
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount4AccumulatedTypes">Tipos de acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount4AccumulatedTypes"
+                                        name="np_ps_drpTotalAmount4AccumulatedTypes" value="{{TotalAmount4AccumulatedType}}">
+                                    <option value=''>- - -</option>
+                                    {{#each TotalAmount4AccumulatedTypes}}
+                                    <option value='{{ID}}'
+                                            {{#if TotalAmount4FiscalAccumulated.indexOf(this) !== -1 || TotalAmount4OtherAccumulated.indexOf(this) !== -1}} disabled{{/if}}>
+                                        {{Name}}
+                                    </option>
+                                    {{/each}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnAddATTotalAmount4" data-type="T" href="#"
+                                        {{#if TotalAmount4AccumulatedType == ""}} disabled="disabled" {{/if}}
+                                        title="Asociar acumulado" on-click="addTAAccumulated">
+                                    <i class="fas fa-level-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Fiscal-->
+                        <div class="col-xs-12 {{#if ConceptType != 'P'}} only-fiscal-accumulated {{/if}}">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount4FiscalAccumulated">Acumulados fiscales</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount4FiscalAccumulated" name="np_ps_drpTotalAmount4FiscalAccumulated"
+                                        multiple style="height:90px;" value="{{TotalAmount4FiscalAccumulatedIDs}}">
+                                    {{#TotalAmount4FiscalAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmount4FiscalAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveATTotalAmount4" data-type="T" href="#"
+                                        {{#if TotalAmount4FiscalAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAFiscalAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <!--Other-->
+                        {{#if ConceptType == 'P'}}
+                        <div class="col-xs-12">
+                            <div class="form-group select">
+                                <label for="np_ps_drpTotalAmount4OtherAccumulated">Otros acumulados</label>
+                                <select class="form-control" id="np_ps_drpTotalAmount4OtherAccumulated" name="np_ps_drpTotalAmount4OtherAccumulated"
+                                        multiple style="height:80px;" value="{{TotalAmount4OtherAccumulatedIDs}}">
+                                    {{#TotalAmount4OtherAccumulated}}
+                                    <option value='{{ID}}'>{{Name}}</option>
+                                    {{/TotalAmount4OtherAccumulated}}
+                                </select>
+                                <button type="button" class="btn btn-white" id="btnRemoveOATotalAmount4" data-type="T" href="#"
+                                        {{#if TotalAmount4OtherAccumulatedIDs == ""}} disabled="disabled" {{/if}}
+                                        title="Desasociar acumulado" on-click="removeTAOtherAccumulated">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="row p-t-20">
+            <div class="col-xs-3 col-xs-offset-3">
+                <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+            </div>
+
+            <div class="col-xs-3">
+                <button id="np_btnSaveRecord" class="btn btn-primary full-width">Guardar</button>
+            </div>
+        </div>
+
+    </div>
+</script>
+
+<script>
+
+    
+
+</script>

@@ -1,0 +1,111 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="incidenttypesActionTemplate">
+    <div class="text-left">
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+                onclick="UX.Cotorra.IncidentTypes.UI.OpenSave(this);">
+            <i class="fad fa-pencil"></i>
+        </button>
+        &nbsp;
+        <button class="btn btn-icon-small" data-toggle="tooltip" title="Eliminar" data-placement="bottom"
+                onclick="UX.Cotorra.IncidentTypes.UI.Delete(this);">
+            <i class="fad fa-trash-alt"></i>
+        </button>
+    </div>
+</script>
+
+<!--top actions-->
+<div class="top-actions">
+    <button class="btn btn-primary" id="np_btnAddRecord">
+        <i class="far fa-plus-circle"></i>
+    </button>
+</div>
+
+<!--main container-->
+<div class="np-incidenttypes-grid full-kendo-grid">
+</div>
+
+<!--add/update modal-->
+<script id="incidenttypes_save_template" type="text/ractive">
+
+    <form id="np_cat_saverecord">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group textfield required">
+                    <label for="np_txtCode">Código</label>
+                    <input type="text" class="form-control" id="np_txtCode" name="np_txtCode" value="{{Code}}"
+                           autocomplete="off" maxlength="4" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_txtName">Nombre</label>
+                    <input type="text" class="form-control" id="np_txtName" name="np_txtName" value="{{Name}}"
+                           autocomplete="off" maxlength="100" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group select">
+                    <label for="np_drpTypeOfIncident">Tipo</label>
+                    <select class="form-control" id="np_drpTypeOfIncident" name="np_drpTypeOfIncident" value="{{TypeOfIncident}}">
+                        {{#TypesOfIndicentsOptions}}
+                        <option value='{{id}}'>{{name}}</option>
+                        {{/TypesOfIndicentsOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-b-10">
+            <div class="col-xs-6">
+                <div class="checkbox">
+                    <label>
+                        <input id="np_chkSalaryRight" name="np_chkSalaryRight" type="checkbox" checked="{{SalaryRight}}">
+                        <i class="input-helper"></i>
+                        Derecho a sueldo
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="checkbox">
+                    <label>
+                        <input id="np_chkDecreasesSeventhDay" name="np_chkDecreasesSeventhDay" type="checkbox" checked="{{DecreasesSeventhDay}}">
+                        <i class="input-helper"></i>
+                        Disminuye 7mo día
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group select">
+                    <label for="np_drpItConsiders">Se considera</label>
+                    <select class="form-control" id="np_drpItConsiders" name="np_drpItConsiders" value="{{ItConsiders}}">
+                        {{#ItConsidersOptions}}
+                        <option value='{{id}}'>{{name}}</option>
+                        {{/ItConsidersOptions}}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row p-t-20">
+        <div class="col-xs-6">
+            <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-6">
+            <button id="np_btnSaveRecord" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+
+</script>

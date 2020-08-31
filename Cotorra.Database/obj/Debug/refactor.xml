@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0">
+  <Operation Name="Rename Refactor" Key="21e12434-806a-44d1-8b96-9d5cfd29b26f" ChangeDateTime="06/03/2019 14:50:24" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Employee].[FirstLastName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Employee]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4808d324-ec5e-4ce7-8a9e-5c24490998d1" ChangeDateTime="11/04/2019 17:24:56" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[NOMEvaluationPhase].[EvaluationID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[NOMEvaluationPhase]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NOMEvaluationPeriodID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="755a52f9-8403-4a54-a9a6-91f6969b74b5" ChangeDateTime="12/12/2019 15:51:48" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[PeriodDetail].[InitialMonth]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PeriodDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PeriodMonth" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="42248a24-4b39-45cb-b5d6-3b76e65ad8ed" ChangeDateTime="12/12/2019 15:52:00" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[PeriodDetail].[InitialBimonthlyIMSS]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PeriodDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PeriodBimonthlyIMSS" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2602cb37-af50-43bf-bac7-ad017a75a060" ChangeDateTime="12/12/2019 15:52:11" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[PeriodDetail].[InitialPayrollYear]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PeriodDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PeriodFiscalYear" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="51d24c24-a216-4cfd-b9fa-185cdbb321ed" ChangeDateTime="01/02/2020 18:02:39" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[DeductionPayment].[TotalAmountFormula]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[DeductionPayment]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Formula" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4123170f-e44c-446e-9cf3-db6f17398445" ChangeDateTime="01/02/2020 18:02:54" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[SalaryPayment].[TotalAmountFormula]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SalaryPayment]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Formula" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="97f253fa-e155-42e1-8caf-006870e98b5e" ChangeDateTime="01/04/2020 04:22:54" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[IncidentTypePeriodEmployeeRelationship].[EmployeeID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[IncidentTypePeriodEmployeeRelationship]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="OverdraftID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="476adb0e-4be6-45db-a0fc-48840e9c8b78" ChangeDateTime="01/09/2020 21:45:50" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[PermanentMovement].[Amount1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[PermanentMovement]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EmployeeID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1f4b3cef-4f6d-4909-b9c6-ce0e2cc0f2ba" ChangeDateTime="02/05/2020 20:30:28" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[FonacotMovement].[AccumulatedAmountWithheld]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[FonacotMovement]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AccumulatedAmountWithHeld" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5c47cf4d-e1b9-4fdd-822b-eee51a36fc71" ChangeDateTime="02/19/2020 22:38:59" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[HistoricOverdraft].[EmployeeID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HistoricOverdraft]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="HistoricEmployeeID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b6fde30f-1f1b-4bf0-bdb5-c358f8877a46" ChangeDateTime="02/20/2020 23:38:35" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[Workshift].[ShiftWorkingDay]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Workshift]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ShiftWorkingDayType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="beaa416d-910a-4741-be9f-3aef96cd893a" ChangeDateTime="03/02/2020 17:45:11" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[EmployerFiscalInformation].[Password]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EmployerFiscalInformation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PasswordPassword" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a43837df-042a-496a-81f2-fd040405f813" ChangeDateTime="03/02/2020 17:45:36" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[EmployerFiscalInformation].[PasswordPassword]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EmployerFiscalInformation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CertificatePwd" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d89a67c2-f6fd-43b1-a7f5-57e47a63617f" ChangeDateTime="03/02/2020 20:33:10" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[EmployerFiscalInformation].[ExpirationDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[EmployerFiscalInformation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StartDate" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="31850f67-cbcf-4641-9451-ad2f92f56da3" ChangeDateTime="03/04/2020 22:39:36" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[OverdraftDetail].[Amount1]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[OverdraftDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Taxed" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2002dbac-1d9c-47bc-be1d-7ffac427cb1e" ChangeDateTime="03/04/2020 22:39:40" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[OverdraftDetail].[Amount2]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[OverdraftDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Exempt" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="729ee701-8267-435d-a943-84b35b92a715" ChangeDateTime="03/04/2020 22:39:45" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[OverdraftDetail].[Amount3]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[OverdraftDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IMSSTaxed" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d11b9428-1380-49b6-89ca-6f4779f0c484" ChangeDateTime="03/04/2020 22:39:52" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[OverdraftDetail].[Amount4]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[OverdraftDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IMSSExempt" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="478d694f-0372-4344-9a84-f6db46b1173f" ChangeDateTime="03/30/2020 22:53:29" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+    <Property Name="ElementName" Value="[dbo].[UMA].[InitialDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UMA]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ValidityDate" />
+  </Operation>
+</Operations>

@@ -1,0 +1,3 @@
+﻿CREATE TABLE [dbo].[BossOfEdge]
+AS EDGE ON [PRIMARY]
+GO

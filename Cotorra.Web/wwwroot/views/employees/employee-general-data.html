@@ -1,0 +1,62 @@
+﻿
+<script id="employee-general-data-template" type="ractive/text">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="form-group textfield">
+                <label for="np_emp_txtBirthDate">Fecha de nacimiento</label>
+                <input type="text" class="form-control" id="np_emp_txtBirthDate" name="np_emp_txtBirthDate" value="{{BirthDate}}"
+                       autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group select">
+                <label for="np_drpGender">Sexo</label>
+                <select class="form-control" id="np_drpGender" name="np_drpGender" value="{{Gender}}">
+                    <option value=''>- - -</option>
+                    {{#GenderOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/GenderOptions}}
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group select">
+                <label for="np_drpCivilStatus">Estado civil</label>
+                <select class="form-control" id="np_drpCivilStatus" name="np_drpCivilStatus" value="{{CivilStatus}}">
+                    <option value=''>- - -</option>
+                    {{#CivilStatusOptions}}
+                    <option value='{{ID}}'>{{Name}}</option>
+                    {{/CivilStatusOptions}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="form-group textfield">
+                <label for="np_emp_txtPhone">Teléfono</label>
+                <input type="text" class="form-control" id="np_emp_txtPhone" name="np_emp_txtPhone" value="{{Phone}}"
+                       autocomplete="off" maxlength="13" placeholder="(___) ___-____" />
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group textfield">
+                <label for="np_emp_txtCellPhone">Celular</label>
+                <input type="text" class="form-control" id="np_emp_txtCellPhone" name="np_emp_txtCellPhone" value="{{Cellphone}}"
+                       autocomplete="off" maxlength="13" placeholder="(___) ___-____" />
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group textfield">
+                <label for="np_emp_txtEmail">Correo electrónico</label>
+                <input type="text" class="form-control" id="np_emp_txtEmail" name="np_emp_txtEmail" value="{{Email}}"
+                       autocomplete="off" maxlength="100" />
+            </div>
+        </div>
+    </div>
+</script>

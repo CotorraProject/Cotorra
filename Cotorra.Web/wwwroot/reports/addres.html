@@ -1,0 +1,37 @@
+﻿<script id="report-template" type="text/ractive">
+    <form id="report-raya-filters">
+        <div class="filters col-xs-3">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield required">
+                        <label for="txtCode">Código</label>
+                        <input type="text" class="form-control" id="txtCode" name="txtCode" value="{{Code}}"
+                               autocomplete="off" maxlength="10" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group textfield">
+                        <label for="txtCode2">Código 2</label>
+                        <input type="text" class="form-control" id="txtCode2" name="txtCode2" value="{{Code2}}"
+                               autocomplete="off" maxlength="10" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary full-width" id="btnProcess">
+                        Ejecutar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="viewer col-xs-9" id="viewer">
+
+    </div>
+</script>
+
+

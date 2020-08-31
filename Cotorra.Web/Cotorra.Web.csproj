@@ -1,0 +1,125 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TieredCompilation>true</TieredCompilation>
+    <ApplicationInsightsResourceId>/subscriptions/46c3b528-342b-47ae-bd61-ec11fbf5464f/resourcegroups/cotorra/providers/microsoft.insights/components/CotorraInsightDev</ApplicationInsightsResourceId>
+    <UserSecretsId>a5727739-e6e3-46ea-8884-f0409c260f9e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <ProjectGuid>{00904DE8-9B29-4261-BC20-2DEE98ECBE00}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\views\reports\**" />
+    <Content Remove="wwwroot\views\reports\**" />
+    <EmbeddedResource Remove="wwwroot\views\reports\**" />
+    <None Remove="wwwroot\views\reports\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+    <Content Remove="Menu\cotorra.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Menu\cotorra.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0-beta2" />
+    <PackageReference Include="Microsoft.ApplicationInsights.TraceListener" Version="2.15.0-beta2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Azure.AppConfiguration.AspNetCore" Version="4.0.0-preview" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="4.0.0-preview" />
+    <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.15.0-beta2" />
+    <PackageReference Include="runtime.linux-x64.CoreCompat.System.Drawing" Version="1.0.0-beta009" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.7.20364.11" />
+    <PackageReference Include="Microsoft.Extensions.Azure" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="5.0.0-preview.6.20305.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.6" />
+    <PackageReference Include="NPOI" Version="2.5.1" />
+    <PackageReference Include="itext7.pdfhtml" Version="3.0.0" />
+    <PackageReference Include="SendGrid" Version="9.20.0" />
+    <PackageReference Include="Serialize.Linq" Version="1.8.1" />
+    <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="wwwroot\assets\img\genericavatars\" />
+    <Folder Include="wwwroot\assets\js\thirdparty\stimulsoft\css\" />
+    <Folder Include="wwwroot\assets\thirdparty\bootstrap-datepicker\js\" />
+    <Folder Include="wwwroot\assets\thirdparty\bootstrap-datepicker\css\" />
+    <Folder Include="wwwroot\assets\thirdparty\bootstrap-datepicker\js\locales\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="compilerconfig.json" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cotorra.ClientLocal\Cotorra.ClientLocal.csproj" />
+    <ProjectReference Include="..\Cotorra.ClientProxy\Cotorra.ClientProxy.csproj" />
+    <ProjectReference Include="..\Cotorra.Client\Cotorra.Client.csproj" />
+    <ProjectReference Include="..\Cotorra.Schema\Cotorra.Schema.csproj" />
+    <ProjectReference Include="..\Cotorra.Core\Cotorra.Core.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="addres.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="addres2.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.debug.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\assets\js\thirdparty\dropzone-amd-module.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\assets\js\thirdparty\stimulsoft\es.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\assets\js\thirdparty\stimulsoft\license.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+
+  <ProjectExtensions>
+    <VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio>
+  </ProjectExtensions>
+
+</Project>

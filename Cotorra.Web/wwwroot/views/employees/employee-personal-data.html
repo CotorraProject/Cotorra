@@ -1,0 +1,44 @@
+﻿
+    <script id="employee-personal-data-template" type="ractive/text">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group textfield required">
+                    <label for="np_emp_txtFirstLastName">Primer apellido</label>
+                    <input type="text" class="form-control" id="np_emp_txtFirstLastName" name="np_emp_txtFirstLastName" value="{{FirstLastName}}"
+                           autocomplete="off" maxlength="100" required>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group textfield">
+                    <label for="np_emp_txtSecondLastName">Segundo apellido</label>
+                    <input type="text" class="form-control" id="np_emp_txtSecondLastName" name="np_emp_txtSecondLastName" value="{{SecondLastName}}"
+                           autocomplete="off" maxlength="100">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group textfield required">
+                    <label for="np_emp_txtName">Nombre(s)</label>
+                    <input type="text" class="form-control" id="np_emp_txtName" name="np_emp_txtName" value="{{Name}}"
+                           autocomplete="off" maxlength="100" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group textfield required">
+                    <label for="np_emp_txtRFC">RFC</label>
+                    <input type="text" class="form-control" id="np_emp_txtRFC" name="np_emp_txtRFC" value="{{RFC}}"
+                           autocomplete="off" maxlength="13" />
+                </div>
+            </div>
+
+            <div class="col-xs-8">
+                <div class="form-group textfield required">
+                    <label for="np_emp_txtCURP">CURP</label>
+                    <input type="text" class="form-control" id="np_emp_txtCURP" name="np_emp_txtCURP" value="{{CURP}}"
+                           autocomplete="off" maxlength="18" />
+                </div>
+            </div>
+        </div>
+    </script>

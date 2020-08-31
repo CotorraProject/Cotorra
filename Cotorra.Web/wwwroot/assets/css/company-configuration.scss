@@ -1,0 +1,179 @@
+﻿
+
+#np-company-configuration {
+    margin-top: 22px;
+    margin-left: 25px;
+
+    .tabs-container {
+        max-width: 650px;
+    }
+}
+
+/*Titles*/
+
+.view-title {
+    padding: 0 !important;
+    margin: 0 auto;
+    font-size: 16px;
+    letter-spacing: -.5px;
+    font-family: 'Proxima Soft';
+    font-weight: 600;
+    color: #273759;
+    margin-bottom: 12px;
+}
+
+/**Tabs**/
+
+.tabs-container {
+}
+
+.tab-nav {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    overflow: unset !important;
+    padding-left: 0px !important;
+    z-index: -1 !important;
+
+    > li {
+        background-color: rgb(203,220,236) !important;
+        border-radius: 5px 5px 0px 0px !important;
+        background-color: rgba(245,246,247,1) !important;
+        border: solid 1px rgba(222, 231, 238,0.26) !important;
+        border-bottom: none !important;
+        margin-right: 2px !important;
+
+        > a {
+            font-family: 'Proxima Soft' !important;
+            font-weight: 600 !important;
+            font-size: 11px !important;
+            opacity: 0.52 !important;
+
+            &:after {
+                background: #273759 !important;
+            }
+        }
+
+        &.active {
+            background-color: white !important;
+            border: solid 1px rgb(222, 231, 238) !important;
+            border-bottom: none !important;
+            box-shadow: 0px -1px 3px 1px rgba(0,0,0,0.06) !important;
+
+            > a {
+                color: #273759 !important;
+                font-weight: 600 !important;
+                opacity: 1 !important;
+            }
+        }
+    }
+}
+
+.tab-content {
+    position: relative;
+    background-color: white;
+    padding: 15px !important;
+    padding-top: 18px !important;
+    border: solid 1px rgb(222, 231, 238);
+    border-radius: 0px 2px 6px 6px;
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.06);
+    z-index: 1;
+}
+
+.tabs-flat {
+    .tab-nav {
+        background-color: white !important;
+
+        > li {
+            border: none !important;
+            box-shadow: none !important;
+            background-color: white !important;
+
+            a {
+                letter-spacing: -0.2px !important;
+            }
+        }
+
+        > li.active {
+            a:focus {
+                color: #273759 !important;
+            }
+        }
+    }
+
+    .tab-content {
+        box-shadow: none !important;
+        border: none !important;
+        border-top: solid 1px rgba(0,0,0,0.10) !important;
+        background-color: white !important;
+    }
+}
+
+
+/*Rows and Cols*/
+
+$form-element-font-family: 'Proxima Soft';
+
+.row {
+}
+
+[class^=col-] {
+}
+
+.form-group {
+    /* margin-bottom: 12px;
+    position: relative;
+    border: solid 1px rgb(216,224,235) !important;
+    border: solid 1px #c8c8c8 !important;
+    border-radius: 3px;
+    min-height: 40px;
+    padding: 0px;
+    box-shadow: 0px 0px 3px 0px rgb(203,220,236);
+    background-color: white;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 4px;
+    padding-bottom: 0px;*/
+    label {
+        /*  font-family: $form-element-font-family;
+        font-weight: 500;
+        font-size: 10.5px;
+        color: rgb(151,184,217);*/
+        &:before {
+            /*display: none !important;*/
+        }
+    }
+
+    > * {
+    }
+    /*Normal*/
+    &.textfield {
+        label {
+            /* position: relative;
+            margin: 0 auto;
+            padding: 0px;*/
+        }
+
+        input[type=text].form-control {
+            /* border: none;
+            padding: 0px !important;
+            height: auto;
+            margin: 0px;
+            padding-bottom: 5px !important;
+            background-color: white !important;
+            font-family: $form-element-font-family;
+            font-size: 13px;
+            margin-top: -2px;*/
+            /*color: rgb(115,153,192);*/
+        }
+    }
+    /*Disabled*/
+    /*&.disabled {
+        cursor: not-allowed;
+        display: none;
+    }
+
+
+    &:not(.textfield) {
+        display: none;
+    }*/
+}

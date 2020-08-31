@@ -1,0 +1,32 @@
+﻿
+<div id="np-farescatalogs" class="catalog-model-a">
+    <div class="generic-catalog">
+        <div class="generic-catalog-menu scrollbar-macosx">
+            <div class="group-title">
+                <i class="far fa-usd-circle"></i>
+                Tablas y tarifas
+            </div>
+            <ul id="catalogs-options"></ul>
+        </div>
+        <div class="generic-catalog-content">
+            <div class="generic-catalog-actions">
+                <div id="searchContent" class="top-action-filter flex">
+                    <div class="form-group textfield-icon">
+                        <input type="text" class="form-control quicksearch" autocomplete="off" placeholder="" />
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="top-actions">
+                </div>
+            </div>
+            <div class="generic-catalog-data">
+                <div class="catalog-content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(() => { UX.Cotorra.Catalogs.Init(UX.Cotorra.Catalogs.FaresOptions.sort((a, b) => { return (a.Title < b.Title ? -1 : 1) }), '#np-farescatalogs'); });
+</script>

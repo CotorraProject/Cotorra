@@ -1,0 +1,62 @@
+﻿
+$main-margin: 25px;
+$width-filter: 250px;
+
+.main-container {
+    background-color: white;
+    position: absolute;
+    top: $main-margin;
+    left: $main-margin;
+    height: calc(100% - 50px);
+    width: calc(100% - 50px);
+    border-radius: 10px;
+
+    .stiDesignerClearAllStyles table {
+        background-color: white;
+        color: black;
+    }
+
+    .stiDesignerToolBar .stiDesignerClearAllStyles img {
+        width: 16px;
+        height: 16px;
+        background-color: black;
+    }
+
+    .stiDesignerClearAllStyles {
+        background-color: white;
+        color: black;
+    }
+
+    .stiDesignerToolBar {
+        background-color: darkgray;
+        color: black;
+    }
+
+    .stiDesignerToolButton_Mouse {
+        background-color: white;
+    }
+
+    .viewer,
+    .filters {
+        background-color: white;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+    }
+
+    .filters {
+        background-color: rgba(187,222,251,1);
+        width: $width-filter;
+        padding: 10px;
+        border-radius: 10px 0px 0px 10px;
+    }
+
+    .viewer {
+        width: calc(100% - 250px);
+        right: 0px;
+        left: unset;
+        padding-top: 10px;
+        border-radius: 0px 10px 10px 0px;
+    }
+}

@@ -1,0 +1,317 @@
+﻿<script id="employee-update-template" type="ractive/text">
+
+    <div class="catalog-model-a">
+        <div class="generic-catalog">
+            <div class="generic-catalog-menu scrollbar-macosx">
+                <div class="employee-data">
+
+                    <div class="avatar">
+                        {{#if Gender == 2}}
+                        <img src="//cdn.Cotorria.mx/assets/img/generic-user-female.png" />
+                        {{else}}
+                        <img src="//cdn.Cotorria.mx/assets/img/generic-user-male.png" />
+                        {{/if}}
+                    </div>
+
+                    <div class="id">
+                        ID {{Code}}
+                    </div>
+
+                    <div class="name">
+                        {{Name}}<br />
+                        {{FirstLastName}} {{SecondLastName}}
+                    </div>
+
+                    <div class="jobposition">
+                        {{JobPosition}}
+                    </div>
+
+                    <hr />
+
+                    <div class="group" data-title="General">
+                        {{#if !IsHistoricEmployee}}
+                        <div class="row">
+                            <div class="item-icon">
+                                <i class="fad fa-fingerprint" style="color:rgb(242,201,77)"></i>
+                            </div>
+                            <div class="item-data">
+                                {{Antiquity}}
+                            </div>
+                            <div class="item-title">
+                                Antigüedad
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        <div class="row">
+                            <div class="item-icon">
+                                <i class="fad fa-portrait" style="color:rgb(39,174,97)"></i>
+                            </div>
+                            <div class="item-data">
+                                {{RFC}}
+                            </div>
+                            <div class="item-title">
+                                RFC
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="item-icon">
+                                <i class="fad fa-heartbeat" style="color:rgb(235,87,87)"></i>
+                            </div>
+                            <div class="item-data">
+                                {{NSS}}
+                            </div>
+                            <div class="item-title">
+                                NSS
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    {{#if !IsHistoricEmployee}}
+                <div class="actions">                  
+
+                    <button class="btn btn-primary btn-lime full-width" data-toggle="tooltip" title="Incremento de salario" id="btnSalaryRaise">
+                        <i class="fas fa-level-up-alt"></i>
+                        Incr. sueldo
+                    </button>
+
+                    <button class="btn btn-primary btn-editing full-width" data-toggle="tooltip" title="Finiquitar colaborador" data-placement="bottom" id="btnSettlementEmployee">
+                        <i class="far fa-user-slash"></i>
+                        Finiquito
+                    </button>
+
+                    <button class="btn btn-primary btn-red full-width" data-toggle="tooltip" title="Eliminar colaborador" id="btnDeleteEmployee">
+                        <i class="far fa-times"></i>
+                        Eliminar
+                    </button>
+                </div>
+                    {{/if}}
+                </div>
+            </div>
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-actions hidden">
+                    <div id="searchContent" class="top-action-filter flex">
+                    </div>
+                    <div class="top-actions">
+                    </div>
+                </div>
+                <div id="np_emp_saveemployee" class="employee-forms" style="position:relative;">
+
+                    <div role="tabpanel" class="tabs-flat">
+                        <ul class="tab-nav" role="tablist">
+                            <li class="active">
+                                <a href="#np_emp_general" aria-controls="np_emp_general" role="tab" data-toggle="tab">Datos personales</a>
+                            </li>
+                            <li class="">
+                                <a href="#np_emp_address" aria-controls="np_emp_address" role="tab" data-toggle="tab">Domicilio</a>
+                            </li>
+                            <li class="">
+                                <a href="#np_emp_employment" aria-controls="np_emp_employment" role="tab" data-toggle="tab">Contratación</a>
+                            </li>
+                            <li class="">
+                                <a href="#np_emp_social_security" aria-controls="np_emp_social_security" role="tab" data-toggle="tab">Seguridad social</a>
+                            </li>
+                            <li class="">
+                                <a href="#np_emp_payment" aria-controls="np_emp_payment" role="tab" data-toggle="tab">Pago electrónico</a>
+                            </li>
+                            <li class="">
+                                <a href="#np_emp_kiosk" aria-controls="np_emp_kiosk" role="tab" data-toggle="tab">Kiosko</a>
+                            </li>
+                            <li class="hidden">
+                                <a href="#np_emp_vacations" aria-controls="np_emp_vacations" role="tab" data-toggle="tab">Vacaciones</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="np_emp_general" class="tab-pane active">
+                                {{>employee-personal-data-template}}
+
+                                {{>employee-general-data-template}}
+
+                                <div class="row m-t-10">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-primary {{#if IsHistoricEmployee}} hidden {{/if}}" id="btnSaveEmployeePersonalData">
+                                            Actualizar datos personales
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="np_emp_address" class="tab-pane">
+                                {{>np-address-template}}
+
+                                <div class="row m-t-10">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-primary {{#if IsHistoricEmployee}} hidden {{/if}}" id="btnSaveEmployeeAddress">
+                                            Actualizar dirección
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="np_emp_employment" class="tab-pane">
+                                {{>employee-employment-template}}
+
+                                {{>employee-jobposition-template}}
+
+                                <div class="row m-t-10">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-primary {{#if IsHistoricEmployee}} hidden {{/if}}" id="btnSaveEmployeeEmployment">
+                                            Actualizar datos de contratación
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="np_emp_social_security" class="tab-pane">
+                                {{>employee-social-security-template}}
+
+                                {{>employee-contribution-salary-template}}
+
+                                <div class="row m-t-10">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-primary {{#if IsHistoricEmployee}} hidden {{/if}}" id="btnSaveEmployeeSocialSecurity">
+                                            Actualizar datos de seguridad social
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="np_emp_payment" class="tab-pane">
+
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="form-group select">
+                                            <label for="np_drpPaymentMethod">Método de pago</label>
+                                            <select class="form-control" id="np_drpPaymentMethod" name="np_drpPaymentMethod" value="{{PaymentMethod}}">
+                                                <option value=''>- - -</option>
+                                                {{#PaymentMethodsOptions}}
+                                                <option value='{{ID}}'>{{Name}}</option>
+                                                {{/PaymentMethodsOptions}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-7">
+                                        <div class="form-group select">
+                                            <label for="np_drpBank">Banco para pago electrónico</label>
+                                            <select class="form-control" id="np_drpBank" name="np_drpBank" value="{{BankID}}">
+                                                <option value=''>- - -</option>
+                                                {{#BanksOptions}}
+                                                <option value='{{ID}}'>{{Name}}</option>
+                                                {{/BanksOptions}}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-5">
+                                        <div class="form-group textfield">
+                                            <label for="np_emp_txtBankBranchNumber">Sucurcal para pago electrónico</label>
+                                            <input type="text" class="form-control" id="np_emp_txtBankBranchNumber" name="np_emp_txtBankBranchNumber" value="{{BankBranchNumber}}"
+                                                   autocomplete="off" maxlength="20" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="form-group textfield">
+                                            <label for="np_emp_txtBankAccount">No. de cuenta para pago electrónico</label>
+                                            <input type="text" class="form-control" id="np_emp_txtBankAccount" name="np_emp_txtBankAccount" value="{{BankAccount}}"
+                                                   autocomplete="off" maxlength="20" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <div class="form-group textfield">
+                                            <label for="np_emp_txtCLABE">CLABE interbancaria</label>
+                                            <input type="text" class="form-control" id="np_emp_txtCLABE" name="np_emp_txtCLABE" value="{{CLABE}}"
+                                                   autocomplete="off" maxlength="30" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row m-t-10">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-primary {{#if IsHistoricEmployee}} hidden {{/if}}" id="btnSaveEmployeePayment">
+                                            Actualizar pago electrónico
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="np_emp_kiosk" class="tab-pane">
+                                {{>employee-kiosk-template}}
+
+                                <div class="row m-t-10">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-primary {{#if IsHistoricEmployee || !IsKioskEnabled}} hidden {{/if}}" id="btnSaveEmployeeKiosk">
+                                            Actualizar datos del Kiosko
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="np_emp_vacations" class="tab-pane hidden">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="form-group textfield disabled">
+                                            <label for="np_txtVacationsBalanceUpToDate">Saldo de vacaciones a la fecha</label>
+                                            <input type="text" class="form-control" id="np_txtVacationsBalanceUpToDate" name="np_txtVacationsBalanceUpToDate" value="{{VacationsBalanceUpToDate}}"
+                                                   autocomplete="off" maxlength="20" disabled />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-7">
+                                        <div class="form-group textfield">
+                                            <label for="np_txtVacationsInitialBalance">Saldo inicial de días de vacaciones</label>
+                                            <input type="text" class="form-control" id="np_txtVacationsInitialBalance" name="np_txtVacationsInitialBalance" value="{{VacationsInitialBalance}}"
+                                                   autocomplete="off" maxlength="20" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-5">
+                                        <div class="form-group textfield">
+                                            <label for="np_txtPaidVacationsBonusInitialBalanace">Saldo inicial de días de prima de vacaciones pagadas</label>
+                                            <input type="text" class="form-control" id="np_txtPaidVacationsBonusInitialBalanace" name="np_txtPaidVacationsBonusInitialBalanace" value="{{PaidVacationsBonusInitialBalanace}}"
+                                                   autocomplete="off" maxlength="20" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row m-t-10">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-primary {{#if IsHistoricEmployee}} hidden {{/if}}" id="btnSaveEmployeeVacations">
+                                            Actualizar vacaciones
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        {{#if IsHistoricEmployee}}
+                        <div class="employee-historic-footer">
+                            <button class="btn btn-primary" id="btnSaveEmployeeHistoric">
+                                Actualizar historial del colaborador
+                            </button>
+                        </div>
+
+                        {{/if}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>

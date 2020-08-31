@@ -1,0 +1,33 @@
+﻿
+<script id="employee-kiosk-template" type="ractive/text">
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="toggle-switch" data-ts-color="blue">
+                <input id="np-enabled-kiosk-switch" type="checkbox" hidden="hidden" checked="{{IsKioskEnabled}}">
+                <label for="np-enabled-kiosk-switch" class="ts-helper"></label>
+                <label for="np-enabled-kiosk-switch" class="ts-label">Habilitar Kiosko</label>
+            </div>
+        </div>
+    </div>  
+    <div class="{{#if !IsKioskEnabled}} hidden {{/if}}">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group textfield {{#if IsKioskEnabled}} required {{/if}}">
+                    <label for="np_emp_txtEmail">Correo electrónico</label>
+                    <input type="text" class="form-control" id="np_emp_txtEmail" name="np_emp_txtEmail" value="{{Email}}"
+                           {{#if !IsKioskEnabled}} readonly {{else}} required {{/if}}
+                           autocomplete="off" maxlength="100" />
+                </div>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="toggle-switch" data-ts-color="{{#if IsIdentityVinculated}} blue {{else}} gray {{/if}}">
+                    <input id="np-identity-vinculated-switch" type="checkbox" hidden="hidden" checked="{{IsIdentityVinculated}}" readonly="readonly">
+                    <label for="np-identity-vinculated-switch" class="ts-helper"></label>
+                    <label for="np-identity-vinculated-switch" class="ts-label">Identidad vinculada en COTORRAi® Plataforma</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

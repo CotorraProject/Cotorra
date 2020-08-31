@@ -1,0 +1,79 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="imssActionTemplate">
+    <!--<div class="text-left">
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+                onclick="UX.Cotorra.IMSS.UI.OpenSave(this);">
+            <i class="fad fa-pencil"></i>
+        </button>
+    </div>-->
+</script>
+
+<!--top actions-->
+<div class="top-actions">
+    <!--<button class="btn btn-primary" id="np_btnAddRecord">
+        Agregar IMSS
+        <i class="zmdi zmdi-plus"></i>
+    </button>-->
+</div>
+
+<!--main container-->
+<div class="np-imss-grid full-kendo-grid">
+</div>
+
+<!--add/update modal-->
+<script id="imss_save_template" type="text/ractive">
+
+    <form id="np_cat_saverecord">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required disabled">
+                    <label for="np_IMMSBranch">Rama IMSS</label>
+                    <input type="text" class="form-control" id="np_IMMSBranch" name="np_IMMSBranch" value="{{IMMSBranch}}"
+                           autocomplete="off" maxlength="200" required disabled="disabled">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required symbol-input" data-symbol-input="%">
+                    <label for="np_EmployerShare">Patrón (%)</label>
+                    <input type="text" class="form-control" id="np_EmployerShare" name="np_EmployerShare" value="{{EmployerShare}}"
+                           autocomplete="off" maxlength="5" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required symbol-input" data-symbol-input="%">
+                    <label for="np_EmployeeShare">Obrero (%)</label>
+                    <input type="text" class="form-control" id="np_EmployeeShare" name="np_EmployeeShare" value="{{EmployeeShare}}"
+                           autocomplete="off" maxlength="5" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_MaxSMDF">Tope SMDF</label>
+                    <input type="text" class="form-control" id="np_MaxSMDF" name="np_MaxSMDF" value="{{MaxSMDF}}"
+                           autocomplete="off" maxlength="5" required>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row p-t-20">
+        <div class="col-xs-6">
+            <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-6">
+            <button id="np_btnSaveRecord" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+
+</script>

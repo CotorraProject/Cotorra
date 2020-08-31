@@ -1,0 +1,149 @@
+﻿{
+  "ServiceID": "09BF71D1-AAB0-42E5-B983-8208265B5930",
+  "Name": "Cotorra",
+  "Logo": "",
+  "Theme": "",
+  "Menu": {
+    "IsFixed": "true",
+    "Layout": "",
+    "IsDefault": "true",
+    "Option": [
+      {
+        "Type": "Category",
+        "Name": "Cotorra",
+        "ID": "00000000-0000-0000-0000-000000000000",
+        "Icon": "",
+        "IconText": "",
+        "Title": "",
+        "Action": "",
+        "Option": [
+          {
+            "Type": "Permission",
+            "Name": "Home",
+            "ID": "00000000-0000-0000-0000-000000000000",
+            "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+            "Icon": "x far fa-chart-pie-alt",
+            "IconText": "",
+            "Title": "Dashboard",
+            "Action": "UX.Cotorra.Menu.OpenDashboard();",
+            "Option": ""
+          },
+          {
+            "Type": "Category",
+            "Name": "DailyOperation",
+            "ID": "00000000-0000-0000-0000-000000000000",
+            "Icon": "x fas fa-envelope-open-dollar",
+            "IconText": "",
+            "Title": "Operación diaria",
+            "Action": "",
+            "Option": [
+
+              {
+                "Type": "Permission",
+                "Name": "PrePayroll",
+                "ID": "00000000-0000-0000-0000-000000000000",
+                "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+                "Icon": "",
+                "IconText": "",
+                "Title": "Mis nóminas",
+                "Action": "UX.Cotorra.Menu.OpenPrePayroll();",
+                "Option": ""
+              },
+              {
+                "Type": "Permission",
+                "Name": "Employees",
+                "ID": "00000000-0000-0000-0000-000000000000",
+                "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+                "Icon": "",
+                "IconText": "",
+                "Title": "Colaboradores",
+                "Action": "UX.Cotorra.Menu.OpenEmployees();",
+                "Option": ""
+              },
+              {
+                "Type": "Permission",
+                "Name": "Catalogs",
+                "ID": "00000000-0000-0000-0000-000000000000",
+                "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+                "Icon": "",
+                "IconText": "",
+                "Title": "Catálogos",
+                "Action": "UX.Cotorra.Menu.OpenCatalogs();",
+                "Option": ""
+              }
+            ]
+          },
+          {
+            "Type": "Category",
+            "Name": "Configuration",
+            "ID": "00000000-0000-0000-0000-000000000000",
+            "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+            "Icon": "x far fa-cog",
+            "IconText": "",
+            "Title": "Configuración",
+            "Action": "",
+            "Option": [
+              {
+                "Type": "Permission",
+                "Name": "CompanyConfiguration",
+                "ID": "00000000-0000-0000-0000-000000000000",
+                "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+                "Icon": "",
+                "IconText": "",
+                "Title": "Configuración empresa",
+                "Action": "UX.Cotorra.Menu.OpenCompanyConfiguration();",
+                "Option": ""
+              },
+              {
+                "Type": "Permission",
+                "Name": "FaresCatalogs",
+                "ID": "00000000-0000-0000-0000-000000000000",
+                "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+                "Icon": "",
+                "IconText": "",
+                "Title": "Tablas y tarifas",
+                "Action": "UX.Cotorra.Menu.OpenFaresCatalogs();",
+                "Option": ""
+              }
+            ]
+          },
+          {
+            "Type": "Category",
+            "Name": "Reports",
+            "ID": "00000000-0000-0000-0000-000000000000",
+            "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+            "Icon": "x far fa-file-chart-line",
+            "IconText": "",
+            "Title": "Reportes",
+            "Action": "",
+            "Option": [
+              {
+                "Type": "Permission",
+                "Name": "RayaReport",
+                "ID": "00000000-0000-0000-0000-000000000000",
+                "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+                "Icon": "",
+                "IconText": "",
+                "Title": "Lista de raya",
+                "Action": "UX.Cotorra.Menu.OpenReports('raya');",
+                "Option": ""
+              },
+              {
+                "Type": "Permission",
+                "Name": "FonacotReport",
+                "ID": "00000000-0000-0000-0000-000000000000",
+                "ServicePermissionID": "00000000-0000-0000-0000-000000000000",
+                "Icon": "",
+                "IconText": "",
+                "Title": "Estado de cuenta créditos FONACOT",
+                "Action": "UX.Cotorra.Menu.OpenReports('fonacot');",
+                "Option": ""
+              }
+            ]
+          }
+
+        ]
+      }
+    ]
+  }
+}

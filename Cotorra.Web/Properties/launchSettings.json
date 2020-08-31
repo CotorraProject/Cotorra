@@ -1,0 +1,46 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://devapp.Cotorria.mx/",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:11720/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "dev"
+      }
+    },
+    "Kestrel": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://devapp.Cotorria.mx:8082/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "dev"
+      },
+      "applicationUrl": "http://127.0.0.1:8083/"
+    },
+    "Local IIS": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "http://devapp.Cotorria.mx/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "dev"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true
+    }
+  }
+}

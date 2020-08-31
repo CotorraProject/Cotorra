@@ -1,0 +1,572 @@
+﻿<html !DOCTYPE>
+
+<head>
+    <!--Title-->
+    <title>COTORRAi&reg; Eval&uacute;a035</title>
+
+    <!--Meta-->
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta content="Aplicación COTORRAi nube" name="description" />
+    <meta content="Computación en Acción S.A de C.V." name="author" />
+    <meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+    <meta http-equiv="EXPIRES" content="0" />
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/faviconnom.ico" type="image/x-icon">
+
+    <!--CSS-->
+    <link href="https://app.devctinube.com/public/css/app.min.css" rel="stylesheet" />
+    <link href="../../assets/css/cotorra.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="app-t nom-employee-view"></div>
+
+    <script src="https://app.devctinube.com/public/js/app-reduced.min.js" async></script>
+
+    <script>
+
+        let paramsString = document.location.search;
+        let searchParams = new URLSearchParams(paramsString);
+        let token = searchParams.get('tokenid');
+
+        var CotorraAppURL = document.location.origin;
+
+        $(document).ready(function () {
+
+            //Get token
+            var actualSurvey = {};
+
+            //Init app
+            var respondSurveys = new Ractive({
+                el: '.app-t',
+                template: '#respondsurvey-template',
+                data: {
+                    token: token,
+                    surveys: []
+                },
+            });
+
+            respondSurveys.on({
+                getSurvey: function (event) {
+                    getSurveyDetail(event.context);
+                }
+            });
+
+            //Get all active surveys
+            let getSurveys = function () {
+                $.ajax({
+                    method: 'GET',
+                    url: CotorraAppURL + '/NOMSurveys/GetAllActive/',
+                    data: {
+                        token: token
+                    },
+                    success: function (data) {
+                        respondSurveys.set('surveys', data);
+
+                        /*Init menu effects*/
+                        $('.nom035-guides > a').off('click').on('click', function () {
+                            $(this).parent().find('a').removeClass('active');
+                            $(this).addClass('active');
+                        });
+
+                    },
+                    error: function (error) { },
+                    complete: function () { }
+                });
+            };
+
+            //Get the survey detail
+            let getSurveyDetail = function (survey) {
+
+                UX.Loaders.SetLoader("#np-nom035-surveys");
+                $.ajax({
+                    method: 'GET',
+                    url: CotorraAppURL + '/NOMSurveys/GetDetail/',
+                    data: {
+                        surveyID: survey.ID
+                    },
+                    success: function (data) {
+
+                        //Set blink behavior on selected answer
+                        let setOptions = () => {
+                            $('#survey_form div.radio > label > input').off('change').on('change', function (ev) {
+                                $(this).parent().parent().parent().find('label').removeClass('active');
+                                $(this).parent().addClass('active').animateCSS("flash");
+                                setTimeout(function () {
+                                    surveyModel._subs.goNext[0]();
+                                }, 500);
+                            });
+                        };
+
+                        //Create the model
+                        let surveyDataModel = {
+                            type: survey.Guide,
+                            name: survey.Name,
+                            description: survey.Description,
+                            totalPhases: data.length,
+                            actualPhase: 0,
+                            actualQuestion: 1,
+                            AcceptedTerms: true,
+                            SecurityLastName: 'MURILLO',
+                            SecurityDepartment: 1,
+                            phases: data,
+                            token: '',
+                        };
+
+                        var surveyModel = new Ractive({
+                            el: '#survey-container',
+                            template: '#survey-template',
+                            data: surveyDataModel,
+                        });
+
+                        surveyModel.on({
+                            initSurvey: function (event) {
+
+                                UX.Loaders.SetLoader("#np-nom035-surveys");
+                                let that = this;
+                                let validation = $.ajax({
+                                    method: 'POST',
+                                    url: CotorraAppURL + '/NOMSurveys/VerifyUser/',
+                                    data: {},
+                                    success: function (data) {
+                                        that.set('actualPhase', 1);
+                                        setOptions();
+                                    },
+                                    error: function (error) { },
+                                    complete: function () { UX.Loaders.RemoveLoader("#np-nom035-surveys"); }
+                                });
+
+                                return false;
+                            },
+
+                            goBack: function (event) {
+                                return false;
+                                $('#atssurvey_form .body').scrollTop(0);
+                                if (this.get('actualPhase') > 1) { this.set('actualPhase', this.get('actualPhase') - 1); }
+                                setOptions();
+                            },
+
+                            goNext: function (event) {
+                                //Scroll to top, if apply
+                                $('#survey_form .body').scrollTop(0);
+
+                                //Get phase and question position
+                                let ap = surveyModel.get('actualPhase');
+                                let tp = surveyModel.get('totalPhases');
+                                let aq = surveyModel.get('actualQuestion');
+                                let ql = surveyModel.get('phases[' + (ap - 1) + '].questions').length;
+
+                                if (aq < ql) {
+                                    //Go next question
+                                    surveyModel.set('actualQuestion', aq + 1);
+                                } else {
+                                    //Go next phase
+                                    //But first, check business rules
+                                    if (surveyModel.get('type') === 'ATS') {
+                                        //For ATS
+                                        var hasTrueValue = surveyModel.get('phases[' + (ap - 1) + '].questions').find(e => { return e.qvalue == 'true' });
+                                        if (hasTrueValue) {
+
+                                            //Fix for ATS Phase 1.5
+                                            if (ap === 1) {
+                                                surveyModel.set('actualPhase', 1.5);
+                                                return;
+                                            }
+
+                                            //Check if last phase
+                                            if (ap === tp) {
+                                                //Save
+                                                surveyModel.set('actualPhase', 99);
+                                                return false;
+                                            }
+                                        } else {
+                                            //Save
+                                            surveyModel.set('actualPhase', 99);
+                                        }
+
+                                    } else if (surveyModel.get('type') === 'RP') {
+                                        //For RP
+                                    } else if (surveyModel.get('type') === 'EEO') {
+                                        //For EEO
+                                    }
+
+                                    //Go next phase, first question
+                                    surveyModel.set('actualPhase', ap + 1);
+                                    surveyModel.set('actualQuestion', 1);
+
+                                    //    //Save and go to end
+                                    //    UX.Loaders.SetLoader("#np-nom035-surveys");
+                                    //    let save = $.ajax({
+                                    //        method: 'POST',
+                                    //        url: CotorraAppURL + '/NOMSurveys/Save/',
+                                    //        data: {},
+                                    //        success: function () {
+                                    //            atsRactive.set('actualPhase', 99);
+                                    //        },
+                                    //        error: function (error) { },
+                                    //        complete: function () { UX.Loaders.RemoveLoader("#np-nom035-surveys"); }
+                                    //    });
+                                }
+
+                                setOptions();
+                            },
+
+                            goPhase2: function (event) {
+                                surveyModel.set('actualPhase', 2);
+                                surveyModel.set('actualQuestion', 1);
+                                setOptions();
+                                return false;
+                            }
+                        });
+
+                    },
+                    error: function (error) { },
+                    complete: function () { UX.Loaders.RemoveLoader("#np-nom035-surveys"); }
+                });
+            }
+
+            getSurveys();
+
+        });
+    </script>
+
+    <script src="https://app.devctinube.com/AssetsV2/fonts/fontawesome/js/all.min.js" async></script>
+
+</body>
+
+</html>
+
+<script id="respondsurvey-template" type="text/ractive">
+    <div class="app-t">
+        <div class="app-c">
+            <div class="app-main">
+
+                <div class="header">
+                    <div class="logo" style="width:auto; border:none;">
+                        <img class="full-size-logo" src="../../assets/img/logo-evalua.png" style="width:130px;" />
+                        <img class="min-size-logo" src="../../assets/img/logo-evalua-mobile.png" style="width:130px;" />
+                    </div>
+                    <div class="company-name">
+                        Computación en Acción S.A. de C.V.
+                    </div>
+                </div>
+
+                <div class="main-container" style="left:0px; top:70px; height: calc(100% - 70px); width:100%;">
+                    <div id="np_nom_surveys" class="pill-view active">
+                        <div class="pill-view-body" style="display: block;">
+                            <div id="np-nom035-surveys">
+                                <div class="generic-catalog">
+
+                                    <div class="generic-catalog-menu scrollbar-macosx nom035-guides">
+                                        {{#surveys: surveyIndex}}
+                                        <a href="#" class="{{Guide}}" data-survey="{{Guide}}" intro='fade:{"delay":0, "duration":2000}'
+                                           on-click="getSurvey">
+                                            <div class="content">
+                                                <div class="icon">
+                                                    {{#if Guide == "ATS"}}
+                                                    <i class="far fa-notes-medical"></i>
+                                                    {{/if}}
+                                                    {{#if Guide == "RP"}}
+                                                    <i class="far fa-head-side-brain"></i>
+                                                    {{/if}}
+                                                    {{#if Guide == "EEO"}}
+                                                    <i class="far fa-share-alt"></i>
+                                                    {{/if}}
+                                                </div>
+                                                <div class="title">
+                                                    {{Name}}
+                                                </div>
+                                                <div class="description">
+                                                    {{Description}}
+                                                </div>
+                                                <div class="check">
+                                                    <i class="fas fa-angle-right"></i>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        {{/surveys}}
+                                    </div>
+
+                                    <div class="generic-catalog-content nom035-survey">
+                                        <div class="generic-catalog-data full-width" style=" height: 100%; top: 0px;">
+                                            <div class="catalog-content">
+                                                <div id="survey-container" class="p-20 full-kendo-grid" style="overflow:auto;">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="questiontemplate" type="text/ractive">
+
+    {{#if actualQuestion == qnumber}}
+    <div id="atsquestion-template">
+        <div class="q-description" intro='fade:{"delay":0,"duration":200}'>
+            <div>
+                <b>{{qnumber}}) </b>{{{qname}}}
+            </div>
+        </div>
+
+        {{#if type == "ATS"}}
+        <div class="row ats-answers" intro='fade:{"delay":0,"duration":200}'>
+            <div class="col-lg-12">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="{{qvalue}}" value="true">
+                        <i class="input-helper"></i>
+                        SÍ
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="{{qvalue}}" value="false">
+                        <i class="input-helper"></i>
+                        NO
+                    </label>
+                </div>
+            </div>
+        </div>
+        {{else}}
+        <div class="row rp-answers" intro='fade:{"delay":0,"duration":200}'>
+            <div class="col-lg-12">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="{{qvalue}}" value="1">
+                        <i class="input-helper"></i>
+                        A) Siempre
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="{{qvalue}}" value="2">
+                        <i class="input-helper"></i>
+                        B) Casi siempre
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="{{qvalue}}" value="3">
+                        <i class="input-helper"></i>
+                        C) Algunas veces
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="{{qvalue}}" value="4">
+                        <i class="input-helper"></i>
+                        D) Casi nunca
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="{{qvalue}}" value="5">
+                        <i class="input-helper"></i>
+                        E) Nunca
+                    </label>
+                </div>
+
+            </div>
+        </div>
+        {{/if}}
+    </div>
+    {{/if}}
+
+</script>
+
+<script id="phasestemplate" type="text/ractive">
+
+    {{!Phase 0}}
+    {{#if actualPhase == 0}}
+    <div class="disclaimer" intro='fade:{"delay":0,"duration":200}'>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="welcome">
+                    ¡Hola! Bienvenido al cuestionario para identificar y apoyar a quienes fueron sujetos a sucesos traumáticos severos.
+                </div>
+                <div class="welcome-description">
+                    Las siguientes preguntas están relacionadas a algún acontecimiento traumático severo presenciado o sufrido.
+                    Por favor lee la siguiente información antes de continuar.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="title-privacy">Aviso de privacidad</div>
+                <div class="terms-title">
+                    <i class="far fa-file-signature"></i>
+                    Términos y condiciones
+                </div>
+                <div class="terms-description">
+                    Manifiesto bajo protesta decir verdad que todas las respuestas proporcionadas en este cuestionario son verídicas y comprobables con fundamentos concretos.
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-b-25">
+            <div class="col-xs-12">
+                <div class="checkbox">
+                    <label>
+                        <input id="nom_acceptterms" name="nom_acceptterms"
+                               type="checkbox" checked="{{AcceptedTerms}}">
+                        <i class="input-helper"></i>
+                        <b>Acepto los términos y condiciones</b>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div style="{{#if !AcceptedTerms}} opacity:0.5;{{/if}}">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="security-questions-title">
+                        <i class="far fa-shield-check"></i>
+                        Preguntas de seguridad
+                    </div>
+
+                    <div class="security-questions-description">
+                        Los datos solicitados son exclusivamente para fines de verificar la identidad del
+                        encuestado y no se relacionan en ninguna forma con las respuestas de la evaluación
+                        ya que estos resultados se mantendrán en estricta confidencialidad.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-t-10">
+                <div class="col-xs-6">
+                    <div class="form-group textfield required {{#if !AcceptedTerms}} disabled {{/if}}">
+                        <label for="nom_sec_txtLastName">Primer apellido</label>
+                        <input type="text" class="form-control" id="nom_sec_txtLastName" name="nom_sec_txtLastName"
+                               value="{{SecurityLastName}}"
+                               autocomplete="off" maxlength="100" required
+                               {{#if !AcceptedTerms}} disabled="disabled" {{/if}}>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group select {{#if !AcceptedTerms}} disabled {{/if}} required">
+                        <label for="nom_sec_drpDeparment">Departamento</label>
+                        <select class="form-control" id="nom_sec_drpDeparment" name="nom_sec_drpDeparment" required
+                                value="{{SecurityDepartment}}"
+                                {{#if !AcceptedTerms}} disabled="disabled" {{/if}}>
+                            <option value=''>Selecciona tu departamento</option>
+                            <option value='1'>Desarrollo de software</option>
+                            {{#DeparmentsOptions}}
+                            <option value='{{id}}'>{{name}}</option>
+                            {{/DeparmentsOptions}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-b-30">
+                <div class="col-xs-4">
+                    <button id="np_nom_btnNext"
+                            class="btn btn-primary no-min-width {{#if !AcceptedTerms}} disabled {{/if}}"
+                            on-click="initSurvey"
+                            {{#if !AcceptedTerms || SecurityDepartment =="" || SecurityLastName ==""}} disabled="disabled" {{/if}}>
+                        Comenzar
+                        <i class="fas fa-chevron-double-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {{/if}}
+
+    {{!Phase 1 to N}}
+    {{#phases: indexPhases}}
+    {{#if actualPhase == number}}
+    <div intro='fade:{"delay":0,"duration":250}'>
+        <div class="q-title">{{name}}</div>
+        {{#questions: questionIndex}}
+        {{>questiontemplate}}
+        {{/questions}}
+    </div>
+    {{/if}}
+    {{/phases}}
+
+    {{!Phase 1.5}}
+    {{#if actualPhase == 1.5}}
+    <div class="condolence" intro='fade:{"delay":0,"duration":250}'>
+        <div class="condolence-title">
+            ¡Lamentamos mucho lo sucedido!
+        </div>
+        <div class="condolence-description">
+            Tenemos algunas preguntas adicionales sobre recuerdos persistentes del acontecimiento en el último mes.
+        </div>
+        <button id="np_nom_btnNext" class="btn btn-primary no-min-width" on-click="goPhase2">
+            Continuar
+            <i class="fas fa-chevron-double-right"></i>
+        </button>
+    </div>
+    {{/if}}
+
+    {{!Phase 99}}
+    {{#if actualPhase == 99}}
+    <div intro='fade:{"delay":0,"duration":250}' class="ending">
+        <div class="ending-title">
+            <span>Gracias por tu confianza, Yamani!</span>
+            <div class="icon">
+                <i class="far fa-laugh-beam"></i>
+            </div>
+        </div>
+        <div class="ending-description">
+            En COTORRAi estamos comprometidos con los colaboradores y su salud.
+            Ten por seguro tus respuestas serán analizadas y en caso de existir alguna situación, contarás con toda nuestra ayuda.
+        </div>
+    </div>
+    {{/if}}
+
+</script>
+
+<script id="survey-template" type="text/ractive">
+
+    <form id="survey_form" class="nom035 survey">
+
+        {{!Survey Title}}
+        <div class="title">
+            <div class="icon">
+                {{#if type == "ATS"}}
+                <i class="far fa-notes-medical icon-ats"></i>
+                {{/if}}
+                {{#if type == "RP"}}
+                <i class="far fa-head-side-brain icon-rp"></i>
+                {{/if}}
+                {{#if type == "EEO"}}
+                <i class="far fa-share-alt icon-eeo"></i>
+                {{/if}}
+            </div>
+            <div class="name">{{name}}</div>
+            <div class="description">{{description}}</div>
+        </div>
+
+        <div class="body">
+            {{>phasestemplate}}
+        </div>
+
+    </form>
+
+</script>

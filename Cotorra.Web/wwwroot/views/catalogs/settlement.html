@@ -1,0 +1,109 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="settlementActionTemplate">
+    <div class="text-left">
+        <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+                onclick="UX.Cotorra.Settlement.UI.OpenSave(this);">
+            <i class="fad fa-pencil"></i>
+        </button>
+        &nbsp;
+    </div>
+</script>
+
+<!--top actions-->
+<div class="top-actions">
+
+</div>
+
+<!--top filters-->
+<div class="top-filters">
+    <div class="top-action-filter" style="width:250px;">
+        <div class="form-group select">
+            <label for="np_fc_drpValidity">En vigor</label>
+            <select id="np_fc_drpValidity" name="np_fc_drpValidity" class="form-control" value="">
+            </select>
+        </div>
+    </div>
+</div>
+
+<!--main container-->
+<div class="np-settlement-grid full-kendo-grid">
+</div>
+
+<!--add settlement modal-->
+<script id="settlement_save_template" type="text/ractive">
+
+    <form id="record_save_wrapper">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_txtCASUSMO">CASUSMO</label>
+                    <input type="text" class="form-control" id="np_txtCASUSMO" name="np_txtCASUSMO" value="{{CASUSMO}}"
+                           autocomplete="off" maxlength="10">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_txtCASISR86">CASISR86</label>
+                    <input type="text" class="form-control" id="np_txtCASISR86" name="np_txtCASISR86" value="{{CASISR86}}"
+                           autocomplete="off" maxlength="10">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_txtCalDirecPerc">CalDirecPerc</label>
+                    <input type="text" class="form-control" id="np_txtCalDirecPerc" name="np_txtCalDirecPerc" value="{{CalDirecPerc}}"
+                           autocomplete="off" maxlength="10">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_txtIndem90">Indem90</label>
+                    <input type="text" class="form-control" id="np_txtIndem90" name="np_txtIndem90" value="{{Indem90}}"
+                           autocomplete="off" maxlength="10">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_txtIndem20">Indem20</label>
+                    <input type="text" class="form-control" id="np_txtIndem20" name="np_txtIndem20" value="{{Indem20}}"
+                           autocomplete="off" maxlength="10">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group textfield required">
+                    <label for="np_txtPrimaAntig">PrimaAntig</label>
+                    <input type="text" class="form-control" id="np_txtPrimaAntig" name="np_txtPrimaAntig" value="{{PrimaAntig}}"
+                           autocomplete="off" maxlength="10">
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="row p-t-20">
+        <div class="col-xs-6">
+            <button id="np_btnCancelSaveRecord" class="btn btn-white full-width">Cancelar</button>
+        </div>
+
+        <div class="col-xs-6">
+            <button id="np_btnSaveRecord" class="btn btn-primary full-width">Guardar</button>
+        </div>
+    </div>
+
+</script>

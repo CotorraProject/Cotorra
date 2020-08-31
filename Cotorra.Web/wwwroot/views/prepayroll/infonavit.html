@@ -1,0 +1,183 @@
+﻿<!--kendo grid templates-->
+<script type="text/x-kendo-template" id="infonavitActionTemplate">
+    <button class="btn btn-icon-small btn-dblclick" data-toggle="tooltip" title="Editar" data-placement="bottom"
+            onclick="event.preventDefault(); UX.Cotorra.Infonavit.UI.Set(this);">
+        <i class="fad fa-pencil"></i>
+    </button>
+    <button class="btn btn-icon-small" data-toggle="tooltip" title="Eliminar" data-placement="bottom"
+            onclick="event.preventDefault(); UX.Cotorra.Infonavit.UI.Delete(this);">
+        <i class="fad fa-trash-alt"></i>
+    </button>
+</script>
+ 
+
+<script type="text/x-kendo-template" id="infonavitStatusTemplate">
+    # if(InfonavitStatus == 1) {#
+    Activo
+    #} else {#
+    Inactivo
+    #}#
+</script>
+
+<!--add infonavit modal-->
+<script id="np-editinfonavit-template" type="text/ractive">
+    <div id="np-infonavit">
+        <div class="generic-catalog">
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-actions">
+                    <div class="top-action-filter flex">
+                        <i class="fad fa-user-circle"></i>
+                        <div class="title">ID {{Employee.Code}}</div>
+                        <div class="description">{{Employee.Name}}</div>
+                    </div>
+                    <!--<div class="top-actions">
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="generic-catalog">
+            <div class="generic-catalog-content">
+                <div class="generic-catalog-data" style="top: 0px !important; height:100%;">
+                    <div class="catalog-content">
+                        <div class="row">
+                            <!--Data grid-->
+                            <div class="col-xs-5 np-info-grid-container">
+                                <div class="np-infonavit-grid full-kendo-grid" style="height:390px;">
+                                </div>
+                            </div>
+
+                            <!--Form data-->
+                            <div id="np_cat_saveinfonavit" class="col-xs-7 np-info-form-container p-t-20 p-l-15 p-r-20">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="form-group textfield required">
+                                            <label for="np_info_txtNumber">No. de crédito infonavit</label>
+                                            <input type="text" class="form-control" id="np_info_txtNumber" name="np_info_txtNumber" value="{{CreditNumber}}"
+                                                   autocomplete="off" maxlength="20" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group textfield required">
+                                            <label for="np_info_txtDescription">Descripción</label>
+                                            <input type="text" class="form-control" id="np_info_txtDescription" name="np_info_txtDescription" value="{{Description}}"
+                                                   autocomplete="off" maxlength="100" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="form-group select required">
+                                            <label for="np_info_drpCreditType">Tipo de crédito</label>
+                                            <select class="form-control" id="np_info_drpCreditType" name="np_info_drpCreditType" value="{{InfonavitCreditType}}">
+                                                {{#InfonavitCreditTypesOptions}}
+                                                <option value="{{ID}}">{{Name}}</option>
+                                                {{/InfonavitCreditTypesOptions}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form-group textfield required">
+
+                                            {{#if InfonavitCreditType == 1}}
+                                            <label for="np_info_txtMonthlyFactor">Movto. perm. factor mensual</label>
+                                            {{elseif InfonavitCreditType == 2}}
+                                            <label for="np_info_txtMonthlyFactor">Porcentaje factor mensual</label>
+                                            {{elseif InfonavitCreditType == 3}}
+                                            <label for="np_info_txtMonthlyFactor">Descuento factor mensual</label>
+                                            {{elseif InfonavitCreditType == 4}}
+                                            <label for="np_info_txtMonthlyFactor">Cuota fija factor mensual</label>
+                                            {{/if}}
+
+                                            <input type="text" class="form-control" id="np_info_txtMonthlyFactor" name="np_info_txtMonthlyFactor" value="{{MonthlyFactor}}"
+                                                   autocomplete="off" maxlength="10" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 includes-insurance-payment-container">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input id="np_info_chkIncludesInsurancePayment" name="np_info_chkIncludesInsurancePayment"
+                                                       type="checkbox" checked="{{IncludeInsurancePayment_D14}}">
+                                                <i class="input-helper"></i>
+                                                Incluir pago de seguro
+                                                <br />
+                                                (Concepto D14)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="form-group textfield required">
+                                            <label for="np_info_txtApplicationInitDate">Fecha inicio de aplicación</label>
+                                            <input type="text" class="form-control" id="np_info_txtApplicationInitDate" name="np_info_txtApplicationInitDate" value="{{InitialApplicationDate}}"
+                                                   autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form-group textfield required currency">
+                                            <label for="np_info_txtAccumulatedAmount">Monto acumulado</label>
+                                            <input type="text" class="form-control currency-input" id="np_info_txtAccumulatedAmount" name="np_info_txtAccumulatedAmount" value="{{AccumulatedAmount}}"
+                                                   autocomplete="off" maxlength="100" />
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-xs-4">
+                                        <div class="form-group textfield required">
+                                            <label for="np_info_txtTotalTimesApplied">Veces aplicado</label>
+                                            <input type="text" class="form-control" id="np_info_txtTotalTimesApplied" name="np_info_txtTotalTimesApplied" value="{{AppliedTimes}}"
+                                                   autocomplete="off" maxlength="5" />
+                                        </div>
+                                    </div>-->
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="form-group textfield required">
+                                            <label for="np_info_txtRegistryDate">Fecha de registro</label>
+                                            <input type="text" class="form-control" id="np_info_txtRegistryDate" name="np_info_txtRegistryDate" value="{{RegisterDate}}"
+                                                   autocomplete="off" maxlength="10" placeholder="dd/mm/aaaa" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form-group select required">
+                                            <label for="np_info_drpStatus">Estado</label>
+                                            <select class="form-control" id="np_info_drpStatus" name="np_info_drpStatus" value="{{InfonavitStatus}}">
+                                                <option value=0>Inactivo</option>
+                                                <option value=1>Activo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="row p-b-15">
+                                    <div class="col-xs-4">
+                                        <button id="np_btnSaveInfonavit" class="btn btn-primary full-width {{#if ID != ''}}btn-editing{{/if}}"
+                                                {{#if ID == '' && HasOneActiveCredit}} data-toggle="tooltip" title="Hay un crédito activo, no se pueden agregar más" data-placement="bottom" disabled {{/if}}>
+                                            {{#if ID == ''}}
+                                            Guardar
+                                            {{else}}
+                                            Actualizar
+                                            {{/if}}
+                                        </button>
+                                    </div>
+
+                                    <div class="col-xs-4">
+                                        <button class="btn btn-primary full-width btn-clear" id="np_btnNewInfonavit">
+                                            Limpiar
+                                        </button>
+                                    </div>
+
+                                    <div class="col-xs-4">
+                                        <button id="np_btnCancelSaveInfonavit" class="btn btn-white full-width" on-click="closeModal">
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

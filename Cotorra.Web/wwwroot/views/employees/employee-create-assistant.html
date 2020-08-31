@@ -1,0 +1,82 @@
+﻿<script id="employee-create-assistant-template" type="ractive/text">
+
+    <div class="assistant" id="np_emp_saveemployee">
+        <div class="content">
+            <div class="steps">
+                <div class="{{#if Step == 1}}actual{{/if}}">
+                    <label>
+                        Datos principales
+                    </label>
+                </div>
+
+                <div class="{{#if Step == 2}}actual{{/if}}">
+                    <label>
+                        Contratación
+                    </label>
+                </div>
+
+                <div class="{{#if Step == 3}}actual{{/if}} {{#if RegimeType >= 5 && RegimeType <=11 }} hidden {{/if}}">
+                    <label>
+                        Seguridad social
+                    </label>
+                </div>
+            </div>
+            <div class="data">
+
+                <div class="{{#if Step != 1}} hidden {{/if}}">
+                    <div class="group-container" data-title="Datos personales">
+                        {{>employee-personal-data-template}}
+                    </div>
+
+                    <div class="group-container" data-title="Datos generales">
+                        {{>employee-general-data-template}}
+                    </div>
+
+                    <div class="group-container" data-title="Domicilio">
+                        {{>np-address-template}}
+                    </div>
+                </div>
+
+                <div class="{{#if Step != 2}} hidden {{/if}}">
+                    <div class="group-container" data-title="Contratación">
+                        {{>employee-employment-template}}
+                    </div>
+
+                    <div class="group-container" data-title="Puesto">
+                        {{>employee-jobposition-template}}
+                    </div>
+
+                </div>
+
+                <div class="{{#if Step != 3}} hidden {{/if}}">
+                    <div class="group-container" data-title="Seguridad social">
+                        {{>employee-social-security-template}}
+                    </div>
+
+                    <div class="group-container" data-title="Salario de cotización">
+                        {{>employee-contribution-salary-template}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <button class="btn btn-white m-r-5" id="btnPrevStep" {{#if Step =="1" }} disabled="disabled" {{/if}}>
+                        Anterior
+                    </button>
+                    <button class="btn btn-primary" id="btnNextStep">
+                        {{#if RegimeType >= 5 && RegimeType <=11 && Step == 2}}
+                        Finalizar
+                        {{elseif Step == 3}}
+                        Finalizar
+                        {{else}}
+                        Siguiente
+                        {{/if}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
